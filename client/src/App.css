@@ -1,0 +1,185 @@
+body {
+  font-family: arial,sans-serif;
+}
+
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:#375dc4;
+  display: block;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.icon {
+  margin-left: 150px;
+}
+
+li {
+  display: block;
+  float:left;
+  font-size:14px;
+}
+
+
+.nav-item {
+  color: white;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  line-height: 45px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+li a:hover {
+  background-color: #1d3473;
+  color: white;
+  text-decoration: none;
+
+}
+li img:hover {
+  background-color: #1d3473;
+}
+
+.diamond {
+  float: right;
+}
+
+.testDetails {
+  float: right;
+  font-size: 10px;
+}
+
+.summary {
+  border-style: groove;
+  border-top: none;
+  border-left: none;
+  position: relative;
+  top: -12px;
+  left: -21px;
+  text-align: center;
+}
+
+.flag {
+  width: 56px;
+}
+
+.results {
+  margin-bottom: 20px;
+}
+
+.last-20 {
+  margin-top: 30px;
+}
+
+.last-20 h2 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.sidebar_info {
+  margin-left: 20px;
+  margin-top: 10px;
+  font-size: 12px;
+  float: left;
+}
+
+.home {
+  float: left;
+}
+
+.home1 {
+  border-style: groove;
+  border-color: #d7dae24f;
+  width: 1287px;
+  height: 3000px;
+  margin-top:65px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.card {
+  margin-left: 60px;
+  font-size: 14px;
+  background-color:#fff23c13;
+  border-style: hidden;
+}
+
+.card h1 {
+  font-size: 22px;
+  text-align: center;
+  border-style: hidden;
+}
+
+.center { 
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  background-color: #eaecf0;
+  color: black;
+}
+
+.btn:hover {
+  background-color:#dadde4;
+  color: black;
+}
+
+.stats {
+  font-size: 12px;
+  margin-top: 30px;
+  text-align: center;
+
+}
+
+.stats h2 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.geochart {
+  margin-left: 50px;
+}
+
+.chart {
+  display: inline-block;
+  width:500px;
+  margin-top: 50px;
+}
+
+.worldChartParagraph {
+  width: 800px;
+  margin-left: 150px;
+  font-size: 12px;
+}
+
+.chart h2 {
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.infoNorm{
+  width: 800px;
+  margin-left: 180px;
+  font-size: 12px;
+}
+
+.normalDistChart {
+  margin-left: 20px;
+}
+
+.googleChart {
+  display: inline-block;
+  margin-left: 50px;
+}
+
+.studyAreaChart {
+  margin-left: 100px;
+  margin-top: 120px;
+}
