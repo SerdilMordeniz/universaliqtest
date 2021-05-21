@@ -31,9 +31,7 @@ function StudyLevelChart({fetchedStudyLevelData}) {
                     dataOpacity: 0.2,
                     title: 'General breakdown according to study level',
                     hAxis: {
-                        title: 'IQ',
-                        
-                    
+                        title: 'IQ'
                     }
                 }}
                 // For tests

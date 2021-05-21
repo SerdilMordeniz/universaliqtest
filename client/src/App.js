@@ -6,6 +6,7 @@ import Statistics from './routes/Statistics'
 import IqApp from './routes/IqApp'
 import IqTestResultsPage from './routes/IqTestResultsPage'
 import Sidebar from './routes/Sidebar'
+import Stats from './components/Stats'
 
 //const Home = lazy(() => import('./routes/Home'));
 //const About = lazy(() => import('./routes/About'));
@@ -30,23 +31,30 @@ const App = () => {
             <Switch>
                 <Route exact path="/">
                     <div className="home1">
-                    <Sidebar />
-                    <Home />
+                        <Sidebar />
+                        <Home />
                     </div>
                 </Route>
                 <Route exact path="/about">
                     <About />
                 </Route>
+
                 <Route exact path="/statistics">
                     <Statistics />
                 </Route>
 
                 <Route exact path="/iq-test-app">
-                    <IqApp />
+                    <div className="home1">
+                        <Sidebar />
+                        <IqApp />
+                        <Stats />
+                    </div>
                 </Route>
 
                 <Route exact path="/results/:id">
-                    <IqTestResultsPage />
+                    <div className="home1">
+                        <IqTestResultsPage />
+                    </div>
                 </Route>
             </Switch>
         </Router>

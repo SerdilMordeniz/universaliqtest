@@ -52,7 +52,7 @@ function AgeCategoryChart({ fetchedAgeCategoryData }) {
             setIqSenior(iqSeniortmp)
         }
 
-    }, [fetchedAgeCategoryData, percentileAdult, percentileSenior, percentileYouth, ])
+    }, [fetchedAgeCategoryData, percentileAdult, percentileSenior, percentileYouth, percentileYoungAdult])
 
     return (
         <div>

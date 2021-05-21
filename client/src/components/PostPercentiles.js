@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import iqTestAPI from '../apis/iqTestAPI'
 import IqTestResultsPage from '../routes/IqTestResultsPage'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Route, useLocation   } from 'react-router-dom'
+
 
 function PostPercentiles(props) {
+
     const [rankAgeCategory, setRankAgeCategory] = useState(0)
     const [numberOfRowsAgeCategory, setNumberOfRowsAgeCategory] = useState(0)
     const [percentileAgeCategory, setPercentileAgeCategory] = useState(0)
@@ -201,11 +203,20 @@ function PostPercentiles(props) {
         }
     }, [status, numberOfRowsAgeCategory, numberOfRowsContinent, numberOfRowsStudyArea, numberOfRowsStudyLevel, numberOfRowsWorldPopulation, percentileAgeCategory, percentileContinent, percentileStudyArea, percentileStudyLevel, percentileWorldPopulation, props.id, rankAgeCategory, rankContinent, rankStudyArea, rankStudyLevel, rankWorldPopulation])
 
+    let location = useLocation().pathname
+    useEffect(() => {
+        if(location.substring(0,9) ==='/results/' ) {
+            window.location.reload();
+        }
+    })
+
     if (status === 201) {
         return (
             <div>
                 <Redirect to={`/results/${props.id}`} />
-                <IqTestResultsPage id={props.id} />
+                <Route exact path="/results/:id" >
+                    <IqTestResultsPage key={Math.floor(Math.random()*100)} />
+                </Route>
             </div>
         )
 

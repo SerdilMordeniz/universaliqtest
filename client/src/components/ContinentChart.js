@@ -42,35 +42,23 @@ const ContinentChart = ({ setTooltipContent, fetchedData }) => {
                 onMouseEnter={() => {
                   const { CONTINENT } = geo.properties;
 
-                  let continenCode = continentNameToCode(CONTINENT)
-                  let result = fetchedData.result.find(o => o.code === continenCode || null)
+                  let continentCode = continentNameToCode(CONTINENT)
+                  let result = fetchedData.result.find(o => o.code === continentCode || null)
                   let numberOfTests = 0
-                  let numberOfRows = parseInt(fetchedData.number_of_rows,10);
-                  let rankContinent = 0;
                   let percentile;
 
                   if(result) {
                     numberOfTests = result.number_of_tests_per_continent
-                    rankContinent = parseInt(result.rank,10);
-                  }
-
-                  //calculate IQ
-                  if (numberOfRows === 1 && rankContinent === 1) {
-                    percentile = 50;
-                  }
-                   if (rankContinent === numberOfRows && rankContinent > 0 && numberOfRows !== 1) {
-                    percentile = ((numberOfRows - rankContinent + 0.9) / numberOfRows) * 100
-                  } if (rankContinent > 0 && rankContinent !== numberOfRows) {
-                    percentile = ((numberOfRows - rankContinent) / numberOfRows) * 100
+                    percentile = result.percentile
                   }
                   let IQ
                   if (result) {
-                    IQ = R.qnorm(percentile / 100, 100, 15).toFixed(0)
+                    IQ = R.qnorm(percentile, 100, 15).toFixed(0)
                   } else {
                     IQ = ''
                   }
 
-                  setTooltipContent(`${CONTINENT}<br />Tests taken : ${numberOfTests}<br />IQ : ${IQ}`);
+                  setTooltipContent(`${CONTINENT}<br />Tests taken : ${numberOfTests}<br />Average IQ : ${IQ}`);
                   setHighlighted(geo.properties.CONTINENT);
                 }}
                 onMouseLeave={() => {

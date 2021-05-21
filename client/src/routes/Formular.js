@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import iqTestAPI from '../apis/iqTestAPI'
 import PostPercentiles from '../components/PostPercentiles'
-import { BrowserRouter as Router } from 'react-router-dom'
-
 
 function Formular(props) {
     const [formRef] = useState(React.createRef());
@@ -113,21 +111,16 @@ function Formular(props) {
         setAgeYear(parseInt(event.target.value), 10)
     }
     if (id > 0) {
-
-
         return (
-            <Router>
-                <PostPercentiles id={id} ageCategory={ageCategory} elapsed={props.elapsed} correctAnswers={props.correctAnswers} timeForItem={props.timeForItem} continentCode={continentCode} studyLevel={studyLevel} studyArea={studyArea} />
-            </Router>
+            <PostPercentiles id={id} ageCategory={ageCategory} elapsed={props.elapsed} correctAnswers={props.correctAnswers} timeForItem={props.timeForItem} continentCode={continentCode} studyLevel={studyLevel} studyArea={studyArea} />
         )
-
-
     } else {
 
         return (
-            <div className="shrink">
+            <div className="formular">
+                <img className="diamond" alt="Diamond approved" src="/diamond.svg" />
                 <form ref={formRef} className="shrink">
-                    <h1 className="mr-4 mt-2">Formular</h1>
+                    <h1 className="mr-4 mt-2">Congratulations, you have finished your test!</h1>
                     <div className="form-group">
                         <label className="mt-1" htmlFor='pseudonym'>Nickname</label>
                         <input className="form-control form-control-sm" maxLength="15" type='text' value={pseudonym} onChange={(e) => setPseudonym(e.target.value)} id="pseudonym" name='pseudonym' required />
@@ -283,7 +276,9 @@ function Formular(props) {
                             <option value='Engineering and technology'>Engineering and technology</option>
                             <option value='Medicine and health'>Medicine and health</option>
                         </select>
-                        <input className="btn-sm btn-primary mt-3" type="submit" value="Submit" onClick={handleSubmit} />
+                        <div className="text-center">
+                            <input className="mt-3 btn" type="submit" value="Submit" onClick={handleSubmit} />
+                        </div>
                     </div>
                 </form>
             </div>

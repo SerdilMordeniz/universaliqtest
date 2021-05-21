@@ -59,7 +59,7 @@ function Sidebar() {
                                 <img className="flag border border-dark" alt="United States" src={`http://purecatamphetamine.github.io/country-flag-icons/1x1/${element.code}.svg`} />
                                 <div className="testDetails">
                                     <div>{element.pseudonym}</div>
-                                    <div>IQ: <b>{(R.qnorm(element.percentile_age_category / 100, 100, 15)).toFixed(0)}</b></div>
+                                    <div>IQ: <b>{(R.qnorm(element.percent_rank, 100, 15)).toFixed(0)}</b></div>
                                     <div>{element.number_of_correct_answers}/49 in {msToTime(element.total_time_taken)}</div>
                                     <div>{element.to_char}</div>
                                 </div>

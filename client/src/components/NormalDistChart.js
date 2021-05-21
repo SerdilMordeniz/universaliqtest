@@ -5,7 +5,6 @@ import R from 'rlab'
 function NormalDistChart() {
 
     const [dataSample, setDataSample] = useState([])
-    const [data, setData] = useState([])
 
     function NormalDensityZx(x, Mean, StdDev) {
         var a = x - Mean;
@@ -77,13 +76,13 @@ function NormalDistChart() {
             chartData[index] = R.dnorm(i, 100, 15)
             index++;
         }
-        let floatingNumber = chartData.reduce((acc, curr) => acc + parseFloat(curr))
-        setData(floatingNumber)
+        // eslint-disable-next-line
     }, [])
 
     return (
-        <div className="normChart">
+        <div>
             <Chart
+            className="normChart"
                 height= '400px'
                 chartType="ComboChart"
                 loader={<div>Loading Chart</div>}

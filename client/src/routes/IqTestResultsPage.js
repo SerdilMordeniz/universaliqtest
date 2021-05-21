@@ -4,42 +4,29 @@ import Chart from "react-google-charts";
 import { useParams } from "react-router-dom";
 var R = require("rlab");
 
-function IqTestResultsPage(props) {
+function IqTestResultsPage() {
     const [IQResult, setIQResult] = useState()
+    const [numberOfRows, setNumberOfRows] = useState()
     const [data, setData] = useState()
 
-    let {id} = useParams()
+    let { id } = useParams()
 
     useEffect(() => {
-        const fetchIQResult = async () => {
-            try {
-                const response = await iqTestAPI.get(`/results/${props.id}`)
-                setIQResult(response.data.result)
 
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        if(props.id && IQResult === undefined) {
-            fetchIQResult()
-        }
-    })
-
-    useEffect(() => {
-        
         const fetchIQResult = async () => {
             try {
                 const response = await iqTestAPI.get(`/results/${id}`)
                 setIQResult(response.data.result)
+                setNumberOfRows(response.data.number_of_rows)
 
             } catch (error) {
                 console.log(error)
             }
         }
-        if(id) {
+        if (id) {
             fetchIQResult()
         }
-    },[id])
+    }, [id])
 
     function msToTime(s) {
         var ms = s % 1000;
@@ -112,92 +99,124 @@ function IqTestResultsPage(props) {
     }, [IQResult])
 
 
-    if(IQResult === undefined) {
-    return (
-        <div>Results Page loading</div>
-    )} else {
-    return (
-        <div className="iq_info">
-            <h1 className="mt-5">IQ result of {IQResult.pseudonym}</h1>
-            <table className="table table-hover table-bordered m-1 mt-4 mb-4">
-                <tbody>
-                    <tr>
-                        <th width="170px" scope="row">Age category</th>
-                        <td>{IQResult.age_category}</td>
-                    </tr>
-                    <tr className="table-warning">
-                        <th scope="row">IQ</th>
-                        <td><b>{(R.qnorm(IQResult.percentile_age_category / 100, 100, 15)).toFixed(0)}</b></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Rank</th>
-                        <td>{IQResult.rank_age_category}/{IQResult.number_of_rows_age_category}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">#Correct answers</th>
-                        <td>{IQResult.number_of_correct_answers}/49</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Total time</th>
-                        <td>{msToTime(IQResult.total_time_taken)}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Percentile</th>
-                        <td>{(Number(IQResult.percentile_age_category)).toFixed(3)}%</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Z-score</th>
-                        <td>{((R.qnorm(IQResult.percentile_age_category / 100, 100, 15) - 100) / 15).toFixed(5)}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Rarity</th>
-                        <td>≈ 1 in {(Math.round(Math.abs(1 / ((IQResult.percentile_age_category - 100) / 100))))}</td>
-                    </tr>
-                </tbody>
+    if (IQResult === undefined || numberOfRows === undefined) {
+        return (
+            <div>Results Page loading</div>
+        )
+    } else {
+        return (
+            <div className="iq_info">
+                <div className="table_result">
+                    <h1>IQ result of {IQResult.pseudonym}</h1>
+                    <p className="result_paragraph">Congratulations, {IQResult.pseudonym}! <br /><br />
 
-            </table>
+The IQ test you took is a development of the Raven concept of progressive matrices. It measures the domain of general intelligence: it evaluates logic, the ability to reason clearly and grasp complexity, and the ability to retain and reproduce patterns of information, sometimes called reproductive capacity.
 
-            <h2 className="mt-5 mb-3">Time taken for each item</h2>
-            <Chart
-                chartType="ColumnChart"
-                width="100%"
-                height="100%"
-                data={data}
-                options={{
-                    title: "Time taken for each item",
-                    hAxis: {
-                        title: "Item"
-                    },
-                    vAxis: {
-                        title: "Time (milliseconds)"
-                    }
-                }}
-            />
+Note that the average standard IQ is set at 100 for historical reasons. The test you passed was designed to have an average score of 100. This allows each candidate to compare their result with statistics and various parameters.
 
-            <h2 className="mt-5">Worldwide IQ</h2>
-            <div>Rank: {IQResult.rank_world_population}/{IQResult.number_of_rows_world_population}</div>
-            <div>Percentile: {Number(IQResult.percentile_world_population).toFixed(3)}%</div>
-            <div><b>IQ: {(R.qnorm(IQResult.percentile_world_population / 100, 100, 15)).toFixed(0)}</b></div>
+<br /><br />Based on the results of the completed test, <b>your IQ score is {(R.qnorm(IQResult.percentile_world_population, 100, 15)).toFixed(0)}.</b>
 
-            <h2 className="mt-5">Continent IQ</h2>
-            <div>Continent code: {IQResult.continent_code}</div>
-            <div>Rank: {IQResult.rank_continent}/{IQResult.number_of_rows_continent} </div>
-            <div>Percentile: {Number(IQResult.percentile_continent).toFixed(3)} </div>
-            <div><b>IQ: {(R.qnorm(IQResult.percentile_continent / 100, 100, 15)).toFixed(0)}</b></div>
+This IQ value is an estimate. Your result may change depending on your current form and the conditions under which you take the test.
+<br /> Below you can see more details about your result. In addition, there are also some statistics in which you can compare yourself.
+</p>
+                    <table className="table table-hover table-bordered m-1 mt-4 mb-4">
+                        <tbody>
+                            <tr className="table-warning">
+                                <th scope="row">IQ</th>
+                                <td><b>{(R.qnorm(IQResult.percentile_world_population, 100, 15)).toFixed(0)}</b></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Rank</th>
+                                <td>{IQResult.rank_world_population}/{numberOfRows.number_of_rows_world_population.count}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">#Correct answers</th>
+                                <td>{IQResult.number_of_correct_answers}/49</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Total time</th>
+                                <td>{msToTime(IQResult.total_time_taken)}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Percentile</th>
+                                <td>{(Number(IQResult.percentile_world_population) * 100).toFixed(3)}%</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Z-score</th>
+                                <td>{((R.qnorm(IQResult.percentile_world_population, 100, 15) - 100) / 15).toFixed(5)}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Rarity</th>
+                                <td>≈ 1 in {(Math.round(Math.abs(1 / ((IQResult.percentile_world_population - 1)))))}</td>
+                            </tr>
+                        </tbody>
 
-            <h2 className="mt-5">Study Level IQ</h2>
-            <div>Study Level: {IQResult.study_level}</div>
-            <div>Rank: {IQResult.rank_study_level}/{IQResult.number_of_rows_study_level} </div>
-            <div>Percentile: {Number(IQResult.percentile_study_level).toFixed(3)} </div>
-            <div><b>IQ: {(R.qnorm(IQResult.percentile_study_level / 100, 100, 15)).toFixed(0)}</b></div>
+                    </table>
+                </div>
+                <div>
+                <h2 class="time_taken_title">Time taken for each item</h2>
+                <Chart
+                    chartType="ColumnChart"
+                    width="800px"
+                    height="500px"
+                    data={data}
+                    options={{
+                        title: "Time taken for each item",
+                        hAxis: {
+                            title: "Item",
+                        },
+                        vAxis: {
+                            title: "Time (milliseconds)",
+                    
+                        }
+                    }}
+                />
+                </div>
 
-            <h2 className="mt-5">Study Area IQ</h2>
-            <div>Study Area: {IQResult.study_area}</div>
-            <div>Rank: {IQResult.rank_study_area}/{IQResult.number_of_rows_study_area} </div>
-            <div>Percentile: {Number(IQResult.percentile_study_area).toFixed(3)} </div>
-            <div><b>IQ: {(R.qnorm(IQResult.percentile_study_area / 100, 100, 15)).toFixed(0)}</b></div>
-        </div>
-    )}
+                <div className="iq_rows" >
+                    <div className="iqs">
+                        <h2 className="">Age Category IQ</h2>
+                        <div>Age Category: {IQResult.age_category}</div>
+                        <div>Rank: {IQResult.rank_age_category}/{numberOfRows.number_of_rows_age_category.find(ageCategory => ageCategory.age_category === IQResult.age_category).count}</div>
+                        <div>Percentile: {(Number(IQResult.percentile_age_category) * 100).toFixed(3)}%</div>
+                        <div><b>IQ: {(R.qnorm(IQResult.percentile_age_category, 100, 15)).toFixed(0)}</b></div>
+                    </div>
+
+                    <div className="iqs">
+                        <h2>Continent IQ</h2>
+                        <div>Continent code: {IQResult.continent_code}</div>
+                        <div>Rank: {IQResult.rank_continent}/{numberOfRows.number_of_rows_continent.find(continent => continent.continent_code === IQResult.continent_code).count} </div>
+                        <div>Percentile: {(Number(IQResult.percentile_continent) * 100).toFixed(3)}%</div>
+                        <div><b>IQ: {(R.qnorm(IQResult.percentile_continent, 100, 15)).toFixed(0)}</b></div>
+                    </div>
+
+                    <div className="iqs">
+                        <h2>Country IQ</h2>
+                        <div>Country: {IQResult.name}</div>
+                        <div>Rank: {IQResult.rank_country}/{numberOfRows.number_of_rows_country.find(country => country.code === IQResult.code).count} </div>
+                        <div>Percentile: {(Number(IQResult.percentile_country) * 100).toFixed(3)}%</div>
+                        <div><b>IQ: {(R.qnorm(IQResult.percentile_country, 100, 15)).toFixed(0)}</b></div>
+                    </div>
+
+                    <div className="iqs">
+                        <h2>Study Level IQ</h2>
+                        <div>Study Level: {IQResult.study_level}</div>
+                        <div>Rank: {IQResult.rank_stduy_level}/{numberOfRows.number_of_rows_study_level.find(study_level => study_level.study_level === IQResult.study_level).count} </div>
+                        <div>Percentile: {(Number(IQResult.percentile_study_level) * 100).toFixed(3)}%</div>
+                        <div><b>IQ: {(R.qnorm(IQResult.percentile_study_level, 100, 15)).toFixed(0)}</b></div>
+                    </div>
+
+                    <div className="iqs">
+                        <h2>Study Area IQ</h2>
+                        <div>Study Area: {IQResult.study_area}</div>
+                        <div>Rank: {IQResult.rank_study_area}/{numberOfRows.number_of_rows_study_are.find(study_area => study_area.study_area === IQResult.study_area).count} </div>
+                        <div>Percentile: {(Number(IQResult.percentile_study_area) * 100).toFixed(3)}%</div>
+                        <div><b>IQ: {(R.qnorm(IQResult.percentile_study_area, 100, 15)).toFixed(0)}</b></div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
 
 export default IqTestResultsPage

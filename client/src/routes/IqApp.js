@@ -30,32 +30,33 @@ const IqApp = () => {
 
   return (
     (itemNumber <= 10) ?
-    <Router>
-      <Redirect to="/iq-test-app" />
+      <Router>
+        <Redirect to="/iq-test-app" />
 
-      <div className="iqapp">
-     <IQTestApp itemNumber={itemNumber}
-        nextItem={nextItem}
-        timeForItem={timeForItem}
-        measureItemTime={measureItemTime}
-        onTimeChange={onTimeChange}
-        elapsed={elapsed}
-        correctAnswers={correctAnswers}
-        handleCorrectAnswer={handleCorrectAnswer}/>
+        <div>
+          <IQTestApp
+            itemNumber={itemNumber}
+            nextItem={nextItem}
+            timeForItem={timeForItem}
+            measureItemTime={measureItemTime}
+            onTimeChange={onTimeChange}
+            elapsed={elapsed}
+            correctAnswers={correctAnswers}
+            handleCorrectAnswer={handleCorrectAnswer} />
         </div>
 
-  </Router> :
-<Router>
+      </Router> :
+      <Router>
 
- <Formular elapsed={elapsed}
-        timeForItem={timeForItem}
-        correctAnswers={correctAnswers}
-        nextItem={nextItem}
-        measureItemTime={measureItemTime}
+        <Formular elapsed={elapsed}
+          timeForItem={timeForItem}
+          correctAnswers={correctAnswers}
+          nextItem={nextItem}
+          measureItemTime={measureItemTime}
         />
 
-</Router>
-  
+      </Router>
+
 
     //iqTestSwitchToFormular()
   )
