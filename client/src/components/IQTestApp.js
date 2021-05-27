@@ -120,7 +120,7 @@ function IQTestItem(props) {
 
 function ItemNumber(props) {
   return (
-    <div className="mb-3 ml-4"> {props.itemNumber}/49 </div>
+    <div className="mb-3 ml-4"> {props.itemNumber}/40 </div>
   )
 }
 

@@ -29,7 +29,7 @@ const IqApp = () => {
   }
 
   return (
-    (itemNumber <= 10) ?
+    (itemNumber <= 40) ?
       <Router>
         <Redirect to="/iq-test-app" />
 
@@ -54,6 +54,8 @@ const IqApp = () => {
           nextItem={nextItem}
           measureItemTime={measureItemTime}
         />
+
+
 
       </Router>
 

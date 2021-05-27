@@ -277,3 +277,54 @@ h2 {
   font-size: 18px;
   font-weight: bold;
 }
+
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+footer {
+  width: 100%;
+  background-color: #1d3473;
+  color: white;
+  margin-top: 20px;
+  padding: 5px;
+  position: relative;
+  bottom: 0;
+}
+
+footer a {
+  color: white;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+footer a:hover {
+  color: white;
+}
+
+.copyright{
+  float:right;
+  margin-right: 20px;
+}
+
+.contactForm {
+  text-align: center;
+}
+
+.contactForm input { 
+  width: 500px;
+}
+
+.contactForm textarea {
+  width: 500px;
+  height: 200px;
+}
+
+.privacy-policy{
+  text-align: center;
+}
+
+.termsOfService { 
+  text-align: center;
+}

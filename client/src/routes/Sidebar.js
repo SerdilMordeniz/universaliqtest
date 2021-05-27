@@ -5,6 +5,7 @@ import iqTestAPI from '../apis/iqTestAPI'
 function Sidebar() {
     const [numberOfTestsTaken, setNumberOfTestsTaken] = useState(0)
     const [last20results, setlast20results] = useState([])
+    const [percentileWorld, setPercentileWorld] = useState([])
 
     function msToTime(s) {
         var ms = s % 1000;
@@ -42,6 +43,35 @@ function Sidebar() {
         fetchLast20Results()
     }, [])
 
+    useEffect(() => {
+        if(last20results.length > 0 && numberOfTestsTaken.length > 0) {
+            console.log(last20results[0].percent_rank)
+            const percentiles = last20results.map((element, index) => {
+                if(element.percent_rank === 0) { 
+                    return (1 - ((numberOfTestsTaken - 1) / numberOfTestsTaken))
+                }
+                else if(element.percent_rank === 1) {
+                    return (1-(1 / numberOfTestsTaken))
+                }
+                else {
+                    return element.percent_rank
+                }
+            })
+            setPercentileWorld(percentiles)
+        }
+        // if(last20results && numberOfTestsTaken >0){
+        //     if(last20results.percent_rank === 0 ) {
+        //         setPercentileWorld(1 - ((numberOfTestsTaken - 1) / numberOfTestsTaken))
+        //     }
+        //     else if(last20results.percent_rank === 1 ) {
+        //         setPercentileWorld(1-(1 / numberOfTestsTaken))
+        //     }
+        //     else {
+        //         setPercentileWorld(last20results.percent_rank) 
+        //     }
+        // }
+    }, [last20results, numberOfTestsTaken])
+
     return (
             <div className="sidebar_info">
                 <div className="summary">
@@ -56,10 +86,10 @@ function Sidebar() {
                         return (
                             <div key={index} className="results" style={{ width: '150px' }}>
                                 {/* <Flags.CH title="United States" className="flag" /> */}
-                                <img className="flag border border-dark" alt="United States" src={`http://purecatamphetamine.github.io/country-flag-icons/1x1/${element.code}.svg`} />
+                                <img className="flag border border-dark" alt={`${element.name}`} title={element.name} src={`http://purecatamphetamine.github.io/country-flag-icons/1x1/${element.code}.svg`} />
                                 <div className="testDetails">
                                     <div>{element.pseudonym}</div>
-                                    <div>IQ: <b>{(R.qnorm(element.percent_rank, 100, 15)).toFixed(0)}</b></div>
+                                    <div>IQ: <b>{(R.qnorm(percentileWorld[index], 100, 15)).toFixed(0)}</b></div>
                                     <div>{element.number_of_correct_answers}/49 in {msToTime(element.total_time_taken)}</div>
                                     <div>{element.to_char}</div>
                                 </div>

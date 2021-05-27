@@ -36,8 +36,8 @@ function StudyAreaChart({fetchedStudyAreaData}) {
                     ['Computer Science', fetchedStudyAreaData.find(o => o.study_area === 'Computer Science') ? parseInt(R.qnorm(fetchedStudyAreaData.find(o => o.study_area === 'Computer Science').avg, 100, 15).toFixed(0), 10) : null, 'blue'],
                     ['Mathematics', fetchedStudyAreaData.find(o => o.study_area === 'Mathematics') ? parseInt(R.qnorm(fetchedStudyAreaData.find(o => o.study_area === 'Mathematics').avg, 100, 15).toFixed(0), 10) : null, 'blue'],
                     ['Business', fetchedStudyAreaData.find(o => o.study_area === 'Business') ? parseInt(R.qnorm(fetchedStudyAreaData.find(o => o.study_area === 'Business').avg, 100, 15).toFixed(0), 10) : null, 'blue'],
-                    ['Engineering and technology', fetchedStudyAreaData.find(o => o.study_area === 'Engineering and technology') ? parseInt(R.qnorm(fetchedStudyAreaData.find(o => o.study_area === 'Engineering and technology').avg, 100, 15).toFixed(0), 10) : null, 'blue'],
-                    ['Medicine and health', fetchedStudyAreaData.find(o => o.study_area === 'Medicine and health') ? parseInt(R.qnorm(fetchedStudyAreaData.find(o => o.study_area === 'Medicine and health').avg, 100, 15).toFixed(0), 10) : null, 'blue'],
+                    ['Engineering', fetchedStudyAreaData.find(o => o.study_area === 'Engineering and technology') ? parseInt(R.qnorm(fetchedStudyAreaData.find(o => o.study_area === 'Engineering and technology').avg, 100, 15).toFixed(0), 10) : null, 'blue'],
+                    ['Medicine', fetchedStudyAreaData.find(o => o.study_area === 'Medicine and health') ? parseInt(R.qnorm(fetchedStudyAreaData.find(o => o.study_area === 'Medicine and health').avg, 100, 15).toFixed(0), 10) : null, 'blue'],
 
                 ]}
                 options={{

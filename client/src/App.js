@@ -7,6 +7,11 @@ import IqApp from './routes/IqApp'
 import IqTestResultsPage from './routes/IqTestResultsPage'
 import Sidebar from './routes/Sidebar'
 import Stats from './components/Stats'
+import Footer from './components/Footer'
+import ContactForm from './routes/ContactForm'
+import PrivacyPolicy from './routes/PrivacyPolicy'
+import TermsOfService from './routes/TermsOfService'
+import PreventTransition from './components/PreventTransition'
 
 //const Home = lazy(() => import('./routes/Home'));
 //const About = lazy(() => import('./routes/About'));
@@ -31,7 +36,6 @@ const App = () => {
             <Switch>
                 <Route exact path="/">
                     <div className="home1">
-                        <Sidebar />
                         <Home />
                     </div>
                 </Route>
@@ -48,6 +52,7 @@ const App = () => {
                         <Sidebar />
                         <IqApp />
                         <Stats />
+                        <PreventTransition />
                     </div>
                 </Route>
 
@@ -56,7 +61,20 @@ const App = () => {
                         <IqTestResultsPage />
                     </div>
                 </Route>
+
+                <Route exact path="/contact">
+                    <ContactForm />
+                </Route>
+
+                <Route exact path="/privacy-policy">
+                    <PrivacyPolicy />
+                </Route>
+
+                <Route exact path="/terms-of-service">
+                    <TermsOfService />
+                </Route>
             </Switch>
+            <Footer />
         </Router>
     )
 }

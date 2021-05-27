@@ -22,7 +22,8 @@ function StudyLevelChart({fetchedStudyLevelData}) {
                     ['3 years graduation', fetchedStudyLevelData.find(o => o.study_level ==='3 years graduation') ? parseInt(R.qnorm(fetchedStudyLevelData.find(o => o.study_level ==='3 years graduation').avg, 100, 15).toFixed(0), 10) : null, 'violet'],
                     ['4 years graduation', fetchedStudyLevelData.find(o => o.study_level ==='4 years graduation') ? parseInt(R.qnorm(fetchedStudyLevelData.find(o => o.study_level ==='4 years graduation').avg, 100, 15).toFixed(0), 10) : null, 'red'],
                     ['5 years graduation', fetchedStudyLevelData.find(o => o.study_level ==='5 years graduation') ? parseInt(R.qnorm(fetchedStudyLevelData.find(o => o.study_level ==='5 years graduation').avg, 100, 15).toFixed(0), 10) : null, 'pink'],
-                    ['More than 5 years graduation', fetchedStudyLevelData.find(o => o.study_level ==='More Than 5 years graduation') ? parseInt(R.qnorm(fetchedStudyLevelData.find(o => o.study_level ==='More Than 5 years graduation').avg, 100, 15).toFixed(0), 10) : null, 'yellow']
+                    ['More than 5 years graduation', fetchedStudyLevelData.find(o => o.study_level ==='More Than 5 years graduation') ? parseInt(R.qnorm(fetchedStudyLevelData.find(o => o.study_level ==='More Than 5 years graduation').avg, 100, 15).toFixed(0), 10) : null, 'yellow'],
+                    ['You', null, 'grey']
                 ]}
                 options={{
                     width: 510,

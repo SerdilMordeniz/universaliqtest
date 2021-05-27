@@ -71,6 +71,7 @@ function AgeCategoryChart({ fetchedAgeCategoryData }) {
                     ['Young Adult (19-35)', parseInt(iqYoungAdult), 'orange'],
                     ['Adult (36-65)', parseInt(iqAdult), 'green'],
                     ['Senior (66-100)', parseInt(iqSenior), 'violet'],
+                    ['You', null, 'grey']
                 ]}
                 options={{
                     width: 510,

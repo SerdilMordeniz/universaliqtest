@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Stats from '../components/Stats'
+import Sidebar from './Sidebar'
 
 const Home = () => {
     return (
-        <div className="">
+        <div className="page-container">
+            <Sidebar />
             <div className="home">
                 <div className="card">
                     <h1 className="card-header">Universal IQ test <img className="diamond" alt="Diamond approved" src="/diamond.svg" /> </h1>

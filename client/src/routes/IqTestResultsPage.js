@@ -2,14 +2,47 @@ import React, { useEffect, useState } from 'react'
 import iqTestAPI from '../apis/iqTestAPI'
 import Chart from "react-google-charts";
 import { useParams } from "react-router-dom";
+import AgeCategoryChart from '../components/AgeCategoryChart'
+import StudyLevelChart from '../components/StudyLevelChart'
 var R = require("rlab");
 
 function IqTestResultsPage() {
     const [IQResult, setIQResult] = useState()
     const [numberOfRows, setNumberOfRows] = useState()
     const [data, setData] = useState()
+    const [percentileWorld, setPercentileWorld] = useState()
 
+    const [fetchedAgeCategoryData, setFetchedAgeCategoryData] = useState(null)
+    const [fetchedStudyLevelData, setFetchedStudyLevelData] = useState(null)
+    const [fetchedStudyAreaData, setFetchedStudyAreaData] = useState(null)
+    
     let { id } = useParams()
+
+     //fetch age category data
+     useEffect(() => {
+        const fetchAgeCategoryChart = async () => {
+            try {
+                const response = await iqTestAPI.get('/age_category_chart')
+                setFetchedAgeCategoryData(response.data.result)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchAgeCategoryChart()
+    }, [])
+
+    //fetch study level data
+    useEffect(() => {
+        const fetchAgeCategoryChart = async () => {
+            try {
+                const response = await iqTestAPI.get('/study_level_chart')
+                setFetchedStudyLevelData(response.data.result)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchAgeCategoryChart()
+    }, [])
 
     useEffect(() => {
 
@@ -27,6 +60,20 @@ function IqTestResultsPage() {
             fetchIQResult()
         }
     }, [id])
+
+    useEffect(() =>{
+        if(IQResult && numberOfRows){
+            if(IQResult.percentile_world_population === 0 ) {
+                setPercentileWorld(Math.abs((IQResult.rank_world_population -1)/(IQResult.rank_world_population) -1))
+            }
+            else if(IQResult.percentile_world_population === 1 ) {
+                setPercentileWorld(Math.abs((IQResult.rank_world_population)/(numberOfRows.number_of_rows_world_population.count)-1))
+            }
+            else {
+                setPercentileWorld(IQResult.percentile_world_population) 
+            }
+        }
+    },[IQResult, numberOfRows])
 
     function msToTime(s) {
         var ms = s % 1000;
@@ -110,20 +157,24 @@ function IqTestResultsPage() {
                     <h1>IQ result of {IQResult.pseudonym}</h1>
                     <p className="result_paragraph">Congratulations, {IQResult.pseudonym}! <br /><br />
 
-The IQ test you took is a development of the Raven concept of progressive matrices. It measures the domain of general intelligence: it evaluates logic, the ability to reason clearly and grasp complexity, and the ability to retain and reproduce patterns of information, sometimes called reproductive capacity.
+                        The IQ test you took is a development of the Raven concept of progressive matrices. It measures the domain of general intelligence: it evaluates logic, the ability to reason clearly and grasp complexity, and the ability to retain and reproduce patterns of information, sometimes called reproductive capacity.
 
-Note that the average standard IQ is set at 100 for historical reasons. The test you passed was designed to have an average score of 100. This allows each candidate to compare their result with statistics and various parameters.
+                        Note that the average standard IQ is set at 100 for historical reasons. The test you passed was designed to have an average score of 100. This allows each candidate to compare their result with statistics and various parameters.
 
-<br /><br />Based on the results of the completed test, <b>your IQ score is {(R.qnorm(IQResult.percentile_world_population, 100, 15)).toFixed(0)}.</b>
+                        <br /><br />Based on the results of the completed test, <b>your IQ score is {(R.qnorm(percentileWorld, 100, 15)).toFixed(0)}.</b>
 
-This IQ value is an estimate. Your result may change depending on your current form and the conditions under which you take the test.
-<br /> Below you can see more details about your result. In addition, there are also some statistics in which you can compare yourself.
-</p>
+                        This IQ value is an estimate. Your result may change depending on your current form and the conditions under which you take the test.
+                        Below you can see more details about your result. In addition, there are also some statistics in which you can compare yourself.
+                    </p>
+                    <p><b>
+                            Your IQ score, ranks and the percentiles change over time. The reason for this is because as more people take this test, the more accurate 
+                            your result will be.
+                        </b></p>
                     <table className="table table-hover table-bordered m-1 mt-4 mb-4">
                         <tbody>
                             <tr className="table-warning">
                                 <th scope="row">IQ</th>
-                                <td><b>{(R.qnorm(IQResult.percentile_world_population, 100, 15)).toFixed(0)}</b></td>
+                                <td><b>{(R.qnorm(percentileWorld, 100, 15)).toFixed(0)}</b></td>
                             </tr>
                             <tr>
                                 <th scope="row">Rank</th>
@@ -143,7 +194,7 @@ This IQ value is an estimate. Your result may change depending on your current f
                             </tr>
                             <tr>
                                 <th scope="row">Z-score</th>
-                                <td>{((R.qnorm(IQResult.percentile_world_population, 100, 15) - 100) / 15).toFixed(5)}</td>
+                                <td>{((R.qnorm(percentileWorld, 100, 15) - 100) / 15).toFixed(5)}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Rarity</th>
@@ -154,23 +205,23 @@ This IQ value is an estimate. Your result may change depending on your current f
                     </table>
                 </div>
                 <div>
-                <h2 class="time_taken_title">Time taken for each item</h2>
-                <Chart
-                    chartType="ColumnChart"
-                    width="800px"
-                    height="500px"
-                    data={data}
-                    options={{
-                        title: "Time taken for each item",
-                        hAxis: {
-                            title: "Item",
-                        },
-                        vAxis: {
-                            title: "Time (milliseconds)",
-                    
-                        }
-                    }}
-                />
+                    <h2 className="time_taken_title">Time taken for each item</h2>
+                    <Chart
+                        chartType="ColumnChart"
+                        width="800px"
+                        height="500px"
+                        data={data}
+                        options={{
+                            title: "Time taken for each item",
+                            hAxis: {
+                                title: "Item",
+                            },
+                            vAxis: {
+                                title: "Time (milliseconds)",
+
+                            }
+                        }}
+                    />
                 </div>
 
                 <div className="iq_rows" >
@@ -214,6 +265,8 @@ This IQ value is an estimate. Your result may change depending on your current f
                         <div><b>IQ: {(R.qnorm(IQResult.percentile_study_area, 100, 15)).toFixed(0)}</b></div>
                     </div>
                 </div>
+                <AgeCategoryChart fetchedAgeCategoryData={fetchedAgeCategoryData} />
+                <StudyLevelChart fetchedStudyLevelData={fetchedStudyLevelData} />
             </div>
         )
     }

@@ -2,11 +2,41 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const db = require('./db')
+const nodemailer = require('nodemailer')
 
 const app = express()
 
 app.use(cors())
 app.use(express.json())
+
+//Send email to my gmail account.
+app.post('/api/v1/contact', async (req, res) => {
+    var message = {
+        from: `${req.body.name} <${req.body.email}>`,
+        to: process.env.MAIL_USER,
+        subject: `Message from ${req.body.name} <${req.body.email}>`,
+        text: req.body.message,
+    };
+
+    let transporter = nodemailer.createTransport({
+        service:'gmail',
+        auth: {
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASS
+        }
+
+    })
+
+    transporter.sendMail(message, (error, info) => {
+        if (error) {
+            console.log(error)
+            res.send('error')
+        } else {
+            console.log(`Email sent: ${info.response}`)
+            res.send('success')
+        }
+    })
+})
 
 // Create an IQ Test entry in the database
 app.post('/api/v1/iqtest', async (req, res) => {
@@ -107,7 +137,7 @@ app.get('/api/v1/rank/study_area', async (req, res) => {
 // Get the last 20 results
 app.get('/api/v1/last_20_results', async (req, res) => {
     try {
-        const last20resuts = await db.query("SELECT person.pseudonym, percent_rank() OVER ( ORDER BY number_of_correct_answers ASC, total_time_taken DESC ), iq_test.number_of_correct_answers, iq_test.total_time_taken, To_char(iq_test.date, 'DD.MM.YYYY HH24:MI'), country.code FROM iq_test INNER JOIN person on iq_test.personal_id = person.id INNER JOIN country on iq_test.personal_id = country.personal_id ORDER BY iq_test.date DESC limit 20;",
+        const last20resuts = await db.query("SELECT person.pseudonym, Percent_rank() OVER ( ORDER BY number_of_correct_answers ASC, total_time_taken DESC ), iq_test.number_of_correct_answers, iq_test.total_time_taken, To_char(iq_test.date, 'DD.MM.YYYY HH24:MI'), country.code, country.name FROM iq_test INNER JOIN person ON iq_test.personal_id = person.id INNER JOIN country ON iq_test.personal_id = country.personal_id ORDER BY iq_test.date DESC limit 20;",
             [])
         res.status(200).json({
             last_20_results: last20resuts.rows
@@ -121,7 +151,7 @@ app.get('/api/v1/last_20_results', async (req, res) => {
 app.get('/api/v1/results/:id', async (req, res) => {
     try {
 
-        const result = await db.query('WITH percentile_rank AS (SELECT age.personal_id, person.pseudonym, age, age_category, country.code, country.NAME, continent_code, total_time_taken, number_of_correct_answers, time_for_each_item, study_level, study_area, Percent_rank() OVER ( partition BY age_category ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) AS percentile_age_category, Percent_rank() OVER ( ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) AS percentile_world_population, Percent_rank() OVER ( partition BY country.continent_code ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) AS percentile_continent, Percent_rank() OVER ( partition BY country.code ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) AS percentile_country, Percent_rank() OVER ( partition BY education.study_level ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) AS percentile_study_level, Percent_rank() OVER ( partition BY education.study_area ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) AS percentile_study_area, Rank() OVER ( partition BY age_category ORDER BY iq_test.number_of_correct_answers DESC, iq_test.time_for_each_item ASC)  AS rank_age_category, Rank() OVER ( ORDER BY iq_test.number_of_correct_answers DESC, iq_test.time_for_each_item ASC)  AS rank_world_population, Rank() OVER ( partition BY country.continent_code ORDER BY iq_test.number_of_correct_answers DESC, iq_test.time_for_each_item ASC)  AS rank_continent, Rank() OVER ( partition BY country.code ORDER BY iq_test.number_of_correct_answers DESC, iq_test.time_for_each_item ASC)  AS rank_country, Rank() OVER ( partition BY education.study_level ORDER BY iq_test.number_of_correct_answers DESC, iq_test.time_for_each_item ASC)  AS rank_stduy_level, Rank() OVER ( partition BY education.study_area ORDER BY iq_test.number_of_correct_answers DESC, iq_test.time_for_each_item ASC)  AS rank_study_area FROM   person INNER JOIN iq_test ON person.id = iq_test.personal_id INNER JOIN age ON person.id = age.personal_id INNER JOIN country ON person.id = country.personal_id INNER JOIN education ON person.id = education.personal_id) SELECT * FROM percentile_rank WHERE  personal_id = $1;',
+        const result = await db.query('WITH percentile_rank AS (SELECT age.personal_id, person.pseudonym, age, age_category, country.code, country.NAME, continent_code, total_time_taken, number_of_correct_answers, time_for_each_item, study_level, study_area, Percent_rank() OVER ( partition BY age_category ORDER BY iq_test.number_of_correct_answers ASC, iq_test.total_time_taken DESC) AS percentile_age_category, Percent_rank() OVER ( ORDER BY iq_test.number_of_correct_answers ASC, iq_test.total_time_taken DESC) AS percentile_world_population, Percent_rank() OVER ( partition BY country.continent_code ORDER BY iq_test.number_of_correct_answers ASC, iq_test.total_time_taken DESC) AS percentile_continent, Percent_rank() OVER ( partition BY country.code ORDER BY iq_test.number_of_correct_answers ASC, iq_test.total_time_taken DESC) AS percentile_country, Percent_rank() OVER ( partition BY education.study_level ORDER BY iq_test.number_of_correct_answers ASC, iq_test.total_time_taken DESC) AS percentile_study_level, Percent_rank() OVER ( partition BY education.study_area ORDER BY iq_test.number_of_correct_answers ASC, iq_test.total_time_taken DESC) AS percentile_study_area, Rank() OVER ( partition BY age_category ORDER BY iq_test.number_of_correct_answers DESC, iq_test.total_time_taken ASC)  AS rank_age_category, Rank() OVER ( ORDER BY iq_test.number_of_correct_answers DESC, iq_test.total_time_taken ASC)  AS rank_world_population, Rank() OVER ( partition BY country.continent_code ORDER BY iq_test.number_of_correct_answers DESC, iq_test.total_time_taken ASC)  AS rank_continent, Rank() OVER ( partition BY country.code ORDER BY iq_test.number_of_correct_answers DESC, iq_test.total_time_taken ASC)  AS rank_country, Rank() OVER ( partition BY education.study_level ORDER BY iq_test.number_of_correct_answers DESC, iq_test.total_time_taken ASC)  AS rank_stduy_level, Rank() OVER ( partition BY education.study_area ORDER BY iq_test.number_of_correct_answers DESC, iq_test.total_time_taken ASC)  AS rank_study_area FROM   person INNER JOIN iq_test ON person.id = iq_test.personal_id INNER JOIN age ON person.id = age.personal_id INNER JOIN country ON person.id = country.personal_id INNER JOIN education ON person.id = education.personal_id) SELECT * FROM   percentile_rank WHERE  personal_id = $1;',
             [req.params.id])
         const resultAgeRows = await db.query('SELECT age_category, COUNT(age_category) FROM age GROUP BY age_category;', [])
         const resultWorldRows = await db.query('SELECT COUNT(*) FROM person;', [])
