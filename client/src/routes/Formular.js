@@ -247,10 +247,10 @@ function Formular(props) {
                             <option value="" hidden >Select study area</option>
                             <option value="No diploma">No Diploma</option>
                             <option value="" disabled >1 Humanities</option>
-                            <option value='Performing arts'>Performing arts</option>
-                            <option value='Visual arts'>Visual arts</option>
+                            <option value='Performing Arts'>Performing arts</option>
+                            <option value='Visual Arts'>Visual arts</option>
                             <option value='History'>History</option>
-                            <option value='Languages and literature'>Languages and literature</option>
+                            <option value='Languages and Literature'>Languages and literature</option>
                             <option value='Law'>Law</option>
                             <option value='Philosophy'>Philosophy</option>
                             <option value='Theology'>Theology</option>
@@ -258,23 +258,23 @@ function Formular(props) {
                             <option value='Anthropology'>Anthropology</option>
                             <option value='Economics'>Economics</option>
                             <option value='Geography'>Geography</option>
-                            <option value='Political science'>Political science</option>
+                            <option value='Political Science'>Political science</option>
                             <option value='Psychology'>Psychology</option>
                             <option value='Sociology'>Sociology</option>
                             <option value='Social Work'>Social Work</option>
                             <option value="" disabled >3 Natural Sciences</option>
                             <option value='Biology'>Biology</option>
                             <option value='Chemistry'>Chemistry</option>
-                            <option value='Earth science'>Earth science</option>
-                            <option value='Space sciences'>Space sciences</option>
+                            <option value='Earth Science'>Earth science</option>
+                            <option value='Space Sciences'>Space sciences</option>
                             <option value='Physics'>Physics</option>
                             <option value="" disabled >4 Formal Sciences</option>
                             <option value='Computer Science'>Computer Science</option>
                             <option value='Mathematics'>Mathematics</option>
                             <option value="" disabled >5 Applied Sciences</option>
                             <option value='Business'>Business</option>
-                            <option value='Engineering and technology'>Engineering and technology</option>
-                            <option value='Medicine and health'>Medicine and health</option>
+                            <option value='Engineering and Technology'>Engineering and technology</option>
+                            <option value='Medicine and Health'>Medicine and health</option>
                         </select>
                         <div className="text-center">
                             <input className="mt-3 btn" type="submit" value="Submit" onClick={handleSubmit} />

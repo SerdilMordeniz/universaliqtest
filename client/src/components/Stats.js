@@ -95,6 +95,7 @@ function Stats() {
                     <h2>Our Statistics</h2>
                     <p>Our following statistics are based on the measured data of this website of all candidates worldwide and may evolve depending on the new results recorded.</p>
                     <p>Furthermore, We complement each IQ result with personalized statistics that assess the candidate based on various parameters (population, age category, study level, study area).</p>
+                    <p><b>Our statistics can change over time, since every result is stored in our database. The more results we store, the more accurate the statistics will be. The calculation of the average IQ scores is done in real time.</b></p>
                 </div>
                 <div className="geochart">
                     <div className="chart">

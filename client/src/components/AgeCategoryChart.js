@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Chart from "react-google-charts"
 import R from 'rlab'
 
-function AgeCategoryChart({ fetchedAgeCategoryData }) {
+function AgeCategoryChart({ fetchedAgeCategoryData, iq }) {
     const [percentileYouth, setPercentileYouth] = useState(null)
     const [percentileYoungAdult, setPercentileYoungAdult] = useState(null)
     const [percentileAdult, setPercentileAdult] = useState(null)
@@ -57,8 +57,6 @@ function AgeCategoryChart({ fetchedAgeCategoryData }) {
     return (
         <div>
             <Chart
-                width={'500px'}
-                height={'300px'}
                 chartType="BarChart"
                 loader={<div>Loading Chart</div>}
                 data={[
@@ -71,7 +69,7 @@ function AgeCategoryChart({ fetchedAgeCategoryData }) {
                     ['Young Adult (19-35)', parseInt(iqYoungAdult), 'orange'],
                     ['Adult (36-65)', parseInt(iqAdult), 'green'],
                     ['Senior (66-100)', parseInt(iqSenior), 'violet'],
-                    ['You', null, 'grey']
+                    ['You', iq, 'grey']
                 ]}
                 options={{
                     width: 510,
@@ -82,6 +80,9 @@ function AgeCategoryChart({ fetchedAgeCategoryData }) {
                     hAxis: { 
                         title: 'IQ',
                         
+                    },
+                    titleTextStyle: {
+                        fontSize: 14
                     }
                 }}
                 // For tests

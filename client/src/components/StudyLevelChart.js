@@ -2,18 +2,16 @@ import React from 'react'
 import Chart from "react-google-charts"
 import R from 'rlab'
 
-function StudyLevelChart({fetchedStudyLevelData}) {
+function StudyLevelChart({fetchedStudyLevelData, iq}) {
     return (
         <div>
             <Chart
-                width={'500px'}
-                height={'300px'}
                 chartType="BarChart"
                 loader={<div>Loading Chart</div>}
                 data={[
                     [
                         'Study Level',
-                        'IQ',
+                        'Average IQ',
                         { role: 'style' },
                     ],
                     ['No Diploma', fetchedStudyLevelData.find(o => o.study_level ==='No diploma') ? parseInt(R.qnorm(fetchedStudyLevelData.find(o => o.study_level ==='No diploma').avg, 100, 15).toFixed(0), 10) : null, 'blue'],
@@ -23,16 +21,19 @@ function StudyLevelChart({fetchedStudyLevelData}) {
                     ['4 years graduation', fetchedStudyLevelData.find(o => o.study_level ==='4 years graduation') ? parseInt(R.qnorm(fetchedStudyLevelData.find(o => o.study_level ==='4 years graduation').avg, 100, 15).toFixed(0), 10) : null, 'red'],
                     ['5 years graduation', fetchedStudyLevelData.find(o => o.study_level ==='5 years graduation') ? parseInt(R.qnorm(fetchedStudyLevelData.find(o => o.study_level ==='5 years graduation').avg, 100, 15).toFixed(0), 10) : null, 'pink'],
                     ['More than 5 years graduation', fetchedStudyLevelData.find(o => o.study_level ==='More Than 5 years graduation') ? parseInt(R.qnorm(fetchedStudyLevelData.find(o => o.study_level ==='More Than 5 years graduation').avg, 100, 15).toFixed(0), 10) : null, 'yellow'],
-                    ['You', null, 'grey']
+                    ['You', iq, 'grey']
                 ]}
                 options={{
-                    width: 510,
+                    width: 610,
                     height: 400,
                     legend: { position: 'none' },
                     dataOpacity: 0.2,
                     title: 'General breakdown according to study level',
                     hAxis: {
                         title: 'IQ'
+                    },
+                    titleTextStyle: {
+                        fontSize: 14
                     }
                 }}
                 // For tests

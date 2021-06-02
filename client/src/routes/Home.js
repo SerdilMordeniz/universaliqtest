@@ -11,6 +11,7 @@ const Home = () => {
                 <div className="card">
                     <h1 className="card-header">Universal IQ test <img className="diamond" alt="Diamond approved" src="/diamond.svg" /> </h1>
                     <div className="card-body">
+                        <div className="main-text">
                         <p className="text-danger"><b>Warning:</b> You can take this test only once. Once you start the test you can't retake the test anymore.</p>
                         <p><b>Before you take the test make sure you are in a quiet place and you can concentrate. Once you chose an answer you can't change it anymore.</b></p>
                         <p>Using 40 questions, we will assess your ability to learn, understand, form concepts, process information, and apply logic and reason.</p>
@@ -18,6 +19,7 @@ const Home = () => {
                         <p>If you are ready click the button below.</p>
                         <div className="center">
                             <Link className="btn" to="/iq-test-app">Start the IQ test</Link>
+                        </div>
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,8 @@ import Chart from "react-google-charts";
 import { useParams } from "react-router-dom";
 import AgeCategoryChart from '../components/AgeCategoryChart'
 import StudyLevelChart from '../components/StudyLevelChart'
+import NormalDistChartResult from '../components/NormalDistChartResult'
+import StudyAreaChart from '../components/StudyAreaChart'
 var R = require("rlab");
 
 function IqTestResultsPage() {
@@ -11,15 +13,16 @@ function IqTestResultsPage() {
     const [numberOfRows, setNumberOfRows] = useState()
     const [data, setData] = useState()
     const [percentileWorld, setPercentileWorld] = useState()
+    const [percentileAge, setPercentileAge] = useState()
 
     const [fetchedAgeCategoryData, setFetchedAgeCategoryData] = useState(null)
     const [fetchedStudyLevelData, setFetchedStudyLevelData] = useState(null)
     const [fetchedStudyAreaData, setFetchedStudyAreaData] = useState(null)
-    
+
     let { id } = useParams()
 
-     //fetch age category data
-     useEffect(() => {
+    //fetch age category data
+    useEffect(() => {
         const fetchAgeCategoryChart = async () => {
             try {
                 const response = await iqTestAPI.get('/age_category_chart')
@@ -44,6 +47,19 @@ function IqTestResultsPage() {
         fetchAgeCategoryChart()
     }, [])
 
+    //fetch study area data
+    useEffect(() => {
+        const fetchAgeCategoryChart = async () => {
+            try {
+                const response = await iqTestAPI.get('/study_area_chart')
+                setFetchedStudyAreaData(response.data.result)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchAgeCategoryChart()
+    }, [])
+
     useEffect(() => {
 
         const fetchIQResult = async () => {
@@ -61,19 +77,35 @@ function IqTestResultsPage() {
         }
     }, [id])
 
-    useEffect(() =>{
-        if(IQResult && numberOfRows){
-            if(IQResult.percentile_world_population === 0 ) {
-                setPercentileWorld(Math.abs((IQResult.rank_world_population -1)/(IQResult.rank_world_population) -1))
+    useEffect(() => {
+        if (IQResult && numberOfRows) {
+            if (IQResult.percentile_world_population === 0) {
+                setPercentileWorld(Math.abs((IQResult.rank_world_population - 1) / (IQResult.rank_world_population) - 1))
             }
-            else if(IQResult.percentile_world_population === 1 ) {
-                setPercentileWorld(Math.abs((IQResult.rank_world_population)/(numberOfRows.number_of_rows_world_population.count)-1))
+            else if (IQResult.percentile_world_population === 1) {
+                setPercentileWorld(Math.abs((IQResult.rank_world_population) / (numberOfRows.number_of_rows_world_population.count) - 1))
             }
             else {
-                setPercentileWorld(IQResult.percentile_world_population) 
+                setPercentileWorld(IQResult.percentile_world_population)
             }
         }
-    },[IQResult, numberOfRows])
+    }, [IQResult, numberOfRows])
+
+    useEffect(() => {
+        if (IQResult && numberOfRows) {
+            if (IQResult.percentile_age_category === 0) {
+                let percentileAgeCategory = Math.abs((IQResult.rank_age_category - 1) / (IQResult.rank_age_category) - 1)
+                setPercentileAge(percentileAgeCategory)
+            }
+            else if (IQResult.percentile_age_category === 1) {
+                let percentileAgeCategory = Math.abs((IQResult.rank_age_category) / (numberOfRows.number_of_rows_age_category.find(ageCategory => ageCategory.age_category === IQResult.age_category).count) - 1)
+                setPercentileAge(percentileAgeCategory)
+            }
+            else {
+                setPercentileAge(IQResult.percentile_age_category)
+            }
+        }
+    }, [IQResult, numberOfRows])
 
     function msToTime(s) {
         var ms = s % 1000;
@@ -131,15 +163,6 @@ function IqTestResultsPage() {
                 ["38", IQResult.time_for_each_item[38]],
                 ["39", IQResult.time_for_each_item[39]],
                 ["40", IQResult.time_for_each_item[40]],
-                ["41", IQResult.time_for_each_item[41]],
-                ["42", IQResult.time_for_each_item[42]],
-                ["43", IQResult.time_for_each_item[43]],
-                ["44", IQResult.time_for_each_item[44]],
-                ["45", IQResult.time_for_each_item[45]],
-                ["46", IQResult.time_for_each_item[46]],
-                ["47", IQResult.time_for_each_item[47]],
-                ["48", IQResult.time_for_each_item[48]],
-                ["49", IQResult.time_for_each_item[49]]
             ];
             setData(dataElements)
         }
@@ -153,9 +176,10 @@ function IqTestResultsPage() {
     } else {
         return (
             <div className="iq_info">
-                <div className="table_result">
-                    <h1>IQ result of {IQResult.pseudonym}</h1>
-                    <p className="result_paragraph">Congratulations, {IQResult.pseudonym}! <br /><br />
+                <div className="inline">
+                    <div className="table_result">
+                        <h1>IQ result of {IQResult.pseudonym} <img className="diamond" alt="Diamond approved" src="/diamond.svg" /></h1>
+                        <p className="result_paragraph">Congratulations, {IQResult.pseudonym}! <br /><br />
 
                         The IQ test you took is a development of the Raven concept of progressive matrices. It measures the domain of general intelligence: it evaluates logic, the ability to reason clearly and grasp complexity, and the ability to retain and reproduce patterns of information, sometimes called reproductive capacity.
 
@@ -166,107 +190,112 @@ function IqTestResultsPage() {
                         This IQ value is an estimate. Your result may change depending on your current form and the conditions under which you take the test.
                         Below you can see more details about your result. In addition, there are also some statistics in which you can compare yourself.
                     </p>
-                    <p><b>
-                            Your IQ score, ranks and the percentiles change over time. The reason for this is because as more people take this test, the more accurate 
+                        <p className="changingParagraph"><b>
+                            Your IQ score, ranks and the percentiles change over time. The reason for this is because as more people take this test, the more accurate
                             your result will be.
                         </b></p>
-                    <table className="table table-hover table-bordered m-1 mt-4 mb-4">
-                        <tbody>
-                            <tr className="table-warning">
-                                <th scope="row">IQ</th>
-                                <td><b>{(R.qnorm(percentileWorld, 100, 15)).toFixed(0)}</b></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Rank</th>
-                                <td>{IQResult.rank_world_population}/{numberOfRows.number_of_rows_world_population.count}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">#Correct answers</th>
-                                <td>{IQResult.number_of_correct_answers}/49</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Total time</th>
-                                <td>{msToTime(IQResult.total_time_taken)}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Percentile</th>
-                                <td>{(Number(IQResult.percentile_world_population) * 100).toFixed(3)}%</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Z-score</th>
-                                <td>{((R.qnorm(percentileWorld, 100, 15) - 100) / 15).toFixed(5)}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Rarity</th>
-                                <td>≈ 1 in {(Math.round(Math.abs(1 / ((IQResult.percentile_world_population - 1)))))}</td>
-                            </tr>
-                        </tbody>
+                        <div className="tableResult">
+                            <table className="table table-hover table-bordered m-1 mt-4 mb-4">
+                                <tbody>
+                                    <tr className="table-warning">
+                                        <th scope="row">IQ (wordwide)</th>
+                                        <td><b>{(R.qnorm(percentileWorld, 100, 15)).toFixed(0)}</b></td>
+                                    </tr>
+                                    <tr className="table-warning">
+                                        <th scope="row">IQ (according to age)</th>
+                                        <td><b>{(R.qnorm(percentileAge, 100, 15)).toFixed(0)}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Rank</th>
+                                        <td>{IQResult.rank_world_population}/{numberOfRows.number_of_rows_world_population.count}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">#Correct answers</th>
+                                        <td>{IQResult.number_of_correct_answers}/49</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Total time</th>
+                                        <td>{msToTime(IQResult.total_time_taken)}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Percentile</th>
+                                        <td>{(Number(IQResult.percentile_world_population) * 100).toFixed(3)}%</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Z-score</th>
+                                        <td>{((R.qnorm(percentileWorld, 100, 15) - 100) / 15).toFixed(5)}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Rarity</th>
+                                        <td>≈ 1 in {(Math.round(Math.abs(1 / ((IQResult.percentile_world_population - 1)))))}</td>
+                                    </tr>
+                                </tbody>
 
-                    </table>
-                </div>
-                <div>
-                    <h2 className="time_taken_title">Time taken for each item</h2>
-                    <Chart
-                        chartType="ColumnChart"
-                        width="800px"
-                        height="500px"
-                        data={data}
-                        options={{
-                            title: "Time taken for each item",
-                            hAxis: {
-                                title: "Item",
-                            },
-                            vAxis: {
-                                title: "Time (milliseconds)",
-
-                            }
-                        }}
-                    />
-                </div>
-
-                <div className="iq_rows" >
-                    <div className="iqs">
-                        <h2 className="">Age Category IQ</h2>
-                        <div>Age Category: {IQResult.age_category}</div>
-                        <div>Rank: {IQResult.rank_age_category}/{numberOfRows.number_of_rows_age_category.find(ageCategory => ageCategory.age_category === IQResult.age_category).count}</div>
-                        <div>Percentile: {(Number(IQResult.percentile_age_category) * 100).toFixed(3)}%</div>
-                        <div><b>IQ: {(R.qnorm(IQResult.percentile_age_category, 100, 15)).toFixed(0)}</b></div>
+                            </table>
+                        </div>
                     </div>
+                    <div className="timeTakenChart">
+                        <Chart
+                            chartType="ColumnChart"
+                            width="600px"
+                            height="500px"
+                            data={data}
+                            options={{
+                                title: "Time taken for each item",
+                                hAxis: {
+                                    title: "Item",
+                                },
+                                vAxis: {
+                                    title: "Time (milliseconds)",
 
-                    <div className="iqs">
-                        <h2>Continent IQ</h2>
-                        <div>Continent code: {IQResult.continent_code}</div>
-                        <div>Rank: {IQResult.rank_continent}/{numberOfRows.number_of_rows_continent.find(continent => continent.continent_code === IQResult.continent_code).count} </div>
-                        <div>Percentile: {(Number(IQResult.percentile_continent) * 100).toFixed(3)}%</div>
-                        <div><b>IQ: {(R.qnorm(IQResult.percentile_continent, 100, 15)).toFixed(0)}</b></div>
-                    </div>
-
-                    <div className="iqs">
-                        <h2>Country IQ</h2>
-                        <div>Country: {IQResult.name}</div>
-                        <div>Rank: {IQResult.rank_country}/{numberOfRows.number_of_rows_country.find(country => country.code === IQResult.code).count} </div>
-                        <div>Percentile: {(Number(IQResult.percentile_country) * 100).toFixed(3)}%</div>
-                        <div><b>IQ: {(R.qnorm(IQResult.percentile_country, 100, 15)).toFixed(0)}</b></div>
-                    </div>
-
-                    <div className="iqs">
-                        <h2>Study Level IQ</h2>
-                        <div>Study Level: {IQResult.study_level}</div>
-                        <div>Rank: {IQResult.rank_stduy_level}/{numberOfRows.number_of_rows_study_level.find(study_level => study_level.study_level === IQResult.study_level).count} </div>
-                        <div>Percentile: {(Number(IQResult.percentile_study_level) * 100).toFixed(3)}%</div>
-                        <div><b>IQ: {(R.qnorm(IQResult.percentile_study_level, 100, 15)).toFixed(0)}</b></div>
-                    </div>
-
-                    <div className="iqs">
-                        <h2>Study Area IQ</h2>
-                        <div>Study Area: {IQResult.study_area}</div>
-                        <div>Rank: {IQResult.rank_study_area}/{numberOfRows.number_of_rows_study_are.find(study_area => study_area.study_area === IQResult.study_area).count} </div>
-                        <div>Percentile: {(Number(IQResult.percentile_study_area) * 100).toFixed(3)}%</div>
-                        <div><b>IQ: {(R.qnorm(IQResult.percentile_study_area, 100, 15)).toFixed(0)}</b></div>
+                                },
+                                titleTextStyle: {
+                                    fontSize: 14
+                                },
+                                legend: 'none'
+                            }}
+                        />
                     </div>
                 </div>
-                <AgeCategoryChart fetchedAgeCategoryData={fetchedAgeCategoryData} />
-                <StudyLevelChart fetchedStudyLevelData={fetchedStudyLevelData} />
+                <h2 className="h2-result">IQ breakdown according to the world population, study area, age category and study level</h2>
+                <div className="resultChart">
+                    <div className="googleChart">
+                        <div className="normalChart">
+                            <NormalDistChartResult iq={(R.qnorm(percentileWorld, 100, 15)).toFixed(0)} percentileWorld={percentileWorld} />
+                            <p>
+                                You are among the <b>{((1 - IQResult.percentile_world_population) * 100).toFixed(0)}%</b> smartest people in the world. You are smarter than <b>{(IQResult.percentile_world_population * 100).toFixed(0)}%</b> of the people in the world.
+                                Your rank among everyone who took this test is <b>{IQResult.rank_world_population}/{numberOfRows.number_of_rows_world_population.count}</b>.
+                        </p>
+                        </div>
+                    </div>
+                    <div className="googleChart">
+                        <div className="studyAreaChart">
+                            <StudyAreaChart fetchedStudyAreaData={fetchedStudyAreaData} iq={(R.qnorm(percentileWorld, 100, 15)).toFixed(0)} />
+                            <p>
+                                You are among the <b>{((1 - IQResult.percentile_study_area) * 100).toFixed(0)}%</b> smartest people in your study area ({IQResult.study_area}). You are smarter than <b>{(IQResult.percentile_study_area * 100).toFixed(0)}%</b> of people in your study area.
+                                Your rank in your study area is <b>{IQResult.rank_study_area}/{numberOfRows.number_of_rows_study_are.find(study_area => study_area.study_area === IQResult.study_area).count}</b>.
+                        </p>
+                        </div>
+                    </div>
+                    <div className="googleChart">
+                        <div className="ageChart">
+                            <AgeCategoryChart fetchedAgeCategoryData={fetchedAgeCategoryData} iq={(R.qnorm(percentileWorld, 100, 15)).toFixed(0)} />
+                            <p className="infoAge">
+                                You are among the <b>{((1 - IQResult.percentile_age_category) * 100).toFixed(0)}%</b> smartest people in your age category ({IQResult.age_category}). You are smarter than <b>{(IQResult.percentile_age_category * 100).toFixed(0)}%</b> of people in your age category.
+                                Your rank in your age category is <b>{IQResult.rank_age_category}/{numberOfRows.number_of_rows_age_category.find(ageCategory => ageCategory.age_category === IQResult.age_category).count}</b>.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="googleChart">
+                        <div className="studyLevelChart">
+                            <StudyLevelChart fetchedStudyLevelData={fetchedStudyLevelData} iq={(R.qnorm(percentileWorld, 100, 15)).toFixed(0)} />
+                            <p className="infostudyLevel">
+                                You are among the <b>{((1 - IQResult.percentile_study_level) * 100).toFixed(0)}%</b> smartest people in your study level ({IQResult.study_level}). You are smarter than <b>{(IQResult.percentile_study_level * 100).toFixed(0)}%</b> of people of your study level.
+                                Your rank in your study level is <b>{IQResult.rank_stduy_level}/{numberOfRows.number_of_rows_study_level.find(studyLevel => studyLevel.study_level === IQResult.study_level).count}</b>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

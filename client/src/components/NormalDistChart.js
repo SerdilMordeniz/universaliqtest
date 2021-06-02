@@ -133,7 +133,10 @@ function NormalDistChart() {
                             fontSize: 12
                         }
                     },
-                    title:'Worldwide IQ distribution'
+                    title:'Worldwide IQ distribution',
+                    titleTextStyle: {
+                        fontSize: 14
+                    }
                 }}
                 rootProps={{ 'data-testid': '1' }}
             />
