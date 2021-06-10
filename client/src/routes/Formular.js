@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import iqTestAPI from '../apis/iqTestAPI'
-import PostPercentiles from '../components/PostPercentiles'
+import IqTestResultsPage from '../routes/IqTestResultsPage'
+import { Redirect, Route, useLocation   } from 'react-router-dom'
 
 function Formular(props) {
     const [formRef] = useState(React.createRef());
@@ -110,9 +111,22 @@ function Formular(props) {
     const handleAge = (event) => {
         setAgeYear(parseInt(event.target.value), 10)
     }
+
+    let location = useLocation().pathname
+    useEffect(() => {
+        if(location.substring(0,9) ==='/results/' ) {
+            window.location.reload();
+        }
+    })
+
     if (id > 0) {
         return (
-            <PostPercentiles id={id} ageCategory={ageCategory} elapsed={props.elapsed} correctAnswers={props.correctAnswers} timeForItem={props.timeForItem} continentCode={continentCode} studyLevel={studyLevel} studyArea={studyArea} />
+            <div>
+                <Redirect to={`/results/${id}`} />
+                <Route exact path="/results/:id" >
+                    <IqTestResultsPage key={Math.floor(Math.random()*100)} />
+                </Route>
+            </div>
         )
     } else {
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import iqTestAPI from '../apis/iqTestAPI'
 import ReactTooltip from "react-tooltip"
-import CountryChart from "../components/CountryChart"
-import ContinentChart from "../components/ContinentChart"
-import NormalDistChart from '../components/NormalDistChart'
-import AgeCategoryChart from '../components/AgeCategoryChart'
-import StudyLevelChart from '../components/StudyLevelChart'
-import StudyAreaChart from '../components/StudyAreaChart'
+import CountryChart from "../charts/CountryChart"
+import ContinentChart from "../charts/ContinentChart"
+import NormalDistChart from '../charts/NormalDistChart'
+import AgeCategoryChart from '../charts/AgeCategoryChart'
+import StudyLevelChart from '../charts/StudyLevelChart'
+import StudyAreaChart from '../charts/StudyAreaChart'
 
 
 

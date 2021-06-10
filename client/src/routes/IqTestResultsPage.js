@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import iqTestAPI from '../apis/iqTestAPI'
 import Chart from "react-google-charts";
 import { useParams } from "react-router-dom";
-import AgeCategoryChart from '../components/AgeCategoryChart'
-import StudyLevelChart from '../components/StudyLevelChart'
-import NormalDistChartResult from '../components/NormalDistChartResult'
-import StudyAreaChart from '../components/StudyAreaChart'
+import AgeCategoryChart from '../charts/AgeCategoryChart'
+import StudyLevelChart from '../charts/StudyLevelChart'
+import NormalDistChartResult from '../charts/NormalDistChartResult'
+import StudyAreaChart from '../charts/StudyAreaChart'
 var R = require("rlab");
 
 function IqTestResultsPage() {
