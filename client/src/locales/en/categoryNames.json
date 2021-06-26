@@ -1,0 +1,43 @@
+{
+    "studyArea": {
+        "No diploma": "No diploma",
+        "Performing Arts": "Performing Arts",
+        "Visual Arts": "Visual Arts",
+        "History": "History",
+        "Languages and Literature": "Languages and Literature",
+        "Law": "Law",
+        "Philosophy": "Philosophy",
+        "Theology": "Theology",
+        "Anthropology": "Anthropology",
+        "Economics": "Economics",
+        "Geography": "Geography",
+        "Political Science": "Political Science",
+        "Psychology": "Psychology",
+        "Sociology": "Sociology",
+        "Social Work": "Social Work",
+        "Biology": "Biology",
+        "Chemistry": "Chemistry",
+        "Earth Science": "Earth Science",
+        "Space Sciences": "Space Sciences",
+        "Computer Science": "Computer Science",
+        "Mathematics": "Mathematics",
+        "Business": "Business",
+        "Engineering and Technology": "Engineering and Technology",
+        "Medicine and Health": "Medicine and Health"
+    },
+    "ageCategory": {
+        "Youth": "Youth",
+        "Young Adult": "Young Adult",
+        "Adult": "Adult",
+        "Senior": "Senior"
+    },
+    "studyLevel": {
+        "No diploma": "No diploma",
+        "High School": "High School",
+        "2 years graduation": "2 years graduation",
+        "3 years graduation": "3 years graduation",
+        "4 years graduation": "4 years graduation",
+        "5 years graduation": "5 years graduation",
+        "More than 5 years graduation": "More than 5 years graduation"
+    }
+}

@@ -4,12 +4,31 @@ import {
   Geographies,
   Geography
 } from "react-simple-maps";
+import { useTranslation } from 'react-i18next';
+import countryNameEN from '../locales/en/countries.json';
+import countryNameDE from '../locales/de/countries.json';
+
 var R = require("rlab");
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 const CountryChart = ({ setTooltipContent, fetchedData }) => {
+  const { t, i18n } = useTranslation();
+
+  const handleCountryName = (ISO_A2) => {
+    let foundCountryName;
+    if(i18n.language === 'en') {
+      foundCountryName = countryNameEN.find(country => country.alpha2 === ISO_A2)
+    } else if(i18n.language === 'de') {
+      foundCountryName = countryNameDE.find(country => country.alpha2 === ISO_A2)
+    }
+    if(foundCountryName) {
+      return foundCountryName.name
+    } else {
+      return undefined
+    }
+  }
 
   return (
     <>
@@ -20,9 +39,9 @@ const CountryChart = ({ setTooltipContent, fetchedData }) => {
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
-                onMouseEnter={(e) => {
-                  console.log(e.defaultPrevented);
-                  const { NAME, ISO_A2 } = geo.properties;
+                onMouseEnter={() => {
+                  const { ISO_A2 } = geo.properties;
+                  const name = handleCountryName(ISO_A2);
                   let result = fetchedData.result.find(o => o.code === ISO_A2 || null)
                   let numberOfTests = 0;
                   let percentile
@@ -38,11 +57,10 @@ const CountryChart = ({ setTooltipContent, fetchedData }) => {
                   } else {
                     IQ = ''
                   }
-                  setTooltipContent(`${NAME}<br />Tests taken : ${numberOfTests}<br />Average IQ : ${IQ}`)
+                  setTooltipContent(`${name}<br />${t('statistics.testsTaken')} : ${numberOfTests}<br />${t('statistics.averageIq')} : ${IQ}`)
                 }}
                 onMouseLeave={() => {
                   setTooltipContent("");
-                  document.addEventListener('touchstart', {passive: true});
                 }}
                 style={{
                   default: {

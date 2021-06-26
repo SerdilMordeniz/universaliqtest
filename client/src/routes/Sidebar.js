@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import R from 'rlab'
 import iqTestAPI from '../apis/iqTestAPI'
+import { useTranslation } from 'react-i18next';
 
 function Sidebar() {
+    const { t } = useTranslation();
     const [numberOfTestsTaken, setNumberOfTestsTaken] = useState(0)
     const [last20results, setlast20results] = useState([])
     const [percentileWorld, setPercentileWorld] = useState([])
@@ -75,13 +77,13 @@ function Sidebar() {
     return (
             <div className="sidebar_info">
                 <div className="summary">
-                    <div><b>{numberOfTestsTaken}</b> tests</div>
-                    <div>highest IQ :<b> {(R.qnorm((1 - (1 / numberOfTestsTaken)), 100, 15)).toFixed(0)}</b></div>
-                    <div>lowest IQ :<b> {(R.qnorm((1 - ((numberOfTestsTaken - 1) / numberOfTestsTaken)), 100, 15)).toFixed(0)}</b></div>
-                    <div><i>average IQ : <b>100</b></i></div>
+                    <div><b>{numberOfTestsTaken}</b> {t("sidebar.tests")}</div>
+                    <div>{t("sidebar.highestIq")}<b> {(R.qnorm((1 - (1 / numberOfTestsTaken)), 100, 15)).toFixed(0)}</b></div>
+                    <div>{t("sidebar.lowestIq")}<b> {(R.qnorm((1 - ((numberOfTestsTaken - 1) / numberOfTestsTaken)), 100, 15)).toFixed(0)}</b></div>
+                    <div><i>{t("sidebar.averageIq")}<b>100</b></i></div>
                 </div>
                 <div className="last-20">
-                    <h2 className="last20" >The last 20 results</h2>
+                    <h2 className="last20" >{t("sidebar.title")}</h2>
                     {last20results.map((element, index) => {
                         return (
                             <div key={index} className="results" style={{ width: '150px' }}>

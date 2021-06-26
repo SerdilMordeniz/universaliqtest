@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Sidebar from './Sidebar'
 import iqTestAPI from '../apis/iqTestAPI'
+import { useTranslation } from 'react-i18next';
 
 function ContactForm() {
-    const [status] = useState("Send Message");
+    const { t } = useTranslation();
+
     const handleSubmit = async (e) => { 
         e.preventDefault();
         const {name, email, message} = e.target.elements
@@ -33,20 +35,20 @@ function ContactForm() {
         <div className="home1">
             <Sidebar />
             <div className="contactForm">
-            <h1>Contact us</h1>
+            <h1>{t('contact.title')}</h1>
             <form onSubmit={handleSubmit}>
                 <div>
 
-                    <input type="text" id="name" placeholder="Name" required />
+                    <input type="text" id="name" placeholder={t('contact.name')} required />
                 </div>
                 <div>
 
-                    <input type="email" id="email" placeholder="Email" required />
+                    <input type="email" id="email" placeholder={t("contact.email")}required />
                 </div>
                 <div>
-                    <textarea id="message" placeholder="Message" required />
+                    <textarea id="message" placeholder={t("contact.message")} required />
                 </div>
-                <button type="submit">{status}</button>
+                <button type="submit">{t("contact.sendMessage")}</button>
             </form>
             </div>
         </div>

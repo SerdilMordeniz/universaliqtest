@@ -1,12 +1,16 @@
 import React from 'react'
 import Sidebar from './Sidebar'
+import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 
 function About() {
+    const { t } = useTranslation();
     return (
         <div className="home1">
             <Sidebar />
             <div className="card">
-                <h1>About Universaliqtest</h1>
+                <h1>{t('about.title')}</h1>
+                <Trans i18nKey='about.paragraph'>
                 <p>Universaliqtest is a private comppany. We created a universal iq test that is
                 assessing ones mental ability. The test consists of questions where no language
                 or any other cultural background would be necessary. Our test has 49 questions.
@@ -18,6 +22,7 @@ function About() {
                 We don't store any private information about a client.
                 The clients privacy is very important to us.
             </p>
+            </Trans>
             </div>
         </div>
     )

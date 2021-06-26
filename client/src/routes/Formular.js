@@ -3,8 +3,10 @@ import axios from 'axios'
 import iqTestAPI from '../apis/iqTestAPI'
 import IqTestResultsPage from '../routes/IqTestResultsPage'
 import { Redirect, Route, useLocation   } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 
 function Formular(props) {
+    const [t] = useTranslation()
     const [formRef] = useState(React.createRef());
 
     const [id, setId] = useState(0)
@@ -134,25 +136,25 @@ function Formular(props) {
             <div className="formular">
                 <img className="diamond" alt="Diamond approved" src="/diamond.svg" />
                 <form ref={formRef} className="shrink">
-                    <h1 className="mr-4 mt-2">Congratulations, you have finished your test!</h1>
+                    <h1 className="mr-4 mt-2">{t('formular.title')}</h1>
                     <div className="form-group">
-                        <label className="mt-1" htmlFor='pseudonym'>Nickname</label>
+                        <label className="mt-1" htmlFor='pseudonym'>{t('formular.nickname')}</label>
                         <input className="form-control form-control-sm" maxLength="15" type='text' value={pseudonym} onChange={(e) => setPseudonym(e.target.value)} id="pseudonym" name='pseudonym' required />
 
-                        <label className="mt-2" htmlFor='email' >E-Mail</label>
+                        <label className="mt-2" htmlFor='email' >{t('formular.email')}</label>
                         <input className="form-control form-control-sm" type='email' value={e_mail} onChange={(e) => setE_mail(e.target.value)} id="email" name='email' required />
-                        <small id="emailHelp" className="form-text text-muted">We'll never share your email.</small>
+                        <small id="emailHelp" className="form-text text-muted">{t('formular.small')}</small>
 
-                        <label className="mt-3" htmlFor='gender'>Gender</label>
+                        <label className="mt-3" htmlFor='gender'>{t('formular.gender')}</label>
                         <select className="form-control form-control-sm heightControl" name='gender' id='gender' value={gender} onChange={(e) => setGender(e.target.value)} required>
-                            <option value="" hidden >Select gender</option>
-                            <option value='male'>Male</option>
-                            <option value='female'>Female</option>
+                            <option value="" hidden >{t('formular.select4')}</option>
+                            <option value='male'>{t('formular.male')}</option>
+                            <option value='female'>{t('formular.female')}</option>
                         </select>
 
-                        <label className="mt-2" htmlFor="birth-year" >Birth Year</label>
+                        <label className="mt-2" htmlFor="birth-year" >{t('formular.birthYear')}</label>
                         <select className="form-control form-control-sm" name="birth-year" id='birth-year' value={ageYear} onChange={(e) => handleAge(e)} required >
-                            <option value="" hidden >Select birth year</option>
+                            <option value="" hidden >{t('formular.select1')}</option>
                             <option value="2009">2009</option>
                             <option value="2008">2008</option>
                             <option value="2007">2007</option>
@@ -244,54 +246,54 @@ function Formular(props) {
                             <option value="1921">1921</option>
                         </select>
 
-                        <label className="mt-2" htmlFor='study_level' >Study Level</label>
+                        <label className="mt-2" htmlFor='study_level' >{t('formular.studyLevel')}</label>
                         <select className="form-control form-control-sm" name='study_level' id='study_level' value={studyLevel} onChange={(e) => setStudyLevel(e.target.value)} required>
-                            <option value="" hidden >Select study level</option>
-                            <option value="No diploma">No Diploma</option>
-                            <option value='High School'>High School</option>
-                            <option value='2 years graduation'>2 years graduation</option>
-                            <option value='3 years graduation'>3 years graduation</option>
-                            <option value='4 years graduation'>4 years graduation</option>
-                            <option value='5 years graduation'>5 years graduation</option>
-                            <option value='More Than 5 years graduation'>More Than 5 years graduation</option>
+                            <option value="" hidden >{t('formular.select2')}</option>
+                            <option value="No diploma">{t('formular.levelOp1')}</option>
+                            <option value='High School'>{t('formular.levelOp2')}</option>
+                            <option value='2 years graduation'>{t('formular.levelOp3')}</option>
+                            <option value='3 years graduation'>{t('formular.levelOp4')}</option>
+                            <option value='4 years graduation'>{t('formular.levelOp5')}</option>
+                            <option value='5 years graduation'>{t('formular.levelOp6')}</option>
+                            <option value='More Than 5 years graduation'>{t('formular.levelOp7')}</option>
                         </select>
 
-                        <label className="mt-2" htmlFor='study_area' >Study Area</label>
+                        <label className="mt-2" htmlFor='study_area' >{t('formular.studyArea')}</label>
                         <select className="form-control form-control-sm" name='study_area' id='study_area' value={studyArea} onChange={(e) => setStudyArea(e.target.value)} required>
-                            <option value="" hidden >Select study area</option>
-                            <option value="No diploma">No Diploma</option>
-                            <option value="" disabled >1 Humanities</option>
-                            <option value='Performing Arts'>Performing arts</option>
-                            <option value='Visual Arts'>Visual arts</option>
-                            <option value='History'>History</option>
-                            <option value='Languages and Literature'>Languages and literature</option>
-                            <option value='Law'>Law</option>
-                            <option value='Philosophy'>Philosophy</option>
-                            <option value='Theology'>Theology</option>
-                            <option value="" disabled >2 Social Sciences</option>
-                            <option value='Anthropology'>Anthropology</option>
-                            <option value='Economics'>Economics</option>
-                            <option value='Geography'>Geography</option>
-                            <option value='Political Science'>Political science</option>
-                            <option value='Psychology'>Psychology</option>
-                            <option value='Sociology'>Sociology</option>
-                            <option value='Social Work'>Social Work</option>
-                            <option value="" disabled >3 Natural Sciences</option>
-                            <option value='Biology'>Biology</option>
-                            <option value='Chemistry'>Chemistry</option>
-                            <option value='Earth Science'>Earth science</option>
-                            <option value='Space Sciences'>Space sciences</option>
-                            <option value='Physics'>Physics</option>
-                            <option value="" disabled >4 Formal Sciences</option>
-                            <option value='Computer Science'>Computer Science</option>
-                            <option value='Mathematics'>Mathematics</option>
-                            <option value="" disabled >5 Applied Sciences</option>
-                            <option value='Business'>Business</option>
-                            <option value='Engineering and Technology'>Engineering and technology</option>
-                            <option value='Medicine and Health'>Medicine and health</option>
+                            <option value="" hidden >{t('formular.select3')}</option>
+                            <option value="No diploma">{t('formular.areaOp1')}</option>
+                            <option value="" disabled >{t('formular.label1')}</option>
+                            <option value='Performing Arts'>{t('formular.areaOp2')}</option>
+                            <option value='Visual Arts'>{t('formular.areaOp3')}</option>
+                            <option value='History'>{t('formular.areaOp4')}</option>
+                            <option value='Languages and Literature'>{t('formular.areaOp5')}</option>
+                            <option value='Law'>{t('formular.areaOp6')}</option>
+                            <option value='Philosophy'>{t('formular.areaOp7')}</option>
+                            <option value='Theology'>{t('formular.areaOp8')}</option>
+                            <option value="" disabled >{t('formular.label2')}</option>
+                            <option value='Anthropology'>{t('formular.areaOp9')}</option>
+                            <option value='Economics'>{t('formular.areaOp10')}</option>
+                            <option value='Geography'>{t('formular.areaOp11')}</option>
+                            <option value='Political Science'>{t('formular.areaOp12')}</option>
+                            <option value='Psychology'>{t('formular.areaOp13')}</option>
+                            <option value='Sociology'>{t('formular.areaOp14')}</option>
+                            <option value='Social Work'>{t('formular.areaOp15')}</option>
+                            <option value="" disabled >{t('formular.label3')}</option>
+                            <option value='Biology'>{t('formular.areaOp16')}</option>
+                            <option value='Chemistry'>{t('formular.areaOp17')}</option>
+                            <option value='Earth Science'>{t('formular.areaOp18')}</option>
+                            <option value='Space Sciences'>{t('formular.areaOp19')}</option>
+                            <option value='Physics'>{t('formular.areaOp20')}</option>
+                            <option value="" disabled >{t('formular.label4')}</option>
+                            <option value='Computer Science'>{t('formular.areaOp21')}</option>
+                            <option value='Mathematics'>{t('formular.areaOp22')}</option>
+                            <option value="" disabled >{t('formular.label5')}</option>
+                            <option value='Business'>{t('formular.areaOp23')}</option>
+                            <option value='Engineering and Technology'>{t('formular.areaOp24')}</option>
+                            <option value='Medicine and Health'>{t('formular.areaOp25')}</option>
                         </select>
                         <div className="text-center">
-                            <input className="mt-3 btn" type="submit" value="Submit" onClick={handleSubmit} />
+                            <input className="mt-3 btn" type="submit" value={t('formular.submit')} onClick={handleSubmit} />
                         </div>
                     </div>
                 </form>

@@ -20,12 +20,14 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json',
-    },
-    fallbackLng: 'en',
-    lng: "en",
     debug: true,
+    detection: {
+      order: ['localStorage', 'path', 'querystring', 'navigator', 'cookie', 'htmlTag'],
+    },
+    backend: {
+      loadPath: '../locales/{{lng}}/{{ns}}.json',
+    },
+
     initImmediate: false,
     react: {
       useSuspense: true

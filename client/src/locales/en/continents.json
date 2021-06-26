@@ -1,0 +1,9 @@
+[
+    {"cc": "AF", "name": "Africa"},
+    {"cc": "NA", "name": "North America"},
+    {"cc": "OC", "name": "Oceania"},
+    {"cc": "AN", "name": "Antarctica"},
+    {"cc": "AS", "name": "Asia"},
+    {"cc": "EU", "name": "Europe"},
+    {"cc": "SA", "name": "South America"}
+]

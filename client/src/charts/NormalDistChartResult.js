@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Chart from "react-google-charts"
+import { useTranslation } from 'react-i18next';
 
 function NormalDistChartResult({ iq, percentileWorld }) {
+    const { t, i18n } = useTranslation();
 
     const [dataSample, setDataSample] = useState([])
 
@@ -25,16 +27,16 @@ function NormalDistChartResult({ iq, percentileWorld }) {
                 index ++
             }
             if(chartData.length>40) {
-                chartData[Math.round((parseInt(iq)+40)/2)-40][4] = `Percentile: ${(percentileWorld*100).toFixed(3)}%`
+                chartData[Math.round((parseInt(iq)+40)/2)-40][4] = `${t('result.normalDistChart.annotation')}: ${(percentileWorld*100).toFixed(3)}%`
             }
-            chartData.unshift(['IQ', 'Frequency', 'Frequency', { role: 'style' }, {role:'annotation'}])
+            chartData.unshift([t('result.normalDistChart.yAxis'), t('result.normalDistChart.xAxis'), t('result.normalDistChart.xAxis'), { role: 'style' }, {role:'annotation'}])
             return chartData;
         }
         if(iq) {
             setDataSample(calculateDataPoints())
         }
         
-    }, [iq, percentileWorld])
+    }, [iq, percentileWorld, i18n.language, t])
 
     if(iq) {
         return (
@@ -71,11 +73,11 @@ function NormalDistChartResult({ iq, percentileWorld }) {
                     ]}
                     options={{
                         hAxis: {
-                            title: 'IQ',
+                            title: t('result.normalDistChart.yAxis'),
                             ticks: [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]
                         },
                         vAxis: {
-                            title: 'Frequency',
+                            title: t('result.normalDistChart.xAxis'),
                         },
                         seriesType: 'line',
                         series: { 
@@ -92,7 +94,7 @@ function NormalDistChartResult({ iq, percentileWorld }) {
                                 fontSize: 16
                             },
                         },
-                        title:'Worldwide IQ distribution',
+                        title: t('result.normalDistChart.title'),
                         titleTextStyle: {
                             fontSize: 14
                         },

@@ -2,22 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Stats from '../components/Stats'
 import Sidebar from './Sidebar'
-import { Trans } from 'react-i18next';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 
-const lngs = {
-    en: { nativeName: 'English' },
-    de: { nativeName: 'Deutsch' }
-};
 
 const Home = () => {
-    const { i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <div className="page-container">
             <Sidebar />
             <div className="home">
                 <div className="card">
-                    <h1 className="card-header">Universal IQ test <img className="diamond" alt="Diamond approved" src="/diamond.svg" /> </h1>
+                    <h1 className="card-header">{t('home.h1')} <img className="diamond" alt="Diamond approved" src="/diamond.svg" /> </h1>
                     <div className="card-body">
 
                         <div className="main-text">
@@ -32,11 +27,6 @@ const Home = () => {
                                 </div>
                             </Trans>
                         </div>
-                        {Object.keys(lngs).map((lng) => (
-                            <button key={lng} style={{ fontWeight: i18n.language === lng ? 'bold' : 'normal' }} type="submit" onClick={() => i18n.changeLanguage(lng)}>
-                                {lngs[lng].nativeName}
-                            </button>
-                        ))}
                     </div>
                 </div>
                 <Stats />

@@ -1,9 +1,11 @@
 import React from 'react'
+import { Trans } from 'react-i18next'
 
 function PrivacyPolicy() {
     return (
         <div className="home1">
             <div className="privacy-policy">
+                <Trans i18nKey="privacyPolicy">
                 <h1>Privacy Policy</h1>
                 <p>Last updated: 26.06.2021</p>
                 <p>
@@ -49,6 +51,7 @@ function PrivacyPolicy() {
                 <p>
                     If you have any questions about this Privacy Policy, please contact us.
                 </p>
+                </Trans>
             </div>
         </div>
     )

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Chart from "react-google-charts"
 import R from 'rlab'
+import { useTranslation } from 'react-i18next';
 
 function NormalDistChart() {
+
+    const [t] = useTranslation()
 
     const [dataSample, setDataSample] = useState([])
 
@@ -11,64 +14,63 @@ function NormalDistChart() {
         return (Math.exp(-(a * a) / (2 * StdDev * StdDev)) / (Math.sqrt(2 * Math.PI) * StdDev))*100;
     }
 
-    const calculateDataPoints = () => {
-        let index = 0;
-        let chartData = new Array([])
-        for (let i=50; i<70; i+=1) {
-            chartData[index] = new Array(2)
-            chartData[index][0] = i
-            chartData[index][1] = NormalDensityZx(i, 100, 15)
-            chartData[index][2] = NormalDensityZx(i, 100, 15)
-            chartData[index][3] = 'red'
-            chartData[index][4] = null
-            index ++
-        }
-        for (let i=70; i<90; i+=1) {
-            chartData[index] = new Array(2)
-            chartData[index][0] = i
-            chartData[index][1] = NormalDensityZx(i, 100, 15)
-            chartData[index][2] = NormalDensityZx(i, 100, 15)
-            chartData[index][3] = 'orange'
-            chartData[index][4] = null
-            index ++
-        }
-        for (let i=90; i<111; i+=1) {
-            chartData[index] = new Array(2)
-            chartData[index][0] = i
-            chartData[index][1] = NormalDensityZx(i, 100, 15)
-            chartData[index][2] = NormalDensityZx(i, 100, 15)
-            chartData[index][3] = 'green'
-            chartData[index][4] = null
-            index ++
-        }
-        for (let i=111; i<131; i+=1) {
-            chartData[index] = new Array(2)
-            chartData[index][0] = i
-            chartData[index][1] = NormalDensityZx(i, 100, 15)
-            chartData[index][2] = NormalDensityZx(i, 100, 15)
-            chartData[index][3] = 'orange'
-            chartData[index][4] = null
-            index ++
-        }
-        for (let i=131; i<151; i+=1) {
-            chartData[index] = new Array(2)
-            chartData[index][0] = i
-            chartData[index][1] = NormalDensityZx(i, 100, 15)
-            chartData[index][2] = NormalDensityZx(i, 100, 15)
-            chartData[index][3] = 'red'
-            chartData[index][4] = null
-            index ++
-        }
-        chartData[10][4] = '1.74% of the population (red)'
-        chartData[30][4] = '22.1% of the population (orange)'
-        chartData[50][4] = '51.6% of the population (green)'
-        chartData[70][4] = '22.1% of the population (orange)'
-        chartData[90][4] = '1.74% of the population (red)'
-        chartData.unshift(['IQ', 'Frequency', 'Frequency', { role: 'style' }, {role:'annotation'}])
-        return chartData;
-    }
-
     useEffect(() => {
+        const calculateDataPoints = () => {
+            let index = 0;
+            let chartData = new Array([])
+            for (let i=50; i<70; i+=1) {
+                chartData[index] = new Array(2)
+                chartData[index][0] = i
+                chartData[index][1] = NormalDensityZx(i, 100, 15)
+                chartData[index][2] = NormalDensityZx(i, 100, 15)
+                chartData[index][3] = 'red'
+                chartData[index][4] = null
+                index ++
+            }
+            for (let i=70; i<90; i+=1) {
+                chartData[index] = new Array(2)
+                chartData[index][0] = i
+                chartData[index][1] = NormalDensityZx(i, 100, 15)
+                chartData[index][2] = NormalDensityZx(i, 100, 15)
+                chartData[index][3] = 'orange'
+                chartData[index][4] = null
+                index ++
+            }
+            for (let i=90; i<111; i+=1) {
+                chartData[index] = new Array(2)
+                chartData[index][0] = i
+                chartData[index][1] = NormalDensityZx(i, 100, 15)
+                chartData[index][2] = NormalDensityZx(i, 100, 15)
+                chartData[index][3] = 'green'
+                chartData[index][4] = null
+                index ++
+            }
+            for (let i=111; i<131; i+=1) {
+                chartData[index] = new Array(2)
+                chartData[index][0] = i
+                chartData[index][1] = NormalDensityZx(i, 100, 15)
+                chartData[index][2] = NormalDensityZx(i, 100, 15)
+                chartData[index][3] = 'orange'
+                chartData[index][4] = null
+                index ++
+            }
+            for (let i=131; i<151; i+=1) {
+                chartData[index] = new Array(2)
+                chartData[index][0] = i
+                chartData[index][1] = NormalDensityZx(i, 100, 15)
+                chartData[index][2] = NormalDensityZx(i, 100, 15)
+                chartData[index][3] = 'red'
+                chartData[index][4] = null
+                index ++
+            }
+            chartData[10][4] = t('home.stat.normalDistChart.annotation1')
+            chartData[30][4] = t('home.stat.normalDistChart.annotation2')
+            chartData[50][4] = t('home.stat.normalDistChart.annotation3')
+            chartData[70][4] = t('home.stat.normalDistChart.annotation2')
+            chartData[90][4] = t('home.stat.normalDistChart.annotation1')
+            chartData.unshift([t('home.stat.normalDistChart.xTitle'), t('home.stat.normalDistChart.yTitle'), t('home.stat.normalDistChart.yTitle'), { role: 'style' }, {role:'annotation'}])
+            return chartData;
+        }
         setDataSample(calculateDataPoints())
         let index = 0;
         let chartData = []
@@ -76,8 +78,7 @@ function NormalDistChart() {
             chartData[index] = R.dnorm(i, 100, 15)
             index++;
         }
-        // eslint-disable-next-line
-    }, [])
+    }, [t])
 
     return (
         <div>
@@ -112,11 +113,11 @@ function NormalDistChart() {
                 ]}
                 options={{
                     hAxis: {
-                        title: 'IQ',
+                        title: t('home.stat.normalDistChart.xTitle'),
                         ticks: [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150]
                     },
                     vAxis: {
-                        title: 'Frequency',
+                        title: t('home.stat.normalDistChart.yTitle'),
                     },
                     seriesType: 'line',
                     series: { 
@@ -133,7 +134,7 @@ function NormalDistChart() {
                             fontSize: 12
                         }
                     },
-                    title:'Worldwide IQ distribution',
+                    title: t('home.stat.normalDistChart.title'),
                     titleTextStyle: {
                         fontSize: 14
                     }

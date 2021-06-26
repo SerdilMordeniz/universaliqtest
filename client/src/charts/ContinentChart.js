@@ -1,5 +1,11 @@
 import React, { memo, useState } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+
+import { useTranslation } from 'react-i18next';
+
+import continentNameEN from '../locales/en/continents.json'
+import continentNameDE from '../locales/de/continents.json'
+
 var R = require("rlab");
 
 const geoUrl =
@@ -7,6 +13,8 @@ const geoUrl =
 
 
 const ContinentChart = ({ setTooltipContent, fetchedData }) => {
+  const { t, i18n } = useTranslation();
+
   const [highlighted, setHighlighted] = useState("");
 
   const continentNameToCode = (continentName) => {
@@ -30,6 +38,20 @@ const ContinentChart = ({ setTooltipContent, fetchedData }) => {
     }
   }
 
+  const handleContinentName = continentCode => {
+    let foundContinentName;
+    if(i18n.language === 'en') {
+      foundContinentName = continentNameEN.find(continent => continent.cc === continentCode)
+    } else if(i18n.language === 'de') {
+      foundContinentName = continentNameDE.find(continent => continent.cc === continentCode)
+    }
+    if(foundContinentName) {
+      return foundContinentName.name
+    } else {
+      return undefined
+    }
+  }
+
   return (
     <>
       <ComposableMap data-tip="" projectionConfig={{ scale: 184 }}>
@@ -43,6 +65,7 @@ const ContinentChart = ({ setTooltipContent, fetchedData }) => {
                   const { CONTINENT } = geo.properties;
 
                   let continentCode = continentNameToCode(CONTINENT)
+                  const name = handleContinentName(continentCode);
                   let result = fetchedData.result.find(o => o.code === continentCode || null)
                   let numberOfTests = 0
                   let percentile;
@@ -58,7 +81,7 @@ const ContinentChart = ({ setTooltipContent, fetchedData }) => {
                     IQ = ''
                   }
 
-                  setTooltipContent(`${CONTINENT}<br />Tests taken : ${numberOfTests}<br />Average IQ : ${IQ}`);
+                  setTooltipContent(`${name}<br />${t('statistics.testsTaken')} : ${numberOfTests}<br />${t('statistics.averageIq')} : ${IQ}`);
                   setHighlighted(geo.properties.CONTINENT);
                 }}
                 onMouseLeave={() => {

@@ -1,9 +1,11 @@
 import React from 'react'
+import { Trans } from 'react-i18next'
 
 function TermsOfService() {
     return (
         <div className="home1">
             <div className="termsOfService">
+            <Trans i18nKey="termsOfService"> 
                 <h1>Terms of Service</h1>
                 <p>Last updated: 26.06.2021</p>
                 <p>
@@ -27,6 +29,7 @@ function TermsOfService() {
                     termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity and
                     limitations of liability.
                 </p>
+                </Trans>
             </div>
         </div>
     )
