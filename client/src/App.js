@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from 'react-router-dom'
 import Home from './routes/Home'
 import About from './routes/About'
 import Statistics from './routes/Statistics'
@@ -52,6 +52,9 @@ const App = () => {
             </ul>
 
             <Switch>
+                <Route exact path="/">
+                    <Redirect to={`/${i18n.language}`} />
+                </Route>
                 <Route exact path={`${base}/`}>
                     <div className="home1">
                         <Home />

@@ -22,7 +22,7 @@ i18n
   .init({
     debug: true,
     detection: {
-      order: ['path','navigator', 'subdomain', 'querystring', 'cookie', 'localStorage', 'sessionStorage', 'htmlTag'],
+      order: ['path', 'navigator', 'subdomain', 'querystring', 'cookie', 'localStorage', 'sessionStorage', 'htmlTag'],
     },
 
     initImmediate: false,
