@@ -6,7 +6,7 @@ import { useTranslation, Trans } from 'react-i18next';
 
 
 const Home = () => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     return (
         <div className="page-container">
             <Sidebar />
@@ -23,7 +23,7 @@ const Home = () => {
                                 <p>Your test result will inform you about your IQ in your age category, how well you did within your continent, the world population, your study level and your study area</p>
                                 <p>If you are ready click the button below.</p>
                                 <div className="center">
-                                    <Link className="btn" to="/iq-test-app">Start the IQ test</Link>
+                                    <Link className="btn" to={`/${i18n.language}/iq-test-app`}>Start the IQ test</Link>
                                 </div>
                             </Trans>
                         </div>

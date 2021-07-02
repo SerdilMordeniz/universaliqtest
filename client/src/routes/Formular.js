@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import iqTestAPI from '../apis/iqTestAPI'
 import IqTestResultsPage from '../routes/IqTestResultsPage'
-import { Redirect, Route, useLocation   } from 'react-router-dom'
+import { Redirect, useLocation   } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 function Formular(props) {
-    const [t] = useTranslation()
+    const [t, i18n] = useTranslation()
     const [formRef] = useState(React.createRef());
 
     const [id, setId] = useState(0)
@@ -124,10 +124,8 @@ function Formular(props) {
     if (id > 0) {
         return (
             <div>
-                <Redirect to={`/results/${id}`} />
-                <Route exact path="/results/:id" >
+                <Redirect to={`/${i18n.language}/results/${id}`} />
                     <IqTestResultsPage key={Math.floor(Math.random()*100)} />
-                </Route>
             </div>
         )
     } else {

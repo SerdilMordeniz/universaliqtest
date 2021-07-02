@@ -29,7 +29,7 @@ const IqApp = () => {
   }
 
   return (
-    (itemNumber <= 40) ?
+    (itemNumber <= 5) ?
       <Router>
         <Redirect to="/iq-test-app" />
 

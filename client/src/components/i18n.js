@@ -22,10 +22,7 @@ i18n
   .init({
     debug: true,
     detection: {
-      order: ['localStorage', 'path', 'querystring', 'navigator', 'cookie', 'htmlTag'],
-    },
-    backend: {
-      loadPath: '../locales/{{lng}}/{{ns}}.json',
+      order: ['path','navigator', 'subdomain', 'querystring', 'cookie', 'localStorage', 'sessionStorage', 'htmlTag'],
     },
 
     initImmediate: false,

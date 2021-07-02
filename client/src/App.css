@@ -258,6 +258,15 @@ li img:hover {
   width: 1100px;
 }
 
+.normalDistChartYAxis {
+  position: relative;
+  bottom: 18em;
+  transform: rotate(-90deg);
+  left: 20px;
+  width: 100px;
+  font-size: 14px;
+}
+
 .googleChart {
   display: inline-block;
   margin-left: 50px;

@@ -47,7 +47,6 @@ function Sidebar() {
 
     useEffect(() => {
         if(last20results.length > 0 && numberOfTestsTaken.length > 0) {
-            console.log(last20results[0].percent_rank)
             const percentiles = last20results.map((element, index) => {
                 if(element.percent_rank === 0) { 
                     return (1 - ((numberOfTestsTaken - 1) / numberOfTestsTaken))
