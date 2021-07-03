@@ -7,6 +7,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import countryNameEN from '../locales/en/countries.json';
 import countryNameDE from '../locales/de/countries.json';
+import countryNameRU from '../locales/ru/countries.json';
 
 var R = require("rlab");
 
@@ -19,9 +20,11 @@ const CountryChart = ({ setTooltipContent, fetchedData }) => {
   const handleCountryName = (ISO_A2) => {
     let foundCountryName;
     if(i18n.language === 'en') {
-      foundCountryName = countryNameEN.find(country => country.alpha2 === ISO_A2)
+      foundCountryName = countryNameEN.find(country => country.alpha2.toLowerCase() === ISO_A2.toLowerCase())
     } else if(i18n.language === 'de') {
-      foundCountryName = countryNameDE.find(country => country.alpha2 === ISO_A2)
+      foundCountryName = countryNameDE.find(country => country.alpha2.toLowerCase() === ISO_A2.toLowerCase())
+    } else if(i18n.language === 'ru') {
+      foundCountryName = countryNameRU.find(country => country.alpha2.toLowerCase() === ISO_A2.toLowerCase())
     }
     if(foundCountryName) {
       return foundCountryName.name

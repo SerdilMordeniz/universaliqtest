@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Geen diploma",
+  "Performing Arts": "Uitvoerende kunst",
+  "Visual Arts": "Beeldende Kunsten",
+  "History": "Geschiedenis",
+  "Languages and Literature": "Talen en literatuur",
+  "Law": "Wet",
+  "Philosophy": "Filosofie",
+  "Theology": "Theologie",
+  "Anthropology": "Antropologie",
+  "Economics": "Economie",
+  "Geography": "Aardrijkskunde",
+  "Political Science": "Politicologie",
+  "Psychology": "Psychologie",
+  "Sociology": "Sociologie",
+  "Social Work": "Maatschappelijk werk",
+  "Biology": "Biologie",
+  "Chemistry": "Chemie",
+  "Earth Science": "Aardwetenschappen",
+  "Space Sciences": "Ruimtewetenschappen",
+  "Computer Science": "Computertechnologie",
+  "Mathematics": "Wiskunde",
+  "Business": "Bedrijf",
+  "Engineering and Technology": "Techniek en technologie",
+  "Medicine and Health": "Geneeskunde en gezondheid"
+ },
+ "ageCategory": {
+  "Youth": "Jeugd",
+  "Young Adult": "Jongvolwassene",
+  "Adult": "Volwassen",
+  "Senior": "Senior"
+ },
+ "studyLevel": {
+  "No diploma": "Geen diploma",
+  "High School": "Middelbare school",
+  "2 years graduation": "2 jaar afstuderen",
+  "3 years graduation": "3 jaar afstuderen",
+  "4 years graduation": "4 jaar afstuderen",
+  "5 years graduation": "5 jaar afstuderen",
+  "More than 5 years graduation": "Meer dan 5 jaar afgestudeerd"
+ }
+}

@@ -22,7 +22,7 @@ import LanguageChanger from './components/LanguageChanger'
 // const IqTestResultsPage = lazy(() => import('./routes/IqTestResultsPage'));
 // const Sidebar = lazy(() => import('./routes/Sidebar'))
 
-const base = '/(en|de|ru)';
+const base = '/(en|de|ar|bg|cs|da|el|es|et|fi|fr|hu|it|ja|ko|nl|no|pl|pt|ro|ru|sk|sv|ta|th|tr|uk|zh)';
 
 
 const App = () => {

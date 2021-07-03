@@ -1,0 +1,30 @@
+[
+ {
+  "cc": "AF",
+  "name": "Afrikka"
+ },
+ {
+  "cc": "NA",
+  "name": "Pohjois-Amerikka"
+ },
+ {
+  "cc": "OC",
+  "name": "Oseania"
+ },
+ {
+  "cc": "AN",
+  "name": "Etelämanner"
+ },
+ {
+  "cc": "AS",
+  "name": "Aasia"
+ },
+ {
+  "cc": "EU",
+  "name": "Eurooppa"
+ },
+ {
+  "cc": "SA",
+  "name": "Etelä-Amerikka"
+ }
+]

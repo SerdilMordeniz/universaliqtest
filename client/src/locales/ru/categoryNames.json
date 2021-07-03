@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Нет диплома",
+  "Performing Arts": "Исполнительские искусства",
+  "Visual Arts": "Изобразительное искусство",
+  "History": "История",
+  "Languages and Literature": "Языки и литература",
+  "Law": "Закон",
+  "Philosophy": "Философия",
+  "Theology": "Богословие",
+  "Anthropology": "Антропология",
+  "Economics": "Экономика",
+  "Geography": "География",
+  "Political Science": "Политическая наука",
+  "Psychology": "Психология",
+  "Sociology": "Социология",
+  "Social Work": "Социальная работа",
+  "Biology": "Биология",
+  "Chemistry": "Химия",
+  "Earth Science": "Наука о Земле",
+  "Space Sciences": "Космические науки",
+  "Computer Science": "Информатика",
+  "Mathematics": "Математика",
+  "Business": "Бизнес",
+  "Engineering and Technology": "Инженерия и технологии",
+  "Medicine and Health": "Медицина и здоровье"
+ },
+ "ageCategory": {
+  "Youth": "Молодежь",
+  "Young Adult": "Молодой взрослый",
+  "Adult": "Взрослый",
+  "Senior": "Старший"
+ },
+ "studyLevel": {
+  "No diploma": "Нет диплома",
+  "High School": "Средняя школа",
+  "2 years graduation": "2 года выпуска",
+  "3 years graduation": "3 года выпуска",
+  "4 years graduation": "Выпуск 4 года",
+  "5 years graduation": "Выпуск 5 лет",
+  "More than 5 years graduation": "Выпуск более 5 лет"
+ }
+}

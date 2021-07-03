@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Inget diplom",
+  "Performing Arts": "Scenkonst",
+  "Visual Arts": "Visuella konsterna",
+  "History": "Historia",
+  "Languages and Literature": "Språk och litteratur",
+  "Law": "Lag",
+  "Philosophy": "Filosofi",
+  "Theology": "Teologi",
+  "Anthropology": "Antropologi",
+  "Economics": "Ekonomi",
+  "Geography": "Geografi",
+  "Political Science": "Statsvetenskap",
+  "Psychology": "Psykologi",
+  "Sociology": "Sociologi",
+  "Social Work": "Socialt arbete",
+  "Biology": "Biologi",
+  "Chemistry": "Kemi",
+  "Earth Science": "Jordvetenskap",
+  "Space Sciences": "Rymdvetenskap",
+  "Computer Science": "Datavetenskap",
+  "Mathematics": "Matematik",
+  "Business": "Företag",
+  "Engineering and Technology": "Teknik och teknik",
+  "Medicine and Health": "Medicin och hälsa"
+ },
+ "ageCategory": {
+  "Youth": "Ungdom",
+  "Young Adult": "Ung vuxen",
+  "Adult": "Vuxen",
+  "Senior": "Senior"
+ },
+ "studyLevel": {
+  "No diploma": "Inget diplom",
+  "High School": "Gymnasium",
+  "2 years graduation": "2 års examen",
+  "3 years graduation": "3 års examen",
+  "4 years graduation": "4 års examen",
+  "5 years graduation": "5 års examen",
+  "More than 5 years graduation": "Mer än 5 års examen"
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Ei tutkintotodistusta",
+  "Performing Arts": "Esittävät taiteet",
+  "Visual Arts": "Kuvataide",
+  "History": "Historia",
+  "Languages and Literature": "Kielet ja kirjallisuus",
+  "Law": "Laki",
+  "Philosophy": "Filosofia",
+  "Theology": "Teologia",
+  "Anthropology": "Antropologia",
+  "Economics": "Taloustiede",
+  "Geography": "Maantiede",
+  "Political Science": "Valtiotiede",
+  "Psychology": "Psykologia",
+  "Sociology": "Sosiologia",
+  "Social Work": "Sosiaalityö",
+  "Biology": "Biologia",
+  "Chemistry": "Kemia",
+  "Earth Science": "Maantiede",
+  "Space Sciences": "Avaruustieteet",
+  "Computer Science": "Tietokone Tiede",
+  "Mathematics": "Matematiikka",
+  "Business": "Liiketoiminta",
+  "Engineering and Technology": "Tekniikka",
+  "Medicine and Health": "Lääketiede ja terveys"
+ },
+ "ageCategory": {
+  "Youth": "Nuoret",
+  "Young Adult": "Nuori aikuinen",
+  "Adult": "Aikuinen",
+  "Senior": "Vanhempi"
+ },
+ "studyLevel": {
+  "No diploma": "Ei tutkintotodistusta",
+  "High School": "Lukio",
+  "2 years graduation": "2 vuoden valmistuminen",
+  "3 years graduation": "3 vuoden valmistuminen",
+  "4 years graduation": "4 vuoden valmistuminen",
+  "5 years graduation": "5 vuoden valmistuminen",
+  "More than 5 years graduation": "Yli 5 vuoden valmistuminen"
+ }
+}

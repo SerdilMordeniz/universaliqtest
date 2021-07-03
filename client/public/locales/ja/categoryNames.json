@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "卒業証書なし",
+  "Performing Arts": "舞台芸術",
+  "Visual Arts": "視覚芸術",
+  "History": "歴史",
+  "Languages and Literature": "言語と文学",
+  "Law": "法律",
+  "Philosophy": "哲学",
+  "Theology": "神学",
+  "Anthropology": "人類学",
+  "Economics": "経済",
+  "Geography": "地理",
+  "Political Science": "政治学",
+  "Psychology": "心理学",
+  "Sociology": "社会学",
+  "Social Work": "社会事業",
+  "Biology": "生物学",
+  "Chemistry": "化学",
+  "Earth Science": "地球科学",
+  "Space Sciences": "宇宙科学",
+  "Computer Science": "コンピュータサイエンス",
+  "Mathematics": "数学",
+  "Business": "ビジネス",
+  "Engineering and Technology": "エンジニアリングとテクノロジー",
+  "Medicine and Health": "医学と健康"
+ },
+ "ageCategory": {
+  "Youth": "若者",
+  "Young Adult": "ヤングアダルト",
+  "Adult": "大人",
+  "Senior": "上級"
+ },
+ "studyLevel": {
+  "No diploma": "卒業証書なし",
+  "High School": "高校",
+  "2 years graduation": "2年間の卒業",
+  "3 years graduation": "3年卒業",
+  "4 years graduation": "4年卒業",
+  "5 years graduation": "5年卒業",
+  "More than 5 years graduation": "5年以上の卒業"
+ }
+}

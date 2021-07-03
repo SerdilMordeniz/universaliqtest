@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Fără diplomă",
+  "Performing Arts": "Artele spectacolului",
+  "Visual Arts": "Arte vizuale",
+  "History": "Istorie",
+  "Languages and Literature": "Limbi și literatură",
+  "Law": "Lege",
+  "Philosophy": "Filozofie",
+  "Theology": "Teologie",
+  "Anthropology": "Antropologie",
+  "Economics": "Economie",
+  "Geography": "Geografie",
+  "Political Science": "Stiinte Politice",
+  "Psychology": "Psihologie",
+  "Sociology": "Sociologie",
+  "Social Work": "Munca sociala",
+  "Biology": "Biologie",
+  "Chemistry": "Chimie",
+  "Earth Science": "Știința Pământului",
+  "Space Sciences": "Științe spațiale",
+  "Computer Science": "Informatică",
+  "Mathematics": "Matematică",
+  "Business": "Afaceri",
+  "Engineering and Technology": "Inginerie și tehnologie",
+  "Medicine and Health": "Medicină și sănătate"
+ },
+ "ageCategory": {
+  "Youth": "Tineret",
+  "Young Adult": "Tânăr adult",
+  "Adult": "Adult",
+  "Senior": "Senior"
+ },
+ "studyLevel": {
+  "No diploma": "Fără diplomă",
+  "High School": "Liceu",
+  "2 years graduation": "2 ani de absolvire",
+  "3 years graduation": "3 ani de absolvire",
+  "4 years graduation": "4 ani de absolvire",
+  "5 years graduation": "5 ani de absolvire",
+  "More than 5 years graduation": "Mai mult de 5 ani de absolvire"
+ }
+}

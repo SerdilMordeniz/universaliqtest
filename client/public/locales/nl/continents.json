@@ -1,0 +1,30 @@
+[
+ {
+  "cc": "AF",
+  "name": "Afrika"
+ },
+ {
+  "cc": "NA",
+  "name": "Noord-Amerika"
+ },
+ {
+  "cc": "OC",
+  "name": "Oceanië"
+ },
+ {
+  "cc": "AN",
+  "name": "Antarctica"
+ },
+ {
+  "cc": "AS",
+  "name": "Azië"
+ },
+ {
+  "cc": "EU",
+  "name": "Europa"
+ },
+ {
+  "cc": "SA",
+  "name": "Zuid-Amerika"
+ }
+]

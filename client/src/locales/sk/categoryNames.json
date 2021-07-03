@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Žiaden diplom",
+  "Performing Arts": "Múzických umení",
+  "Visual Arts": "Výtvarné umenie",
+  "History": "História",
+  "Languages and Literature": "Jazyky a literatúra",
+  "Law": "Zákon",
+  "Philosophy": "Filozofia",
+  "Theology": "Teológia",
+  "Anthropology": "Antropológia",
+  "Economics": "Ekonomika",
+  "Geography": "Geografia",
+  "Political Science": "Politická veda",
+  "Psychology": "Psychológia",
+  "Sociology": "Sociológia",
+  "Social Work": "Sociálna práca",
+  "Biology": "Biológia",
+  "Chemistry": "Chémia",
+  "Earth Science": "Veda o Zemi",
+  "Space Sciences": "Vesmírne vedy",
+  "Computer Science": "Počítačová veda",
+  "Mathematics": "Matematika",
+  "Business": "Obchodné",
+  "Engineering and Technology": "Strojárstvo a technológia",
+  "Medicine and Health": "Medicína a zdravie"
+ },
+ "ageCategory": {
+  "Youth": "Mládež",
+  "Young Adult": "Mladý dospelý",
+  "Adult": "Dospelý",
+  "Senior": "Senior"
+ },
+ "studyLevel": {
+  "No diploma": "Žiaden diplom",
+  "High School": "Stredná škola",
+  "2 years graduation": "Absolvovanie 2 rokov",
+  "3 years graduation": "3 roky od ukončenia štúdia",
+  "4 years graduation": "Absolvovanie 4 rokov",
+  "5 years graduation": "5 rokov od ukončenia štúdia",
+  "More than 5 years graduation": "Viac ako 5 rokov od ukončenia štúdia"
+ }
+}

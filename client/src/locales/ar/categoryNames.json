@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "لا دبلوم",
+  "Performing Arts": "الفنون التمثيلية",
+  "Visual Arts": "الفنون البصرية",
+  "History": "تاريخ",
+  "Languages and Literature": "اللغات والأدب",
+  "Law": "قانون",
+  "Philosophy": "فلسفة",
+  "Theology": "علم اللاهوت",
+  "Anthropology": "الأنثروبولوجيا",
+  "Economics": "اقتصاديات",
+  "Geography": "جغرافية",
+  "Political Science": "العلوم السياسية",
+  "Psychology": "علم النفس",
+  "Sociology": "علم الاجتماع",
+  "Social Work": "الخدمة الاجتماعية",
+  "Biology": "مادة الاحياء",
+  "Chemistry": "كيمياء",
+  "Earth Science": "علوم الأرض",
+  "Space Sciences": "علوم الفضاء",
+  "Computer Science": "علوم الكمبيوتر",
+  "Mathematics": "الرياضيات",
+  "Business": "اعمال",
+  "Engineering and Technology": "الهندسة و التكنولوجيا",
+  "Medicine and Health": "الطب والصحة"
+ },
+ "ageCategory": {
+  "Youth": "شباب",
+  "Young Adult": "الشباب",
+  "Adult": "الكبار",
+  "Senior": "كبير"
+ },
+ "studyLevel": {
+  "No diploma": "لا دبلوم",
+  "High School": "المدرسة الثانوية",
+  "2 years graduation": "2 سنوات التخرج",
+  "3 years graduation": "3 سنوات التخرج",
+  "4 years graduation": "4 سنوات التخرج",
+  "5 years graduation": "5 سنوات التخرج",
+  "More than 5 years graduation": "تخرج أكثر من 5 سنوات"
+ }
+}

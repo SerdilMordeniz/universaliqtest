@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Pas de diplôme",
+  "Performing Arts": "Arts performants",
+  "Visual Arts": "arts visuels",
+  "History": "Histoire",
+  "Languages and Literature": "Langues et littérature",
+  "Law": "Droit",
+  "Philosophy": "Philosophie",
+  "Theology": "Théologie",
+  "Anthropology": "Anthropologie",
+  "Economics": "Économie",
+  "Geography": "La géographie",
+  "Political Science": "Science politique",
+  "Psychology": "Psychologie",
+  "Sociology": "Sociologie",
+  "Social Work": "Travail social",
+  "Biology": "Biologie",
+  "Chemistry": "Chimie",
+  "Earth Science": "sciences de la Terre",
+  "Space Sciences": "Sciences spatiales",
+  "Computer Science": "L'informatique",
+  "Mathematics": "Mathématiques",
+  "Business": "Affaires",
+  "Engineering and Technology": "Ingénierie et technologie",
+  "Medicine and Health": "La médecine et la santé"
+ },
+ "ageCategory": {
+  "Youth": "Jeunesse",
+  "Young Adult": "Jeune adulte",
+  "Adult": "Adulte",
+  "Senior": "Sénior"
+ },
+ "studyLevel": {
+  "No diploma": "Pas de diplôme",
+  "High School": "Lycée",
+  "2 years graduation": "2 ans d'études",
+  "3 years graduation": "3 ans d'études",
+  "4 years graduation": "4 ans d'obtention du diplôme",
+  "5 years graduation": "5 ans d'obtention du diplôme",
+  "More than 5 years graduation": "Plus de 5 ans d'études"
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Diplomit pole",
+  "Performing Arts": "Lavakunst",
+  "Visual Arts": "Kujutav kunst",
+  "History": "Ajalugu",
+  "Languages and Literature": "Keeled ja kirjandus",
+  "Law": "Seadus",
+  "Philosophy": "Filosoofia",
+  "Theology": "Teoloogia",
+  "Anthropology": "Antropoloogia",
+  "Economics": "Majandus",
+  "Geography": "Geograafia",
+  "Political Science": "Politoloogia",
+  "Psychology": "Psühholoogia",
+  "Sociology": "Sotsioloogia",
+  "Social Work": "Sotsiaaltöö",
+  "Biology": "Bioloogia",
+  "Chemistry": "Keemia",
+  "Earth Science": "Maateadus",
+  "Space Sciences": "Kosmoseteadused",
+  "Computer Science": "Arvutiteadus",
+  "Mathematics": "Matemaatika",
+  "Business": "Äri",
+  "Engineering and Technology": "Insener ja tehnoloogia",
+  "Medicine and Health": "Meditsiin ja tervis"
+ },
+ "ageCategory": {
+  "Youth": "Noored",
+  "Young Adult": "Noor täiskasvanu",
+  "Adult": "Täiskasvanud",
+  "Senior": "Vanem"
+ },
+ "studyLevel": {
+  "No diploma": "Diplomit pole",
+  "High School": "Keskkool",
+  "2 years graduation": "2 aastat lõpetamist",
+  "3 years graduation": "3 aastat lõpetamist",
+  "4 years graduation": "4 aastat lõpetamist",
+  "5 years graduation": "5 aastat lõpetamist",
+  "More than 5 years graduation": "Rohkem kui 5 aastat lõpetamist"
+ }
+}

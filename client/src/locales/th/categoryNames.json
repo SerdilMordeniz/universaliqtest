@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "ไม่มีประกาศนียบัตร",
+  "Performing Arts": "ศิลปะการแสดง",
+  "Visual Arts": "ทัศนศิลป์",
+  "History": "ประวัติศาสตร์",
+  "Languages and Literature": "ภาษาและวรรณคดี",
+  "Law": "กฎหมาย",
+  "Philosophy": "ปรัชญา",
+  "Theology": "เทววิทยา",
+  "Anthropology": "มานุษยวิทยา",
+  "Economics": "เศรษฐศาสตร์",
+  "Geography": "ภูมิศาสตร์",
+  "Political Science": "รัฐศาสตร์",
+  "Psychology": "จิตวิทยา",
+  "Sociology": "สังคมวิทยา",
+  "Social Work": "งานสังคมสงเคราะห์",
+  "Biology": "ชีววิทยา",
+  "Chemistry": "เคมี",
+  "Earth Science": "วิทยาศาสตร์โลก",
+  "Space Sciences": "วิทยาศาสตร์อวกาศ",
+  "Computer Science": "วิทยาศาสตร์คอมพิวเตอร์",
+  "Mathematics": "คณิตศาสตร์",
+  "Business": "ธุรกิจ",
+  "Engineering and Technology": "วิศวกรรมและเทคโนโลยี",
+  "Medicine and Health": "ยาและสุขภาพ"
+ },
+ "ageCategory": {
+  "Youth": "เยาวชน",
+  "Young Adult": "คนหนุ่มสาว",
+  "Adult": "ผู้ใหญ่",
+  "Senior": "อาวุโส"
+ },
+ "studyLevel": {
+  "No diploma": "ไม่มีประกาศนียบัตร",
+  "High School": "มัธยม",
+  "2 years graduation": "รับปริญญา2ปี",
+  "3 years graduation": "จบ3ปี",
+  "4 years graduation": "รับปริญญา4ปี",
+  "5 years graduation": "รับปริญญา5ปี",
+  "More than 5 years graduation": "จบการศึกษามากกว่า 5 ปี"
+ }
+}

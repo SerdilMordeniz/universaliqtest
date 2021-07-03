@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Няма диплома",
+  "Performing Arts": "Сценичните изкуства",
+  "Visual Arts": "Визуални изкуства",
+  "History": "История",
+  "Languages and Literature": "Езици и литература",
+  "Law": "Закон",
+  "Philosophy": "Философия",
+  "Theology": "Богословие",
+  "Anthropology": "Антропология",
+  "Economics": "Икономика",
+  "Geography": "География",
+  "Political Science": "Политология",
+  "Psychology": "Психология",
+  "Sociology": "Социология",
+  "Social Work": "Социална работа",
+  "Biology": "Биология",
+  "Chemistry": "Химия",
+  "Earth Science": "земна наука",
+  "Space Sciences": "Космически науки",
+  "Computer Science": "Информатика",
+  "Mathematics": "Математика",
+  "Business": "Бизнес",
+  "Engineering and Technology": "Инженеринг и технологии",
+  "Medicine and Health": "Медицина и здраве"
+ },
+ "ageCategory": {
+  "Youth": "Младост",
+  "Young Adult": "Млад възрастен",
+  "Adult": "Възрастен",
+  "Senior": "Старши"
+ },
+ "studyLevel": {
+  "No diploma": "Няма диплома",
+  "High School": "Средно училище",
+  "2 years graduation": "Дипломиране след 2 години",
+  "3 years graduation": "3 години завършване",
+  "4 years graduation": "4 години завършване",
+  "5 years graduation": "5 години от завършването",
+  "More than 5 years graduation": "Дипломиране преди повече от 5 години"
+ }
+}

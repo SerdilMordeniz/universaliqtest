@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Χωρίς δίπλωμα",
+  "Performing Arts": "Τέχνες του θεάματος",
+  "Visual Arts": "Εικαστικές τέχνες",
+  "History": "Ιστορία",
+  "Languages and Literature": "Γλώσσες και λογοτεχνία",
+  "Law": "Νόμος",
+  "Philosophy": "Φιλοσοφία",
+  "Theology": "Θεολογία",
+  "Anthropology": "Ανθρωπολογία",
+  "Economics": "Οικονομικά",
+  "Geography": "Γεωγραφία",
+  "Political Science": "Πολιτικές επιστήμες",
+  "Psychology": "Ψυχολογία",
+  "Sociology": "Κοινωνιολογία",
+  "Social Work": "Κοινωνική εργασία",
+  "Biology": "Βιολογία",
+  "Chemistry": "Χημεία",
+  "Earth Science": "Επιστήμη της Γης",
+  "Space Sciences": "Επιστήμες του Διαστήματος",
+  "Computer Science": "Επιστήμη των υπολογιστών",
+  "Mathematics": "Μαθηματικά",
+  "Business": "Επιχείρηση",
+  "Engineering and Technology": "Μηχανική και Τεχνολογία",
+  "Medicine and Health": "Ιατρική και υγεία"
+ },
+ "ageCategory": {
+  "Youth": "Νεολαία",
+  "Young Adult": "Νεαρός ενήλικας",
+  "Adult": "Ενήλικας",
+  "Senior": "Αρχαιότερος"
+ },
+ "studyLevel": {
+  "No diploma": "Χωρίς δίπλωμα",
+  "High School": "Λύκειο",
+  "2 years graduation": "2 χρόνια αποφοίτησης",
+  "3 years graduation": "3 χρόνια αποφοίτησης",
+  "4 years graduation": "4 χρόνια αποφοίτησης",
+  "5 years graduation": "5 χρόνια αποφοίτησης",
+  "More than 5 years graduation": "Πάνω από 5 χρόνια αποφοίτησης"
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Intet eksamensbevis",
+  "Performing Arts": "Scenekunst",
+  "Visual Arts": "Visuel kunst",
+  "History": "Historie",
+  "Languages and Literature": "Sprog og litteratur",
+  "Law": "Lov",
+  "Philosophy": "Filosofi",
+  "Theology": "Teologi",
+  "Anthropology": "Antropologi",
+  "Economics": "Økonomi",
+  "Geography": "Geografi",
+  "Political Science": "Statskundskab",
+  "Psychology": "Psykologi",
+  "Sociology": "Sociologi",
+  "Social Work": "Socialt arbejde",
+  "Biology": "Biologi",
+  "Chemistry": "Kemi",
+  "Earth Science": "Geovidenskab",
+  "Space Sciences": "Rumvidenskab",
+  "Computer Science": "Computer videnskab",
+  "Mathematics": "Matematik",
+  "Business": "Forretning",
+  "Engineering and Technology": "Ingeniør og teknologi",
+  "Medicine and Health": "Medicin og sundhed"
+ },
+ "ageCategory": {
+  "Youth": "Ungdom",
+  "Young Adult": "Ung voksen",
+  "Adult": "Voksen",
+  "Senior": "Senior"
+ },
+ "studyLevel": {
+  "No diploma": "Intet eksamensbevis",
+  "High School": "Gymnasium",
+  "2 years graduation": "2 års eksamen",
+  "3 years graduation": "3 års eksamen",
+  "4 years graduation": "4 års eksamen",
+  "5 years graduation": "5 års eksamen",
+  "More than 5 years graduation": "Mere end 5 års eksamen"
+ }
+}

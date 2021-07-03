@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Ніякого диплому",
+  "Performing Arts": "Виконавські види мистецтва",
+  "Visual Arts": "Образотворче мистецтво",
+  "History": "Історія",
+  "Languages and Literature": "Мови та література",
+  "Law": "Закон",
+  "Philosophy": "Філософія",
+  "Theology": "Богослов'я",
+  "Anthropology": "Антропологія",
+  "Economics": "Економіка",
+  "Geography": "Географія",
+  "Political Science": "Політологія",
+  "Psychology": "Психологія",
+  "Sociology": "Соціологія",
+  "Social Work": "Соціальна робота",
+  "Biology": "Біологія",
+  "Chemistry": "Хімія",
+  "Earth Science": "Наука про Землю",
+  "Space Sciences": "Космічні науки",
+  "Computer Science": "Комп'ютерна наука",
+  "Mathematics": "Математика",
+  "Business": "Бізнес",
+  "Engineering and Technology": "Техніка та технологія",
+  "Medicine and Health": "Медицина та здоров'я"
+ },
+ "ageCategory": {
+  "Youth": "Молодь",
+  "Young Adult": "Молодий дорослий",
+  "Adult": "Дорослий",
+  "Senior": "Старший"
+ },
+ "studyLevel": {
+  "No diploma": "Ніякого диплому",
+  "High School": "Вища школа",
+  "2 years graduation": "2 роки закінчення",
+  "3 years graduation": "3 роки закінчення",
+  "4 years graduation": "4 роки закінчення",
+  "5 years graduation": "5 років закінчення",
+  "More than 5 years graduation": "Випуск більше 5 років"
+ }
+}

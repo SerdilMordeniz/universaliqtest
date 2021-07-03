@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "டிப்ளோமா இல்லை",
+  "Performing Arts": "கலை நிகழ்ச்சி",
+  "Visual Arts": "விஷுவல் ஆர்ட்ஸ்",
+  "History": "வரலாறு",
+  "Languages and Literature": "மொழிகள் மற்றும் இலக்கியம்",
+  "Law": "சட்டம்",
+  "Philosophy": "தத்துவம்",
+  "Theology": "இறையியல்",
+  "Anthropology": "மானுடவியல்",
+  "Economics": "பொருளாதாரம்",
+  "Geography": "நிலவியல்",
+  "Political Science": "அரசியல் அறிவியல்",
+  "Psychology": "உளவியல்",
+  "Sociology": "சமூகவியல்",
+  "Social Work": "சமூக பணி",
+  "Biology": "உயிரியல்",
+  "Chemistry": "வேதியியல்",
+  "Earth Science": "புவி அறிவியல்",
+  "Space Sciences": "விண்வெளி அறிவியல்",
+  "Computer Science": "கணினி அறிவியல்",
+  "Mathematics": "கணிதம்",
+  "Business": "வணிக",
+  "Engineering and Technology": "பொறியியல் மற்றும் தொழில்நுட்பம்",
+  "Medicine and Health": "மருத்துவம் மற்றும் ஆரோக்கியம்"
+ },
+ "ageCategory": {
+  "Youth": "இளைஞர்கள்",
+  "Young Adult": "இளம் வயதுவந்தோர்",
+  "Adult": "பெரியவர்",
+  "Senior": "மூத்தவர்"
+ },
+ "studyLevel": {
+  "No diploma": "டிப்ளோமா இல்லை",
+  "High School": "உயர்நிலைப்பள்ளி",
+  "2 years graduation": "2 ஆண்டுகள் பட்டம்",
+  "3 years graduation": "3 ஆண்டுகள் பட்டம்",
+  "4 years graduation": "4 ஆண்டுகள் பட்டம்",
+  "5 years graduation": "5 ஆண்டுகள் பட்டம்",
+  "More than 5 years graduation": "5 ஆண்டுகளுக்கும் மேலாக பட்டப்படிப்பு"
+ }
+}

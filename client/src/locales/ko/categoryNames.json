@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "졸업장 없음",
+  "Performing Arts": "공연 예술",
+  "Visual Arts": "시각 예술",
+  "History": "역사",
+  "Languages and Literature": "언어와 문학",
+  "Law": "법",
+  "Philosophy": "철학",
+  "Theology": "신학",
+  "Anthropology": "인류학",
+  "Economics": "경제학",
+  "Geography": "지리학",
+  "Political Science": "정치 과학",
+  "Psychology": "심리학",
+  "Sociology": "사회학",
+  "Social Work": "사회 사업",
+  "Biology": "생물학",
+  "Chemistry": "화학",
+  "Earth Science": "지구 과학",
+  "Space Sciences": "우주 과학",
+  "Computer Science": "컴퓨터 과학",
+  "Mathematics": "수학",
+  "Business": "사업",
+  "Engineering and Technology": "공학 및 기술",
+  "Medicine and Health": "의학과 건강"
+ },
+ "ageCategory": {
+  "Youth": "청소년",
+  "Young Adult": "젊은 성인",
+  "Adult": "성인",
+  "Senior": "연장자"
+ },
+ "studyLevel": {
+  "No diploma": "졸업장 없음",
+  "High School": "고등학교",
+  "2 years graduation": "2 년 졸업",
+  "3 years graduation": "3년 졸업",
+  "4 years graduation": "4 년 졸업",
+  "5 years graduation": "5 년 졸업",
+  "More than 5 years graduation": "5 년 이상 졸업"
+ }
+}

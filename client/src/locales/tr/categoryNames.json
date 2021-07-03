@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "diploma yok",
+  "Performing Arts": "Performans sanatları",
+  "Visual Arts": "Görsel Sanatlar",
+  "History": "Tarih",
+  "Languages and Literature": "Diller ve Edebiyat",
+  "Law": "Yasa",
+  "Philosophy": "Felsefe",
+  "Theology": "Ilahiyat",
+  "Anthropology": "Antropoloji",
+  "Economics": "Ekonomi",
+  "Geography": "Coğrafya",
+  "Political Science": "Politika Bilimi",
+  "Psychology": "Psikoloji",
+  "Sociology": "Sosyoloji",
+  "Social Work": "Sosyal çalışma",
+  "Biology": "Biyoloji",
+  "Chemistry": "Kimya",
+  "Earth Science": "Yer Bilimi",
+  "Space Sciences": "Uzay Bilimleri",
+  "Computer Science": "Bilgisayar Bilimi",
+  "Mathematics": "Matematik",
+  "Business": "iş",
+  "Engineering and Technology": "Mühendislik ve Teknoloji",
+  "Medicine and Health": "Tıp ve Sağlık"
+ },
+ "ageCategory": {
+  "Youth": "gençlik",
+  "Young Adult": "Genç Yetişkin",
+  "Adult": "Yetişkin",
+  "Senior": "Kıdemli"
+ },
+ "studyLevel": {
+  "No diploma": "diploma yok",
+  "High School": "Lise",
+  "2 years graduation": "2 yıl mezuniyet",
+  "3 years graduation": "3 yıl mezuniyet",
+  "4 years graduation": "4 yıl mezuniyet",
+  "5 years graduation": "5 yıl mezuniyet",
+  "More than 5 years graduation": "5 yıldan fazla mezuniyet"
+ }
+}

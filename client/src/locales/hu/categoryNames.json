@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Nincs oklevél",
+  "Performing Arts": "Előadóművészet",
+  "Visual Arts": "Vizuális művészetek",
+  "History": "Történelem",
+  "Languages and Literature": "Nyelvek és irodalom",
+  "Law": "Törvény",
+  "Philosophy": "Filozófia",
+  "Theology": "Teológia",
+  "Anthropology": "Antropológia",
+  "Economics": "Közgazdaságtan",
+  "Geography": "Földrajz",
+  "Political Science": "Politológia",
+  "Psychology": "Pszichológia",
+  "Sociology": "Szociológia",
+  "Social Work": "Szociális munka",
+  "Biology": "Biológia",
+  "Chemistry": "Kémia",
+  "Earth Science": "Földtudomány",
+  "Space Sciences": "Űrtudományok",
+  "Computer Science": "Számítástechnika",
+  "Mathematics": "Matematika",
+  "Business": "Üzleti",
+  "Engineering and Technology": "Mérnöki és technológiai",
+  "Medicine and Health": "Orvostudomány és egészségügy"
+ },
+ "ageCategory": {
+  "Youth": "Ifjúság",
+  "Young Adult": "Fiatal felnőtt",
+  "Adult": "Felnőtt",
+  "Senior": "Idősebb"
+ },
+ "studyLevel": {
+  "No diploma": "Nincs oklevél",
+  "High School": "Gimnázium",
+  "2 years graduation": "2 év érettségi",
+  "3 years graduation": "3 év érettségi",
+  "4 years graduation": "4 év érettségi",
+  "5 years graduation": "5 év érettségi",
+  "More than 5 years graduation": "Több mint 5 év diploma"
+ }
+}
