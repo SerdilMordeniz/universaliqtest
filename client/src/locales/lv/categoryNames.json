@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Nav diploma",
+  "Performing Arts": "Skatuves māksla",
+  "Visual Arts": "Vizuālās mākslas",
+  "History": "Vēsture",
+  "Languages and Literature": "Valodas un literatūra",
+  "Law": "Likums",
+  "Philosophy": "Filozofija",
+  "Theology": "Teoloģija",
+  "Anthropology": "Antropoloģija",
+  "Economics": "Ekonomika",
+  "Geography": "Ģeogrāfija",
+  "Political Science": "Politikas zinātne",
+  "Psychology": "Psiholoģija",
+  "Sociology": "Socioloģija",
+  "Social Work": "Sociālais darbs",
+  "Biology": "Bioloģija",
+  "Chemistry": "Ķīmija",
+  "Earth Science": "zemes zinātne",
+  "Space Sciences": "Kosmosa zinātnes",
+  "Computer Science": "Datorzinātne",
+  "Mathematics": "Matemātika",
+  "Business": "Bizness",
+  "Engineering and Technology": "Inženierzinātnes un tehnoloģijas",
+  "Medicine and Health": "Medicīna un veselība"
+ },
+ "ageCategory": {
+  "Youth": "Jaunieši",
+  "Young Adult": "Jauns pieaugušais",
+  "Adult": "Pieaugušo",
+  "Senior": "Vecākais"
+ },
+ "studyLevel": {
+  "No diploma": "Nav diploma",
+  "High School": "Vidusskola",
+  "2 years graduation": "2 gadu izlaidums",
+  "3 years graduation": "3 gadu izlaidums",
+  "4 years graduation": "4 gadu izlaidums",
+  "5 years graduation": "5 gadu izlaidums",
+  "More than 5 years graduation": "Izlaidums vairāk nekā 5 gadus"
+ }
+}

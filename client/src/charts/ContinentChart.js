@@ -1,5 +1,6 @@
 import React, { memo, useState } from "react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
+import { scaleQuantile } from "d3-scale";
 
 import { useTranslation } from 'react-i18next';
 
@@ -11,6 +12,17 @@ var R = require("rlab");
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
+const colorScale = scaleQuantile()
+  .domain([1, 7])
+  .range([
+    "#EBF5FB",
+    "#D6EAF8",
+    "#85C1E9",
+    "#5DADE2",
+    "#2E86C1",
+    "#2874A6",
+    "#1B4F72"
+  ]);
 
 const ContinentChart = ({ setTooltipContent, fetchedData }) => {
   const { t, i18n } = useTranslation();
@@ -18,7 +30,7 @@ const ContinentChart = ({ setTooltipContent, fetchedData }) => {
   const [highlighted, setHighlighted] = useState("");
 
   const continentNameToCode = (continentName) => {
-    switch(continentName) {
+    switch (continentName) {
       case 'North America':
         return 'NA';
       case 'South America':
@@ -40,27 +52,40 @@ const ContinentChart = ({ setTooltipContent, fetchedData }) => {
 
   const handleContinentName = continentCode => {
     let foundContinentName;
-    if(i18n.language === 'en') {
+    if (i18n.language === 'en') {
       foundContinentName = continentNameEN.find(continent => continent.cc === continentCode)
-    } else if(i18n.language === 'de') {
+    } else if (i18n.language === 'de') {
       foundContinentName = continentNameDE.find(continent => continent.cc === continentCode)
     }
-    if(foundContinentName) {
+    if (foundContinentName) {
       return foundContinentName.name
     } else {
       return undefined
     }
   }
 
+  const linearConverter = (oldValue, oldMin, oldMax, newMin, newMax) => {
+    const newValue = (((oldValue - oldMin) * (newMax - newMin)) / (oldMax - oldMin)) + newMin
+    return newValue;
+  }
+
   return (
     <>
-      <ComposableMap data-tip="" projectionConfig={{ scale: 184 }}>
+      <ComposableMap data-tip="">
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
-            geographies.map((geo) => (
+            geographies.map((geo) => { 
+              const { CONTINENT } = geo.properties;
+              const cur = fetchedData.result.find(s => s.code === continentNameToCode(CONTINENT));
+              let current;
+              if(cur) {
+                current = linearConverter(cur.percent_rank, 0, 1, 1, 7) 
+              }
+              return (
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
+                fill={cur ? colorScale(current) : "#D6D6DA"}
                 onMouseEnter={() => {
                   const { CONTINENT } = geo.properties;
 
@@ -70,7 +95,7 @@ const ContinentChart = ({ setTooltipContent, fetchedData }) => {
                   let numberOfTests = 0
                   let percentile;
 
-                  if(result) {
+                  if (result) {
                     numberOfTests = result.number_of_tests_per_continent
                     percentile = result.percentile
                   }
@@ -93,10 +118,11 @@ const ContinentChart = ({ setTooltipContent, fetchedData }) => {
                     fill:
                       geo.properties.CONTINENT === highlighted
                         ? "#F53"
-                        : "#D6D6DA"
+                        : ""
                   },
+
                   hover: {
-                    fill: "#F53",
+                    fill: geo.properties.CONTINENT === highlighted?"#F53": "",
                     outline: "none"
                   },
                   pressed: {
@@ -105,7 +131,8 @@ const ContinentChart = ({ setTooltipContent, fetchedData }) => {
                   }
                 }}
               />
-            ))
+            )
+          })
           }
         </Geographies>
       </ComposableMap>

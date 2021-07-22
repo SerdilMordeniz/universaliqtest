@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "没有文凭",
+  "Performing Arts": "表演艺术",
+  "Visual Arts": "视觉艺术",
+  "History": "历史",
+  "Languages and Literature": "语言文学",
+  "Law": "法律",
+  "Philosophy": "哲学",
+  "Theology": "神学",
+  "Anthropology": "人类学",
+  "Economics": "经济学",
+  "Geography": "地理",
+  "Political Science": "政治学",
+  "Psychology": "心理学",
+  "Sociology": "社会学",
+  "Social Work": "社会工作",
+  "Biology": "生物学",
+  "Chemistry": "化学",
+  "Earth Science": "地球科学",
+  "Space Sciences": "空间科学",
+  "Computer Science": "计算机科学",
+  "Mathematics": "数学",
+  "Business": "商业",
+  "Engineering and Technology": "工程技术",
+  "Medicine and Health": "医药与健康"
+ },
+ "ageCategory": {
+  "Youth": "青年",
+  "Young Adult": "年轻的成年人",
+  "Adult": "成人",
+  "Senior": "高级的"
+ },
+ "studyLevel": {
+  "No diploma": "没有文凭",
+  "High School": "中学",
+  "2 years graduation": "2年毕业",
+  "3 years graduation": "3年毕业",
+  "4 years graduation": "4年毕业",
+  "5 years graduation": "5年毕业",
+  "More than 5 years graduation": "毕业5年以上"
+ }
+}

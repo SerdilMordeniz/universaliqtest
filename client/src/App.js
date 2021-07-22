@@ -1,5 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from 'react-router-dom'
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./components/CheckoutForm";
 import Home from './routes/Home'
 import About from './routes/About'
 import Statistics from './routes/Statistics'
@@ -24,6 +27,11 @@ import LanguageChanger from './components/LanguageChanger'
 
 const base = '/(en|de|ar|bg|cs|da|el|es|et|fi|fr|hu|it|ja|ko|nl|no|pl|pt|ro|ru|sk|sv|ta|th|tr|uk|zh)';
 
+// Make sure to call loadStripe outside of a component’s render to avoid
+// recreating the Stripe object on every render.
+// loadStripe is initialized with your real test publishable API key.
+const promise = loadStripe("pk_test_51IkoZhABViR74PKsaGYgp00fcpgGOi4mJRpymTyaVI9ECpDUGJwkmi6yuKjocDLUfFDseeFECqOO1FExUFK0Xi8n00TYSd8Ndp");
+
 
 const App = () => {
     const { t, i18n } = useTranslation();
@@ -31,9 +39,9 @@ const App = () => {
 
 
     useEffect(() => {
-        if(i18n.language === 'en') {
+        if (i18n.language === 'en') {
             setLogoURL('/logoEN.svg')
-        } else if(i18n.language === 'de') {
+        } else if (i18n.language === 'de') {
             setLogoURL('/logoDE.svg')
         }
     }, [i18n.language])
@@ -62,6 +70,9 @@ const App = () => {
                 </Route>
                 <Route exact path={`${base}/about`}>
                     <About />
+                    <Elements stripe={promise}>
+                        <CheckoutForm />
+                    </Elements>
                 </Route>
 
                 <Route exact path={`${base}/statistics`}>

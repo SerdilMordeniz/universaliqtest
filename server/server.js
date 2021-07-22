@@ -4,12 +4,35 @@ const cors = require('cors')
 const db = require('./db')
 const nodemailer = require('nodemailer')
 
+// This is your real test secret API key.
+// Set your secret key. Remember to switch to your live secret key in production.
+// See your keys here: https://dashboard.stripe.com/apikeys
+const stripe = require('stripe')('sk_test_51IkoZhABViR74PKsE7x3RgnJ4xRzXXaA9yLi7tG0YIhkanEMV0KFBzrrdkRqHWn9vlpOLsV32NV1fV4vi88KA9dt00TL1lxTNg');
+
 const app = express()
 
 
 
 app.use(cors())
 app.use(express.json())
+
+const calculateOrderAmount = items => {
+    // Replace this constant with a calculation of the order's amount
+    // Calculate the order total on the server to prevent
+    // people from directly manipulating the amount on the client
+    return 1400;
+  };
+  app.post("/api/v1/create-payment-intent", async (req, res) => {
+    const { items } = req.body;
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: calculateOrderAmount(items),
+      currency: "usd"
+    });
+    res.send({
+      clientSecret: paymentIntent.client_secret
+    });
+  });
 
 //Send email to my gmail account.
 app.post('/api/v1/contact', async (req, res) => {
@@ -21,7 +44,7 @@ app.post('/api/v1/contact', async (req, res) => {
     };
 
     let transporter = nodemailer.createTransport({
-        service:'gmail',
+        service: 'gmail',
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS
@@ -180,7 +203,7 @@ app.get('/api/v1/results/:id', async (req, res) => {
 // Get continent rank and rows (1 number, not a whole array)
 app.get('/api/v1/continent_chart', async (req, res) => {
     try {
-        const result = await db.query('WITH continent AS ( SELECT country.continent_code AS code, PERCENT_RANK() OVER (ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) FROM iq_test INNER JOIN country ON country.personal_id = iq_test.personal_id ) SELECT code, COUNT(code) AS number_of_tests_per_continent, AVG(continent.percent_rank) as percentile FROM continent GROUP BY code;',
+        const result = await db.query('WITH continent AS (SELECT country.continent_code AS code, Percent_rank() OVER ( ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) FROM   iq_test INNER JOIN country ON country.personal_id = iq_test.personal_id) SELECT code, Count(code) AS number_of_tests_per_continent, Avg(continent.percent_rank) AS percentile, percent_rank() over ( ORDER BY Avg(continent.percent_rank) asc ) FROM continent GROUP  BY code;',
             [])
         res.status(200).json({
             number_of_rows: result.rows.length,
@@ -194,7 +217,7 @@ app.get('/api/v1/continent_chart', async (req, res) => {
 // Get country rank and rows for each country
 app.get('/api/v1/country_chart', async (req, res) => {
     try {
-        const result = await db.query('WITH country AS ( SELECT country.code, PERCENT_RANK() OVER (ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) FROM iq_test INNER JOIN country ON country.personal_id = iq_test.personal_id ) SELECT code, COUNT(code) AS number_of_tests_per_country, AVG(country.percent_rank) as percentile FROM country GROUP BY code;',
+        const result = await db.query('WITH country AS (SELECT country.code, Percent_rank() OVER ( ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) FROM   iq_test INNER JOIN country ON country.personal_id = iq_test.personal_id) SELECT code, Count(code) AS number_of_tests_per_country, Avg(country.percent_rank) AS percentile, percent_rank() over ( ORDER BY Avg(country.percent_rank) asc ) FROM country GROUP  BY code;',
             [])
         res.status(200).json({
             number_of_rows: result.rows.length,

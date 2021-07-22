@@ -324,26 +324,21 @@ function IqTestResultsPage() {
                         </div>
                     </div>
                     <div className="timeTakenChart">
+                        <h3 className="charth3">{t('result.totalTimeTakenChart.title')}</h3>
                         <Chart
                             chartType="ColumnChart"
                             width="600px"
                             height="500px"
                             data={data}
                             options={{
-                                title: t('result.totalTimeTakenChart.title'),
-                                hAxis: {
-                                    title: t('result.totalTimeTakenChart.item'),
-                                },
-                                vAxis: {
-                                    title: t('result.totalTimeTakenChart.time'),
-
-                                },
                                 titleTextStyle: {
                                     fontSize: 14
                                 },
                                 legend: 'none'
                             }}
                         />
+                        <div className='chartXaxis'>{t('result.totalTimeTakenChart.item')}</div>
+                        <div className='chartYaxis'>{t('result.totalTimeTakenChart.time')}</div>
                     </div>
                 </div>
                 <h2 className="h2-result">{t('result.title2')}</h2>

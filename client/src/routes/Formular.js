@@ -66,7 +66,6 @@ function Formular(props) {
             const getGeoInfo = async () => {
                 const response = await axios.get('http://api.ipapi.com/check?access_key=919b8e15d3142223683599008d66db22')
                 let data = response.data;
-                console.log(data.location.languages.code)
                 setCountryName(data.country_name)
                 setCountryCode(data.country_code)
                 setContinentCode(data.continent_code)

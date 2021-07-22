@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "沒有文憑",
+  "Performing Arts": "表演藝術",
+  "Visual Arts": "視覺藝術",
+  "History": "歷史",
+  "Languages and Literature": "語言文學",
+  "Law": "法律",
+  "Philosophy": "哲學",
+  "Theology": "神學",
+  "Anthropology": "人類學",
+  "Economics": "經濟學",
+  "Geography": "地理",
+  "Political Science": "政治學",
+  "Psychology": "心理學",
+  "Sociology": "社會學",
+  "Social Work": "社會工作",
+  "Biology": "生物學",
+  "Chemistry": "化學",
+  "Earth Science": "地球科學",
+  "Space Sciences": "空間科學",
+  "Computer Science": "計算機科學",
+  "Mathematics": "數學",
+  "Business": "商業",
+  "Engineering and Technology": "工程技術",
+  "Medicine and Health": "醫藥與健康"
+ },
+ "ageCategory": {
+  "Youth": "青年",
+  "Young Adult": "年輕的成年人",
+  "Adult": "成人",
+  "Senior": "高級的"
+ },
+ "studyLevel": {
+  "No diploma": "沒有文憑",
+  "High School": "中學",
+  "2 years graduation": "2年畢業",
+  "3 years graduation": "3年畢業",
+  "4 years graduation": "4年畢業",
+  "5 years graduation": "5年畢業",
+  "More than 5 years graduation": "畢業5年以上"
+ }
+}

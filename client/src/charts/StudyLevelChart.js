@@ -7,6 +7,7 @@ function StudyLevelChart({fetchedStudyLevelData, iq}) {
     const [t] = useTranslation()
     return (
         <div>
+            <h3 className="charth3">{t('home.stat.studyLevelChart.title')}</h3>
             <Chart
                 chartType="BarChart"
                 loader={<div>Loading Chart</div>}
@@ -26,14 +27,10 @@ function StudyLevelChart({fetchedStudyLevelData, iq}) {
                     [t('home.stat.studyLevelChart.annotation8'), iq, 'grey']
                 ]}
                 options={{
-                    width: 610,
+                    width: 500,
                     height: 400,
                     legend: { position: 'none' },
                     dataOpacity: 0.2,
-                    title: t('home.stat.studyLevelChart.title'),
-                    hAxis: {
-                        title: t('home.stat.studyLevelChart.xTitle')
-                    },
                     titleTextStyle: {
                         fontSize: 14
                     }
@@ -41,6 +38,7 @@ function StudyLevelChart({fetchedStudyLevelData, iq}) {
                 // For tests
                 rootProps={{ 'data-testid': '6' }}
             />
+            <div className="chartXaxis">{t('home.stat.studyLevelChart.xTitle')}</div>
         </div>
     )
 }

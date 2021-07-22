@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.4.1",
+    "@stripe/stripe-js": "^1.16.0",
     "axios": "^0.21.1",
     "chart.js": "^3.2.1",
     "chartjs-chart-geo": "^3.0.1",
     "country-flag-icons": "^1.2.9",
+    "d3-scale": "^4.0.0",
     "highcharts": "^9.1.0",
     "highcharts-react-official": "^3.0.0",
     "i18next": "^20.3.1",

@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Không có bằng cấp",
+  "Performing Arts": "Biểu diễn nghệ thuật",
+  "Visual Arts": "Nghệ thuật tạo hình",
+  "History": "Lịch sử",
+  "Languages and Literature": "Ngôn ngữ và Văn học",
+  "Law": "Pháp luật",
+  "Philosophy": "Triết học",
+  "Theology": "Thần học",
+  "Anthropology": "Nhân chủng học",
+  "Economics": "Kinh tế học",
+  "Geography": "Môn Địa lý",
+  "Political Science": "Khoa học chính trị",
+  "Psychology": "Tâm lý học",
+  "Sociology": "Xã hội học",
+  "Social Work": "Công tac xa hội",
+  "Biology": "Sinh học",
+  "Chemistry": "Hóa học",
+  "Earth Science": "khoa học Trái đất",
+  "Space Sciences": "Khoa học vũ trụ",
+  "Computer Science": "Khoa học máy tính",
+  "Mathematics": "toán học",
+  "Business": "Kinh doanh",
+  "Engineering and Technology": "Kỹ thuật và Công nghệ",
+  "Medicine and Health": "Y học và Sức khỏe"
+ },
+ "ageCategory": {
+  "Youth": "Thiếu niên",
+  "Young Adult": "Người trẻ",
+  "Adult": "Người lớn",
+  "Senior": "Cao cấp"
+ },
+ "studyLevel": {
+  "No diploma": "Không có bằng cấp",
+  "High School": "Trung học phổ thông",
+  "2 years graduation": "Tốt nghiệp 2 năm",
+  "3 years graduation": "3 năm tốt nghiệp",
+  "4 years graduation": "4 năm tốt nghiệp",
+  "5 years graduation": "5 năm tốt nghiệp",
+  "More than 5 years graduation": "Hơn 5 năm tốt nghiệp"
+ }
+}

@@ -191,4 +191,9 @@
 {"id":704,"name":"Vietnam","alpha2":"vn","alpha3":"vnm"},
 {"id":140,"name":"Zentral­afrikanische Republik","alpha2":"cf","alpha3":"caf"},
 {"id":196,"name":"Zypern","alpha2":"cy","alpha3":"cyp"},
-{"name": "Antarktis", "alpha2": "aq"}]
+{"name": "Antarktis", "alpha2": "aq"},
+{"name": "Grönland", "alpha2": "gl"},
+{"name": "Falkland Inseln", "alpha2": "fk"},
+{"name": "Taiwan", "alpha2": "tw"},
+{"name": "Südfranzösische Territorien", "alpha2": "tf"},
+{"name": "Puerto Rico", "alpha2": "pr"}]

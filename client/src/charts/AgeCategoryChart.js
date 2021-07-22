@@ -64,6 +64,7 @@ function AgeCategoryChart({ fetchedAgeCategoryData, iq }) {
 
     return (
         <div>
+            <h3 className="charth3">{t('home.stat.ageCategoryChart.title')}</h3>
             <Chart
                 chartType="BarChart"
                 loader={<div>Loading Chart</div>}
@@ -84,11 +85,6 @@ function AgeCategoryChart({ fetchedAgeCategoryData, iq }) {
                     height: 400,
                     legend: { position: 'none' },
                     dataOpacity: 0.2,
-                    title: t('home.stat.ageCategoryChart.title'),
-                    hAxis: {
-                        title: t('home.stat.ageCategoryChart.xTitle'),
-
-                    },
                     titleTextStyle: {
                         fontSize: 14
                     }
@@ -96,6 +92,7 @@ function AgeCategoryChart({ fetchedAgeCategoryData, iq }) {
                 // For tests
                 rootProps={{ 'data-testid': '6' }}
             />
+            <div className="chartXaxis">{t('home.stat.ageCategoryChart.xTitle')}</div>
         </div>
     )
 }

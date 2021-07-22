@@ -81,13 +81,14 @@ function NormalDistChart() {
     }, [t])
 
     return (
-        <div>
-            <div></div>
+        <div className="normalDistChartHome">
+            <h3>{t('home.stat.normalDistChart.title')}</h3>
             <Chart
             className="normChart"
             charset = "utf8"
                 chartLanguage='russian'
                 height= '400px'
+                width= '800px'
                 chartType="ComboChart"
                 loader={<div>Loading Chart</div>}
                 data={dataSample}
@@ -116,7 +117,6 @@ function NormalDistChart() {
                 ]}
                 options={{
                     hAxis: {
-                        title: t('home.stat.normalDistChart.xTitle'),
                         ticks: [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150]
                     },
                     seriesType: 'line',
@@ -134,7 +134,6 @@ function NormalDistChart() {
                             fontSize: 12
                         }
                     },
-                    title: t('home.stat.normalDistChart.title'),
                     titleTextStyle: {
                         fontSize: 14
                     }
@@ -142,6 +141,7 @@ function NormalDistChart() {
                 rootProps={{ 'data-testid': '1' }}
             />
             <div className="normalDistChartYAxis">{t('home.stat.normalDistChart.yTitle')}</div>
+            <div className="normalDistChartXAxis">{t('home.stat.normalDistChart.xTitle')}</div>
         </div>
     )
 }

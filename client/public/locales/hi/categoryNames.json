@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "कोई डिप्लोमा नहीं",
+  "Performing Arts": "कला प्रदर्शन",
+  "Visual Arts": "दृश्य कला",
+  "History": "इतिहास",
+  "Languages and Literature": "भाषाएं और साहित्य",
+  "Law": "कानून",
+  "Philosophy": "दर्शन",
+  "Theology": "धर्मशास्र",
+  "Anthropology": "मनुष्य जाति का विज्ञान",
+  "Economics": "अर्थशास्त्र",
+  "Geography": "भूगोल",
+  "Political Science": "राजनीति विज्ञान",
+  "Psychology": "मनोविज्ञान",
+  "Sociology": "नागरिक सास्त्र",
+  "Social Work": "सामाजिक कार्य",
+  "Biology": "जीवविज्ञान",
+  "Chemistry": "रसायन विज्ञान",
+  "Earth Science": "पृथ्वी विज्ञान",
+  "Space Sciences": "अंतरिक्ष विज्ञान",
+  "Computer Science": "कंप्यूटर विज्ञान",
+  "Mathematics": "गणित",
+  "Business": "व्यापार",
+  "Engineering and Technology": "इंजीनियरिंग और प्रौद्योगिकी",
+  "Medicine and Health": "चिकित्सा और स्वास्थ्य"
+ },
+ "ageCategory": {
+  "Youth": "जवानी",
+  "Young Adult": "युवा वयस्क",
+  "Adult": "वयस्क",
+  "Senior": "वरिष्ठ"
+ },
+ "studyLevel": {
+  "No diploma": "कोई डिप्लोमा नहीं",
+  "High School": "उच्च विद्यालय",
+  "2 years graduation": "2 साल स्नातक",
+  "3 years graduation": "3 साल स्नातक",
+  "4 years graduation": "4 साल स्नातक",
+  "5 years graduation": "5 साल स्नातक",
+  "More than 5 years graduation": "5 साल से अधिक स्नातक"
+ }
+}

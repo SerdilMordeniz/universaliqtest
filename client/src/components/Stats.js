@@ -105,12 +105,12 @@ function Stats() {
                 </div>
                 <div className="geochart">
                     <div className="chart">
-                        <h2>{t('home.stat.h2')}</h2>
+                        <h3>{t('home.stat.h2')}</h3>
                         <CountryChart setTooltipContent={setContentCountry} fetchedData={fetchedCountryData} />
                         <ReactTooltip html={true}>{contentCountry}</ReactTooltip>
                     </div>
                     <div className="chart">
-                        <h2>{t('home.stat.h3')}</h2>
+                        <h3>{t('home.stat.h3')}</h3>
                         <ContinentChart setTooltipContent={setContentContinent} fetchedData={fetchedContinentData} />
                         <ReactTooltip html={true}>{contentContinent}</ReactTooltip>
                     </div>
@@ -124,7 +124,7 @@ function Stats() {
                         </Trans>
                     </div>
                 </div>
-                <div className="normalDistChart">
+                <div className="normalDistChartHome">
                     <NormalDistChart />
                     <div className="infoNorm">
                         <Trans i18nKey='home.stat.description.normalized'>

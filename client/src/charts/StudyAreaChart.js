@@ -7,6 +7,7 @@ function StudyAreaChart({fetchedStudyAreaData, iq}) {
     const [t] = useTranslation()
     return (
         <div>
+            <h3 className="studyAreaCharth3">{t('home.stat.studyAreaChart.title')}</h3>
             <Chart
                 chartType="BarChart"
                 loader={<div>Loading Chart</div>}
@@ -47,13 +48,7 @@ function StudyAreaChart({fetchedStudyAreaData, iq}) {
                     width: 500,
                     height: 500,
                     legend: { position: 'none' },
-                    chartArea:{left:200,top:50,bottom:110},
                     dataOpacity: 0.2,
-                    title: t('home.stat.studyAreaChart.title'),
-                    hAxis: {
-                        title: t('home.stat.studyAreaChart.xTitle'),
-                        format: '0',
-                    },
                     vAxis: {
                         textStyle: {
                             color: 'black',
@@ -67,6 +62,7 @@ function StudyAreaChart({fetchedStudyAreaData, iq}) {
                 // For tests
                 rootProps={{ 'data-testid': '6' }}
             />
+            <div className="chartXaxis">{t('home.stat.studyAreaChart.xTitle')}</div>
         </div>
     )
 }

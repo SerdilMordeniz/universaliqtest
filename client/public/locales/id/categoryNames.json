@@ -1,0 +1,43 @@
+{
+ "studyArea": {
+  "No diploma": "Tidak ada ijazah",
+  "Performing Arts": "Pentas seni",
+  "Visual Arts": "seni visual",
+  "History": "Sejarah",
+  "Languages and Literature": "Bahasa dan Sastra",
+  "Law": "Hukum",
+  "Philosophy": "Filsafat",
+  "Theology": "Teologi",
+  "Anthropology": "Antropologi",
+  "Economics": "Ekonomi",
+  "Geography": "Geografi",
+  "Political Science": "Ilmu Politik",
+  "Psychology": "Psikologi",
+  "Sociology": "Sosiologi",
+  "Social Work": "Pekerjaan sosial",
+  "Biology": "Biologi",
+  "Chemistry": "Kimia",
+  "Earth Science": "ilmu bumi",
+  "Space Sciences": "Ilmu Luar Angkasa",
+  "Computer Science": "Ilmu Komputer",
+  "Mathematics": "Matematika",
+  "Business": "Bisnis",
+  "Engineering and Technology": "Rekayasa dan Teknologi",
+  "Medicine and Health": "Kedokteran dan Kesehatan"
+ },
+ "ageCategory": {
+  "Youth": "Pemuda",
+  "Young Adult": "Anak muda",
+  "Adult": "Dewasa",
+  "Senior": "Senior"
+ },
+ "studyLevel": {
+  "No diploma": "Tidak ada ijazah",
+  "High School": "SMA",
+  "2 years graduation": "2 tahun kelulusan",
+  "3 years graduation": "3 tahun kelulusan",
+  "4 years graduation": "4 tahun kelulusan",
+  "5 years graduation": "5 tahun kelulusan",
+  "More than 5 years graduation": "Lebih dari 5 tahun kelulusan"
+ }
+}

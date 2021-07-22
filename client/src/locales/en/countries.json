@@ -191,4 +191,9 @@
 {"id":887,"name":"Yemen","alpha2":"ye","alpha3":"yem"},
 {"id":894,"name":"Zambia","alpha2":"zm","alpha3":"zmb"},
 {"id":716,"name":"Zimbabwe","alpha2":"zw","alpha3":"zwe"},
-{"name": "Antarctica", "alpha2": "aq"}]
+{"name": "Antarctica", "alpha2": "aq"},
+{"name": "Greenland", "alpha2": "gl"},
+{"name": "Falkland Islands", "alpha2": "fk"},
+{"name": "Taiwan", "alpha2": "tw"},
+{"name": "French Southern Territories", "alpha2": "tf"},
+{"name": "Puerto Rico", "alpha2": "pr"}]

@@ -9,7 +9,7 @@ function NormalDistChartResult({ iq, percentileWorld }) {
 
     function NormalDensityZx(x, Mean, StdDev) {
         var a = x - Mean;
-        return (Math.exp(-(a * a) / (2 * StdDev * StdDev)) / (Math.sqrt(2 * Math.PI) * StdDev))*100;
+        return (Math.exp(-(a * a) / (2 * StdDev * StdDev)) / (Math.sqrt(2 * Math.PI) * StdDev)) * 100;
     }
 
 
@@ -17,34 +17,33 @@ function NormalDistChartResult({ iq, percentileWorld }) {
         const calculateDataPoints = () => {
             let index = 0;
             let chartData = new Array([])
-            for (let i=40; i<=iq; i+=1) {
+            for (let i = 40; i <= iq; i += 1) {
                 chartData[index] = new Array(2)
                 chartData[index][0] = i
                 chartData[index][1] = NormalDensityZx(i, 100, 15)
                 chartData[index][2] = NormalDensityZx(i, 100, 15)
                 chartData[index][3] = 'lightblue'
                 chartData[index][4] = null
-                index ++
+                index++
             }
-            if(chartData.length>40) {
-                chartData[Math.round((parseInt(iq)+40)/2)-40][4] = `${t('result.normalDistChart.annotation')}: ${(percentileWorld*100).toFixed(3)}%`
+            if (chartData.length > 40) {
+                chartData[Math.round((parseInt(iq) + 40) / 2) - 40][4] = `${t('result.normalDistChart.annotation')}: ${(percentileWorld * 100).toFixed(3)}%`
             }
-            chartData.unshift([t('result.normalDistChart.yAxis'), t('result.normalDistChart.xAxis'), t('result.normalDistChart.xAxis'), { role: 'style' }, {role:'annotation'}])
+            chartData.unshift([t('result.normalDistChart.yAxis'), t('result.normalDistChart.xAxis'), t('result.normalDistChart.xAxis'), { role: 'style' }, { role: 'annotation' }])
             return chartData;
         }
-        if(iq) {
+        if (iq) {
             setDataSample(calculateDataPoints())
         }
-        
+
     }, [iq, percentileWorld, i18n.language, t])
 
-    if(iq) {
+    if (iq) {
         return (
             <div>
+                <h3 className="charth3">{t('result.normalDistChart.title')}</h3>
                 <Chart
-                className="normChart"
-                    height= '550px'
-                    width= '500px'
+                    className="normChart"
                     chartType="ComboChart"
                     loader={<div>Loading Chart</div>}
                     data={dataSample}
@@ -58,7 +57,7 @@ function NormalDistChartResult({ iq, percentileWorld }) {
                                 negativeParens: true,
                                 fractionDigits: 15,
                             },
-                            
+
                         },
                         {
                             type: 'NumberFormat',
@@ -68,20 +67,22 @@ function NormalDistChartResult({ iq, percentileWorld }) {
                                 negativeColor: 'red',
                                 negativeParens: true,
                             },
-                            
+
                         },
                     ]}
                     options={{
+                        width: 510,
+                        height: 450,
                         hAxis: {
-                            title: t('result.normalDistChart.yAxis'),
+
                             ticks: [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]
                         },
                         vAxis: {
-                            title: t('result.normalDistChart.xAxis'),
+
                         },
                         seriesType: 'line',
-                        series: { 
-                            0: {color: 'blue'},
+                        series: {
+                            0: { color: 'blue' },
                             1: { type: 'bars', color: 'black' },
                         },
                         // chartArea: { left: 20, top: 0, width: '80%', height: '80%' },
@@ -94,7 +95,6 @@ function NormalDistChartResult({ iq, percentileWorld }) {
                                 fontSize: 16
                             },
                         },
-                        title: t('result.normalDistChart.title'),
                         titleTextStyle: {
                             fontSize: 14
                         },
@@ -102,13 +102,16 @@ function NormalDistChartResult({ iq, percentileWorld }) {
                     }}
                     rootProps={{ 'data-testid': '1' }}
                 />
+                <div></div>
+                <div className="chartXaxis">{t('result.normalDistChart.yAxis')}</div>
+                <div className="chartYaxis">{t('result.normalDistChart.xAxis')}</div>
             </div>
         )
     } else {
         return (
             <div>Chart is loading...</div>
         )
-    } 
+    }
 
 }
 
