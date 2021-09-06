@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import IQTestApp from '../components/IQTestApp'
 import Formular from './Formular'
-import { BrowserRouter as Router, Redirect } from 'react-router-dom'
 
-const IqApp = () => {
+const IqApp = (props) => {
   let [itemNumber, setItemNumber] = useState(1)
   let [timeForItem, setTimeForItem] = useState([0])
   let [elapsed, setElapsed] = useState(0)
@@ -30,9 +29,6 @@ const IqApp = () => {
 
   return (
     (itemNumber <= 5) ?
-      <Router>
-        <Redirect to="/iq-test-app" />
-
         <div>
           <IQTestApp
             itemNumber={itemNumber}
@@ -43,23 +39,15 @@ const IqApp = () => {
             elapsed={elapsed}
             correctAnswers={correctAnswers}
             handleCorrectAnswer={handleCorrectAnswer} />
-        </div>
-
-      </Router> :
-      <Router>
+        </div> :
 
         <Formular elapsed={elapsed}
           timeForItem={timeForItem}
           correctAnswers={correctAnswers}
           nextItem={nextItem}
           measureItemTime={measureItemTime}
+          toggleTransition={props.toggleTransition}
         />
-
-
-
-      </Router>
-
-
     //iqTestSwitchToFormular()
   )
 }

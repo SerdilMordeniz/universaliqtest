@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, NavLink, Redirect } from 'react-router-dom'
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "./components/CheckoutForm";
 import Home from './routes/Home'
 import About from './routes/About'
 import Statistics from './routes/Statistics'
 import IqApp from './routes/IqApp'
+import Checkout from './routes/Checkout'
 import IqTestResultsPage from './routes/IqTestResultsPage'
 import Sidebar from './routes/Sidebar'
 import Stats from './components/Stats'
@@ -30,12 +28,55 @@ const base = '/(en|de|ar|bg|cs|da|el|es|et|fi|fr|hu|it|ja|ko|nl|no|pl|pt|ro|ru|s
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // loadStripe is initialized with your real test publishable API key.
-const promise = loadStripe("pk_test_51IkoZhABViR74PKsaGYgp00fcpgGOi4mJRpymTyaVI9ECpDUGJwkmi6yuKjocDLUfFDseeFECqOO1FExUFK0Xi8n00TYSd8Ndp");
+
+const ProductDisplay = () => (
+    <section>
+      <div className="product">
+        <img
+          src="https://i.imgur.com/EHyR2nP.png"
+          alt="The cover of Stubborn Attachments"
+        />
+        <div className="description">
+          <h3>Stubborn Attachments</h3>
+          <h5>$20.00</h5>
+        </div>
+      </div>
+      <form action="http://localhost:3001/api/v1/create-checkout-session" method="POST">
+        <button type="submit">
+          Checkout
+        </button>
+      </form>
+    </section>
+  );
+  const Message = ({ message }) => (
+    <section>
+      <p>{message}</p>
+    </section>
+  );
 
 
 const App = () => {
     const { t, i18n } = useTranslation();
     const [logoUrRL, setLogoURL] = useState(null)
+    const [message, setMessage] = useState("");
+    const [preventTransition, setPreventTransition] = useState(true);
+
+    const toggleTransition = ()=> {
+      setPreventTransition(false)
+    }
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+    if (query.get("success")) {
+      setMessage("Order placed! You will receive an email confirmation.");
+    }
+    if (query.get("canceled")) {
+      setMessage(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, []);
 
 
     useEffect(() => {
@@ -70,23 +111,29 @@ const App = () => {
                 </Route>
                 <Route exact path={`${base}/about`}>
                     <About />
-                    <Elements stripe={promise}>
-                        <CheckoutForm />
-                    </Elements>
                 </Route>
 
                 <Route exact path={`${base}/statistics`}>
                     <Statistics />
+                    <ProductDisplay />
                 </Route>
 
                 <Route exact path={`${base}/iq-test-app`}>
                     <div className="home1">
                         <Sidebar />
-                        <IqApp />
+                        <IqApp toggleTransition={toggleTransition} />
                         <Stats />
-                        <PreventTransition />
+                        <PreventTransition preventTransition={preventTransition} />
                     </div>
                 </Route>
+
+                <Router exact path={`${base}/checkout`}>
+                  <div className="home1">
+                  <Sidebar />
+                    <Checkout />
+                    <Stats />
+                  </div>
+                </Router>
 
                 <Route exact path={`${base}/results/:id`}>
                     <div className="home1">
@@ -94,15 +141,15 @@ const App = () => {
                     </div>
                 </Route>
 
-                <Route exact path="/contact">
+                <Route exact path={`${base}/contact`}>
                     <ContactForm />
                 </Route>
 
-                <Route exact path="/privacy-policy">
+                <Route exact path={`${base}/privacy-policy`}>
                     <PrivacyPolicy />
                 </Route>
 
-                <Route exact path="/terms-of-service">
+                <Route exact path={`${base}/terms-of-service`}>
                     <TermsOfService />
                 </Route>
             </Switch>
