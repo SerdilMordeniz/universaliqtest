@@ -8,49 +8,33 @@ const { json } = require('express')
 // This is your real test secret API key.
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/apikeys
-const stripe = require('stripe')('sk_test_51IkoZhABViR74PKsE7x3RgnJ4xRzXXaA9yLi7tG0YIhkanEMV0KFBzrrdkRqHWn9vlpOLsV32NV1fV4vi88KA9dt00TL1lxTNg');
 
 const app = express()
 
+const stripe = require("stripe")("sk_test_51IkoZhABViR74PKsE7x3RgnJ4xRzXXaA9yLi7tG0YIhkanEMV0KFBzrrdkRqHWn9vlpOLsV32NV1fV4vi88KA9dt00TL1lxTNg");
+
 app.use(cors())
 app.use(express.json())
-const YOUR_DOMAIN = 'http://localhost:3000/checkout';
 
-app.post('/api/v1/create-checkout-session', async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: [
-        'card',
-        'alipay',
-      ],
-    line_items: [
-      {
-        price_data: {
-          currency: 'cny',
-          product_data: {
-            name: 'Stubborn Attachments',
-            images: ['https://i.imgur.com/EHyR2nP.png'],
-          },
-          unit_amount: 2000,
-        },
-        quantity: 1,
-      },
-    ],
-    mode: 'payment',
-    success_url: `${YOUR_DOMAIN}?success=true`,
-    cancel_url: `${YOUR_DOMAIN}`,
+const calculateOrderAmount = items => {
+    // Replace this constant with a calculation of the order's amount
+    // Calculate the order total on the server to prevent
+    // people from directly manipulating the amount on the client
+    return 599;
+  };
+  
+  app.post("/create-payment-intent", async (req, res) => {
+    const { items } = req.body;
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: calculateOrderAmount(items),
+      currency: "usd"
+    });
+  
+    res.send({
+      clientSecret: paymentIntent.client_secret
+    });
   });
-  res.redirect(303, session.url)
-});
-
-
-app.post('/webhook',  (request, response) => {
-  const payload = request.body;
-
-  console.log("Got payload: " + payload);
-
-  response.status(200).end();
-});
-
 
 //Send email to my gmail account.
 app.post('/api/v1/contact', async (req, res) => {

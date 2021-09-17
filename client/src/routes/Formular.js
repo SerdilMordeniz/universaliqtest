@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import iqTestAPI from '../apis/iqTestAPI'
-import IqTestResultsPage from '../routes/IqTestResultsPage'
-import { useLocation, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 function Formular(props) {
     const [t, i18n] = useTranslation()
     const [formRef] = useState(React.createRef());
-
-    const [id, setId] = useState(0)
 
     const [pseudonym, setPseudonym] = useState("");
     const [e_mail, setE_mail] = useState("");
@@ -83,7 +79,7 @@ function Formular(props) {
         props.toggleTransition();
         if (formRef.current.reportValidity()) {
             try {
-                const results = await iqTestAPI.post('/iqtest', {
+                /* const results = await iqTestAPI.post('/iqtest', {
                     pseudonym: pseudonym,
                     e_mail: e_mail,
                     gender: gender,
@@ -104,9 +100,32 @@ function Formular(props) {
 
                     study_level: studyLevel,
                     study_area: studyArea
+                }) */
+                history.push({
+                    pathname: `/${i18n.language}/checkout`,
+                    state: {
+                        pseudonym: pseudonym,
+                        e_mail: e_mail,
+                        gender: gender,
+
+                        age: age,
+                        age_category: ageCategory,
+
+                        ip_address: ip,
+                        code: countryCode,
+                        name: countryName,
+                        continent_code: continentCode,
+                        languages: languages,
+
+                        total_time_taken: props.elapsed,
+                        number_of_correct_answers: props.correctAnswers,
+                        time_for_each_item: props.timeForItem,
+                        date: new Date(),
+
+                        study_level: studyLevel,
+                        study_area: studyArea
+                    }
                 })
-                setId(results.data.personal_id.personal_id)
-                history.push(`/${i18n.language}/checkout`)
             } catch (error) {
             }
         }

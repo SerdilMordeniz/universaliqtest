@@ -29,54 +29,15 @@ const base = '/(en|de|ar|bg|cs|da|el|es|et|fi|fr|hu|it|ja|ko|nl|no|pl|pt|ro|ru|s
 // recreating the Stripe object on every render.
 // loadStripe is initialized with your real test publishable API key.
 
-const ProductDisplay = () => (
-    <section>
-      <div className="product">
-        <img
-          src="https://i.imgur.com/EHyR2nP.png"
-          alt="The cover of Stubborn Attachments"
-        />
-        <div className="description">
-          <h3>Stubborn Attachments</h3>
-          <h5>$20.00</h5>
-        </div>
-      </div>
-      <form action="http://localhost:3001/api/v1/create-checkout-session" method="POST">
-        <button type="submit">
-          Checkout
-        </button>
-      </form>
-    </section>
-  );
-  const Message = ({ message }) => (
-    <section>
-      <p>{message}</p>
-    </section>
-  );
-
 
 const App = () => {
     const { t, i18n } = useTranslation();
     const [logoUrRL, setLogoURL] = useState(null)
-    const [message, setMessage] = useState("");
     const [preventTransition, setPreventTransition] = useState(true);
 
     const toggleTransition = ()=> {
       setPreventTransition(false)
     }
-
-  useEffect(() => {
-    // Check to see if this is a redirect back from Checkout
-    const query = new URLSearchParams(window.location.search);
-    if (query.get("success")) {
-      setMessage("Order placed! You will receive an email confirmation.");
-    }
-    if (query.get("canceled")) {
-      setMessage(
-        "Order canceled -- continue to shop around and checkout when you're ready."
-      );
-    }
-  }, []);
 
 
     useEffect(() => {
@@ -115,7 +76,6 @@ const App = () => {
 
                 <Route exact path={`${base}/statistics`}>
                     <Statistics />
-                    <ProductDisplay />
                 </Route>
 
                 <Route exact path={`${base}/iq-test-app`}>
