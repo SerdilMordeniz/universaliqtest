@@ -53,6 +53,7 @@ function Formular(props) {
 
     useEffect(() => {
         calculateAgeCategory()
+        props.toggleTransition();
     })
 
     useEffect(() => {
@@ -76,7 +77,6 @@ function Formular(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        props.toggleTransition();
         if (formRef.current.reportValidity()) {
             try {
                 /* const results = await iqTestAPI.post('/iqtest', {

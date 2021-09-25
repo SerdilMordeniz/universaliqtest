@@ -28,7 +28,6 @@ function ContactForm() {
         } else {
             alert('Something went wrong')
         }
-        console.log(results)
     }
 
     return (

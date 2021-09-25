@@ -1,17 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CheckoutCard from './CheckoutCard'
 import {
     CardElement,
     useStripe,
     useElements
 } from "@stripe/react-stripe-js";
+import { useHistory } from 'react-router-dom'
+import iqTestAPI from '../../apis/iqTestAPI'
+import { useTranslation } from 'react-i18next'
+import {  PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 
 function CheckoutItems() {
+    const [{ isResolved }] = usePayPalScriptReducer();
+
+    const { i18n } = useTranslation();
     const [creditCardClicked, setCreditCardClicked] = useState(false)
+    const [paypalClicked, setPaypalClicked] = useState(false)
     const [googlePayClicked, setGooglePayClicked] = useState(false)
     const [applePayClicked, setApplePayClicked] = useState(false)
-    const [paypalClicked, setPaypalClicked] = useState(false)
 
     const [succeeded, setSucceeded] = useState(false);
     const [error, setError] = useState(null);
@@ -20,6 +27,73 @@ function CheckoutItems() {
     const [clientSecret, setClientSecret] = useState('');
     const stripe = useStripe();
     const elements = useElements();
+
+    let history = useHistory()
+    let state = history.location.state;
+
+    const handlePostDetails = async () => {
+        if (succeeded) {
+            const results = await iqTestAPI.post('/iqtest', {
+                pseudonym: state.pseudonym,
+                e_mail: state.e_mail,
+                gender: state.gender,
+
+                age: state.age,
+                age_category: state.age_category,
+
+                ip_address: state.ip_address,
+                code: state.code,
+                name: state.name,
+                continent_code: state.continent_code,
+                languages: state.languages,
+
+                total_time_taken: state.total_time_taken,
+                number_of_correct_answers: state.number_of_correct_answers,
+                time_for_each_item: state.time_for_each_item,
+                date: new Date(),
+
+                study_level: state.study_level,
+                study_area: state.study_area
+            })
+
+            history.push({ pathname: `/${i18n.language}/results/${results.data.personal_id.personal_id}` })
+        }
+    }
+
+    useEffect(() => {
+        const handlePostDetails = async () => {
+            if (succeeded || isResolved) {
+                const results = await iqTestAPI.post('/iqtest', {
+                    pseudonym: state.pseudonym,
+                    e_mail: state.e_mail,
+                    gender: state.gender,
+
+                    age: state.age,
+                    age_category: state.age_category,
+
+                    ip_address: state.ip_address,
+                    code: state.code,
+                    name: state.name,
+                    continent_code: state.continent_code,
+                    languages: state.languages,
+
+                    total_time_taken: state.total_time_taken,
+                    number_of_correct_answers: state.number_of_correct_answers,
+                    time_for_each_item: state.time_for_each_item,
+                    date: new Date(),
+
+                    study_level: state.study_level,
+                    study_area: state.study_area
+                })
+
+                history.push({ pathname: `/${i18n.language}/results/${results.data.personal_id.personal_id}` })
+                window.location.reload()
+            }
+        }
+        handlePostDetails();
+    })
+
+
 
     const handleCardSubmit = async ev => {
         ev.preventDefault();
@@ -49,26 +123,27 @@ function CheckoutItems() {
     };
 
     const handleInputChange = (e) => {
+        console.log(e.target.value)
         if (e.target.value === 'cards') {
             setCreditCardClicked(true);
+            setPaypalClicked(false);
             setGooglePayClicked(false);
-            setApplePayClicked(false)
-            setPaypalClicked(false)
+            setApplePayClicked(false);
+        } else if (e.target.value === 'paypal') {
+            setCreditCardClicked(false);
+            setPaypalClicked(true);
+            setGooglePayClicked(false);
+            setApplePayClicked(false);
         } else if (e.target.value === 'googlePay') {
             setCreditCardClicked(false);
+            setPaypalClicked(false);
             setGooglePayClicked(true);
-            setApplePayClicked(false)
-            setPaypalClicked(false)
+            setApplePayClicked(false);
         } else if (e.target.value === 'applePay') {
+            setCreditCardClicked(false);
+            setPaypalClicked(false);
             setGooglePayClicked(false);
-            setCreditCardClicked(false);
-            setApplePayClicked(true)
-            setPaypalClicked(false)
-        } else if (e.target.target === 'paypal') {
-            setGooglePayClicked(true);
-            setCreditCardClicked(false);
-            setApplePayClicked(false)
-            setPaypalClicked(true)
+            setApplePayClicked(true);
         }
     }
     return (
@@ -86,9 +161,16 @@ function CheckoutItems() {
                 />
 
                 <div className="borderTop">
+                    <input className="checkoutInputWallets" type="radio" id="paypals" name="checkoutOption" value="paypal" onChange={handleInputChange} />
+                    <label htmlFor="paypals">
+                        <img className="paypalSVG" src="/checkout_pics/paypal.svg" alt="Paypal Pay" />
+                    </label>
+                </div>
+
+                <div className="borderTop">
                     <input className="checkoutInputWallets" type="radio" id="googlePay" name="checkoutOption" value="googlePay" onChange={handleInputChange} />
                     <label htmlFor="googlePay">
-                        <img className="walletSVG" src="/checkout_pics/googlePay.svg" alt="Google Pay"/>
+                        <img className="walletSVG" src="/checkout_pics/googlePay.svg" alt="Google Pay" />
                     </label>
                 </div>
 
@@ -98,16 +180,11 @@ function CheckoutItems() {
                         <img className="walletSVG" src="/checkout_pics/applePay.svg" alt='Apple Pay' />
                     </label>
                 </div>
-
-                <div className="borderTop">
-                    <input className="checkoutInputWallets" type="radio" id="paypal" name="checkoutOption" value="paypal" onChange={handleInputChange} />
-                    <label htmlFor="paypal">
-                        <img className="paypalSVG" src="/checkout_pics/paypal.svg" alt="Paypal" />
-                    </label>
-                </div>
             </div>
 
-            <button
+            {/* Card Button */}
+            {creditCardClicked &&
+                <button
                 disabled={processing || disabled || succeeded}
                 id="resultButton"
                 onClick={handleCardSubmit}
@@ -120,6 +197,24 @@ function CheckoutItems() {
                     )}
                 </span>
             </button>
+            }
+
+            {/* Paypal Button */}
+            {paypalClicked && 
+                    <PayPalButtons style={{ layout: "horizontal" }} 
+                    createOrder={(data, actions) => {
+                        return actions.order.create({
+                            purchase_units: [
+                                {
+                                    amount: {
+                                        value: "5.99",
+                                    },
+                                },
+                            ],
+                        });
+                    }}
+                    />
+            }
         </form>
     )
 }

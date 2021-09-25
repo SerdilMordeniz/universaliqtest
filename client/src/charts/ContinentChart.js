@@ -71,71 +71,74 @@ const ContinentChart = ({ setTooltipContent, fetchedData }) => {
 
   return (
     <>
-      <ComposableMap data-tip="">
-        <Geographies geography={geoUrl}>
-          {({ geographies }) =>
-            geographies.map((geo) => { 
-              const { CONTINENT } = geo.properties;
-              const cur = fetchedData.result.find(s => s.code === continentNameToCode(CONTINENT));
-              let current;
-              if(cur) {
-                current = linearConverter(cur.percent_rank, 0, 1, 1, 7) 
-              }
-              return (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                fill={cur ? colorScale(current) : "#D6D6DA"}
-                onMouseEnter={() => {
-                  const { CONTINENT } = geo.properties;
+      {fetchedData &&
+        <ComposableMap data-tip="">
+          <Geographies geography={geoUrl}>
+            {({ geographies }) =>
+              geographies.map((geo) => {
+                const { CONTINENT } = geo.properties;
+                const cur = fetchedData.result.find(s => s.code === continentNameToCode(CONTINENT));
+                let current;
+                if (cur) {
+                  current = linearConverter(cur.percent_rank, 0, 1, 1, 7)
+                }
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill={cur ? colorScale(current) : "#D6D6DA"}
+                    onMouseEnter={() => {
+                      const { CONTINENT } = geo.properties;
 
-                  let continentCode = continentNameToCode(CONTINENT)
-                  const name = handleContinentName(continentCode);
-                  let result = fetchedData.result.find(o => o.code === continentCode || null)
-                  let numberOfTests = 0
-                  let percentile;
+                      let continentCode = continentNameToCode(CONTINENT)
+                      const name = handleContinentName(continentCode);
+                      let result = fetchedData.result.find(o => o.code === continentCode || null)
+                      let numberOfTests = 0
+                      let percentile;
 
-                  if (result) {
-                    numberOfTests = result.number_of_tests_per_continent
-                    percentile = result.percentile
-                  }
-                  let IQ
-                  if (result) {
-                    IQ = R.qnorm(percentile, 100, 15).toFixed(0)
-                  } else {
-                    IQ = ''
-                  }
+                      if (result) {
+                        numberOfTests = result.number_of_tests_per_continent
+                        percentile = result.percentile
+                      }
+                      let IQ
+                      if (result) {
+                        IQ = R.qnorm(percentile, 100, 15).toFixed(0)
+                      } else {
+                        IQ = ''
+                      }
 
-                  setTooltipContent(`${name}<br />${t('statistics.testsTaken')} : ${numberOfTests}<br />${t('statistics.averageIq')} : ${IQ}`);
-                  setHighlighted(geo.properties.CONTINENT);
-                }}
-                onMouseLeave={() => {
-                  setTooltipContent("");
-                  setHighlighted("");
-                }}
-                style={{
-                  default: {
-                    fill:
-                      geo.properties.CONTINENT === highlighted
-                        ? "#F53"
-                        : ""
-                  },
+                      setTooltipContent(`${name}<br />${t('statistics.testsTaken')} : ${numberOfTests}<br />${t('statistics.averageIq')} : ${IQ}`);
+                      setHighlighted(geo.properties.CONTINENT);
+                    }}
+                    onMouseLeave={() => {
+                      setTooltipContent("");
+                      setHighlighted("");
+                    }}
+                    style={{
+                      default: {
+                        fill:
+                          geo.properties.CONTINENT === highlighted
+                            ? "#F53"
+                            : ""
+                      },
 
-                  hover: {
-                    fill: geo.properties.CONTINENT === highlighted?"#F53": "",
-                    outline: "none"
-                  },
-                  pressed: {
-                    fill: "#E42",
-                    outline: "none"
-                  }
-                }}
-              />
-            )
-          })
-          }
-        </Geographies>
-      </ComposableMap>
+                      hover: {
+                        fill: geo.properties.CONTINENT === highlighted ? "#F53" : "",
+                        outline: "none"
+                      },
+                      pressed: {
+                        fill: "#E42",
+                        outline: "none"
+                      }
+                    }}
+                  />
+                )
+              })
+            }
+          </Geographies>
+        </ComposableMap>
+      }
+
     </>
   );
 };

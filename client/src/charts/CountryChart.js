@@ -96,60 +96,62 @@ const CountryChart = ({ setTooltipContent, fetchedData }) => {
 
   return (
     <>
-      <ComposableMap data-tip=""  >
-        <Geographies geography={geoUrl}>
-          {({ geographies }) =>
-            geographies.map(geo => {
-              const { ISO_A2 } = geo.properties;
-              const cur = fetchedData.result.find(s => s.code === ISO_A2);
-              let current;
-              if(cur) {
-                current = linearConverter(cur.percent_rank, 0, 1, 1, 10)
+      {fetchedData &&
+        <ComposableMap data-tip=""  >
+          <Geographies geography={geoUrl}>
+            {({ geographies }) =>
+              geographies.map(geo => {
+                const { ISO_A2 } = geo.properties;
+                const cur = fetchedData.result.find(s => s.code === ISO_A2);
+                let current;
+                if (cur) {
+                  current = linearConverter(cur.percent_rank, 0, 1, 1, 10)
+                }
+                return (
+                  <Geography
+                    key={geo.rsmKey}
+                    geography={geo}
+                    fill={cur ? colorScale(current) : "#D6D6DA"}
+                    onMouseEnter={() => {
+                      const { ISO_A2 } = geo.properties;
+                      const name = handleCountryName(ISO_A2);
+                      let result = fetchedData.result.find(o => o.code === ISO_A2 || null)
+                      let numberOfTests = 0;
+                      let percentile
+
+                      if (result) {
+                        numberOfTests = result.number_of_tests_per_country;
+                        percentile = result.percentile
+                      }
+
+                      let IQ
+                      if (result) {
+                        IQ = R.qnorm(percentile, 100, 15).toFixed(0)
+                      } else {
+                        IQ = ''
+                      }
+                      setTooltipContent(`${name}<br />${t('statistics.testsTaken')} : ${numberOfTests}<br />${t('statistics.averageIq')} : ${IQ}`)
+                    }}
+                    onMouseLeave={() => {
+                      setTooltipContent("");
+                    }}
+                    style={{
+                      hover: {
+                        fill: "#F53",
+                        outline: "none"
+                      },
+                      pressed: {
+                        fill: "#E42",
+                        outline: "none"
+                      }
+                    }}
+                  />
+                )
+              })
             }
-            return (
-              <Geography
-                key={geo.rsmKey}
-                geography={geo}
-                fill={cur ? colorScale(current) : "#D6D6DA"}
-                onMouseEnter={() => {
-                  const { ISO_A2 } = geo.properties;
-                  const name = handleCountryName(ISO_A2);
-                  let result = fetchedData.result.find(o => o.code === ISO_A2 || null)
-                  let numberOfTests = 0;
-                  let percentile
-
-                  if (result) {
-                    numberOfTests = result.number_of_tests_per_country;
-                    percentile = result.percentile
-                  }
-
-                  let IQ
-                  if (result) {
-                    IQ = R.qnorm(percentile, 100, 15).toFixed(0)
-                  } else {
-                    IQ = ''
-                  }
-                  setTooltipContent(`${name}<br />${t('statistics.testsTaken')} : ${numberOfTests}<br />${t('statistics.averageIq')} : ${IQ}`)
-                }}
-                onMouseLeave={() => {
-                  setTooltipContent("");
-                }}
-                style={{
-                  hover: {
-                    fill: "#F53",
-                    outline: "none"
-                  },
-                  pressed: {
-                    fill: "#E42",
-                    outline: "none"
-                  }
-                }}
-              />
-            )
-          })
-          }
-        </Geographies>
-      </ComposableMap>
+          </Geographies>
+        </ComposableMap>
+      }
     </>
   );
 };

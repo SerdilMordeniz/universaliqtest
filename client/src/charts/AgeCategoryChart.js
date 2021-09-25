@@ -65,33 +65,35 @@ function AgeCategoryChart({ fetchedAgeCategoryData, iq }) {
     return (
         <div>
             <h3 className="charth3">{t('home.stat.ageCategoryChart.title')}</h3>
-            <Chart
-                chartType="BarChart"
-                loader={<div>Loading Chart</div>}
-                data={[
-                    [
-                        t('home.stat.ageCategoryChart.yTitle'),
-                        t('home.stat.ageCategoryChart.xTitle'),
-                        { role: 'style' },
-                    ],
-                    [t('home.stat.ageCategoryChart.annotation1'), parseInt(iqYouth), 'blue'],
-                    [t('home.stat.ageCategoryChart.annotation2'), parseInt(iqYoungAdult), 'orange'],
-                    [t('home.stat.ageCategoryChart.annotation3'), parseInt(iqAdult), 'green'],
-                    [t('home.stat.ageCategoryChart.annotation4'), parseInt(iqSenior), 'violet'],
-                    [t('home.stat.ageCategoryChart.annotation5'), iq, 'grey']
-                ]}
-                options={{
-                    width: 510,
-                    height: 400,
-                    legend: { position: 'none' },
-                    dataOpacity: 0.2,
-                    titleTextStyle: {
-                        fontSize: 14
-                    }
-                }}
-                // For tests
-                rootProps={{ 'data-testid': '6' }}
-            />
+            {fetchedAgeCategoryData &&
+                <Chart
+                    chartType="BarChart"
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                        [
+                            t('home.stat.ageCategoryChart.yTitle'),
+                            t('home.stat.ageCategoryChart.xTitle'),
+                            { role: 'style' },
+                        ],
+                        [t('home.stat.ageCategoryChart.annotation1'), parseInt(iqYouth), 'blue'],
+                        [t('home.stat.ageCategoryChart.annotation2'), parseInt(iqYoungAdult), 'orange'],
+                        [t('home.stat.ageCategoryChart.annotation3'), parseInt(iqAdult), 'green'],
+                        [t('home.stat.ageCategoryChart.annotation4'), parseInt(iqSenior), 'violet'],
+                        [t('home.stat.ageCategoryChart.annotation5'), iq, 'grey']
+                    ]}
+                    options={{
+                        width: 510,
+                        height: 400,
+                        legend: { position: 'none' },
+                        dataOpacity: 0.2,
+                        titleTextStyle: {
+                            fontSize: 14
+                        }
+                    }}
+                    // For tests
+                    rootProps={{ 'data-testid': '6' }}
+                />
+            }
             <div className="chartXaxis">{t('home.stat.ageCategoryChart.xTitle')}</div>
         </div>
     )

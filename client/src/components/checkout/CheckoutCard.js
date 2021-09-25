@@ -16,7 +16,6 @@ function CheckoutCard(props) {
                 body: JSON.stringify({ items: [{ id: "IQ-test" }] })
             })
             .then(res => {
-                console.log(res)
                 return res.json();
             })
             .then(data => {
