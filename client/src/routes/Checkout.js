@@ -5,6 +5,13 @@ import CheckoutForm from '../components/checkout/CheckoutForm'
 function Checkout() {
     let history = useHistory()
 
+    const amount = history.location.state.convertedCurrencyAmount;
+    const currency = history.location.state.currency;
+    const languageCode = history.location.state.languages;
+    const countryCode = history.location.state.code;
+    const formattedAmount = new Intl.NumberFormat(`${languageCode}-${countryCode}`, { style: 'currency', currency: currency }).format(amount);
+
+
     const calculateAgeBrackets = (ageCategory) => {
         switch (ageCategory) {
             case 'Youth':
@@ -21,8 +28,8 @@ function Checkout() {
 
     return (
         <div className="card">
-            <h1>Verfication: In order for us to be sure that you took our test seriously we need you to pay 5$.</h1>
-            <p>To make sure our statistics don't get inflated with false results we need you to pay 5$. If we make this test free a lot of
+            <h1>Verfication: In order for us to be sure that you took our test seriously we need you to pay {formattedAmount}.</h1>
+            <p>To make sure our statistics don't get inflated with false results we need you to pay {formattedAmount}. If we make this test free a lot of
                 people will take this test several times which will make all of the results inaccurate. On top of that computer bots are
                 crawling this website and would skew our database even more.
             </p>

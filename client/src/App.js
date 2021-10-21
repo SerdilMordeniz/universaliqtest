@@ -87,7 +87,7 @@ const App = () => {
                     </div>
                 </Route>
 
-                <Router exact path={`${base}/checkout`}>
+                <Router path={`${base}/checkout`}>
                   <div className="home1">
                   <Sidebar />
                     <Checkout />

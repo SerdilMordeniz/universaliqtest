@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useHistory } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 function Formular(props) {
-    const [t, i18n] = useTranslation()
+    let history = useHistory()
+    const [t, i18n] = useTranslation();
     const [formRef] = useState(React.createRef());
 
     const [pseudonym, setPseudonym] = useState("");
@@ -12,19 +13,27 @@ function Formular(props) {
     const [gender, setGender] = useState("");
 
     const [ageYear, setAgeYear] = useState();
-    const [currentYear] = useState(new Date().getFullYear())
-    const [age, setAge] = useState()
+    const [currentYear] = useState(new Date().getFullYear());
+    const [age, setAge] = useState();
 
-    const [ageCategory, setAgeCategories] = useState("")
+    const [ageCategory, setAgeCategories] = useState("");
 
-    const [ip, setIp] = useState("")
-    const [countryCode, setCountryCode] = useState("")
-    const [countryName, setCountryName] = useState("")
-    const [continentCode, setContinentCode] = useState("")
-    const [languages, setLanguages] = useState("")
+    const [ip, setIp] = useState("");
+    const [countryCode, setCountryCode] = useState("");
+    const [countryName, setCountryName] = useState("");
+    const [continentCode, setContinentCode] = useState("");
+    const [languages, setLanguages] = useState("");
 
     const [studyLevel, setStudyLevel] = useState("");
     const [studyArea, setStudyArea] = useState("");
+
+    const [currency, setCurrency] = useState("");
+    const [currencySymbol, setCurrencySymbol] = useState("");
+    const [convertedCurrencyAmount, setConvertedCurrencyAmount] = useState(5)
+
+    function round(value, decimals) {
+        return Number(Math.round(value +'e'+ decimals) +'e-'+ decimals).toFixed(decimals);
+    }
 
     useEffect(() => {
         props.nextItem()
@@ -59,21 +68,29 @@ function Formular(props) {
     useEffect(() => {
         try {
 
+            const getCurrencyConversion = async() => {
+                const response = await axios.get(`https://data.fixer.io/api/convert?access_key=8d53ce243903ce8105bb1bbefdd701e8&from=EUR&to=${currency}&amount=5&format=1`)
+                setConvertedCurrencyAmount(round(response.data.result, 2));
+            }
             const getGeoInfo = async () => {
                 const response = await axios.get('http://api.ipapi.com/check?access_key=919b8e15d3142223683599008d66db22')
                 let data = response.data;
-                setCountryName(data.country_name)
-                setCountryCode(data.country_code)
-                setContinentCode(data.continent_code)
-                setLanguages(data.location.languages[0].code)
-                setIp(data.ip)
+                setCountryName(data.country_name);
+                setCountryCode(data.country_code);
+                setContinentCode(data.continent_code);
+                setLanguages(data.location.languages[0].code);
+                setIp(data.ip);
+                setCurrency(data.currency.code);
+                setCurrencySymbol(data.currency.symbol);
             }
-            getGeoInfo()
+            getGeoInfo();
+            if(currency && currencySymbol) {
+                getCurrencyConversion();
+            }
+            
         } catch (error) {
         }
-    }, [])
-
-    let history = useHistory()
+    }, [setCurrency, setCurrencySymbol, currency, currencySymbol, convertedCurrencyAmount])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -123,7 +140,11 @@ function Formular(props) {
                         date: new Date(),
 
                         study_level: studyLevel,
-                        study_area: studyArea
+                        study_area: studyArea,
+
+                        currency: currency,
+                        currencySymbol: currencySymbol,
+                        convertedCurrencyAmount: convertedCurrencyAmount
                     }
                 })
             } catch (error) {

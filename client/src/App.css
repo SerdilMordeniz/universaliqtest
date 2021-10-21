@@ -594,14 +594,45 @@ footer a:hover {
   font-size: 12px;
 }
 
-.walletSVG{
-  width: 70px;
-  margin-left: -10px;
-}
-
 .paypalSVG {
   width: 70px;
   margin-left: -5px;
+}
+
+.sofortSVG {
+  width: 76px;
+  margin-left: -5px;
+  height: 45px;
+}
+
+.bancontactSVG {
+  width: 85px;
+  margin-left: -10px;
+}
+
+.epsSVG {
+  width: 80px;
+}
+
+.giropaySVG {
+  width: 85px;
+  margin-left: -5px;
+}
+
+.idealSVG {
+  width: 70px;
+  margin-left: -8px;
+}
+
+.p24SVG {
+  width: 100px;
+  height: 45px;
+  margin-left: -3px;
+}
+
+.walletSVG{
+  width: 70px;
+  margin-left: -10px;
 }
 
 .borderTop {
@@ -742,4 +773,26 @@ footer a:hover {
   form {
     width: 80vw;
   }
+}
+
+.epsBank {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.StripeElement {
+  height: 40px;
+  width: 100%;
+  color: #32325d;
+  background-color: white;
+  border: 1px solid;
+  border-radius: 4px;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.checkoutSection {
+  padding: 20px;
 }

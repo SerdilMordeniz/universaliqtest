@@ -4,35 +4,81 @@ const cors = require('cors')
 const db = require('./db')
 const nodemailer = require('nodemailer')
 const { json } = require('express')
+const app = express()
 
 // This is your real test secret API key.
 // Set your secret key. Remember to switch to your live secret key in production.
 // See your keys here: https://dashboard.stripe.com/apikeys
-
-const app = express()
-
-const stripe = require("stripe")("sk_test_51IkoZhABViR74PKsE7x3RgnJ4xRzXXaA9yLi7tG0YIhkanEMV0KFBzrrdkRqHWn9vlpOLsV32NV1fV4vi88KA9dt00TL1lxTNg");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 app.use(cors())
 app.use(express.json())
 
-const calculateOrderAmount = items => {
-    // Replace this constant with a calculation of the order's amount
-    // Calculate the order total on the server to prevent
-    // people from directly manipulating the amount on the client
-    return 599;
-  };
+function round(value, decimals) {
+    return Number(Math.round(value +'e'+ decimals) +'e-'+ decimals).toFixed(decimals);
+}
+
+  const calculatePaymentMethods = (currency, country_code, availableSofortCountries) => {
+    let paymentMethod = ['card'];
+    // Sofort payment is for Austria, Belgium, Germany, Italy, Netherlands and Spain
+    if((currency.toLowerCase() === 'eur') && ( availableSofortCountries.includes(country_code.toLowerCase()) )) {
+        paymentMethod.push('sofort');
+    // Bancontact is for Belgium
+    } if((currency.toLowerCase() === 'eur') && (country_code.toLowerCase() === 'be')) {
+        paymentMethod.push('bancontact');
+    // EPS Bank is for Austria
+    } if((currency.toLowerCase() === 'eur') && (country_code.toLowerCase() === 'at')) {
+        paymentMethod.push('eps');
+    // Giropay is for Germany
+    } if ((currency.toLowerCase() === 'eur') && (country_code.toLowerCase() === 'de')) {
+        paymentMethod.push('giropay');
+    //Ideal Bank is for Netherlands
+    } if ((currency.toLowerCase() === 'eur') && (country_code.toLowerCase() === 'nl')) {
+        paymentMethod.push('ideal');
+    //P24 is for Poland
+    } if ((currency.toLowerCase() === 'eur' || 'pln') && (country_code.toLowerCase() === 'pl')) {
+        paymentMethod.push('p24');
+    }
+    return paymentMethod;
+  }
   
   app.post("/create-payment-intent", async (req, res) => {
-    const { items } = req.body;
+    const { items, currency, country_code, convertedCurrencyAmount, availableSofortCountries } = req.body;
+    const zerodecimalCurrencies = ['BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'];
+    const twodecimalCurrencies = 'USDAEDAFNALLAMDANGAOAARSAUDAWGAZNBAMBBDBDTBGNBMDBNDBOBBRLBSDBWPBYNBZDCADCDFCHFCNYCOPCRCCVECZKDKKDOPDZDEGPETBEURFJDFKPGBPGELGIPGMDGTQGYDHKDHNLHRKHTGHUFIDRILSINRISKJMDKESKGSKHRKYDKZTLAKLBPLKRLRDLSLMADMDLMKDMMKMNTMOPMROMURMVRMWKMXNMYRMZNNADNGNNIONOKNPRNZDPABPENPGKPHPPKRPLNQARRONRSDRUBSARSBDSCRSEKSGDSHPSLLSOSSRDSTDSZLTHBTJSTOPTRYTTDTWDTZSUAHUYUUZSWSTXCDYERZARZMW'.split(/(.{3})/).filter(O=>O)
+    console.log(twodecimalCurrencies)
+    let amountNumber = parseFloat(convertedCurrencyAmount)
+    let currencyUsed = currency;
+
+    //Zero-decimal currencies cases
+    if(zerodecimalCurrencies.includes(currency)) {
+        amountNumber = round(amountNumber, 0)
+    } else if(twodecimalCurrencies.includes(currency)) {
+        amountNumber = amountNumber*100;
+    } else {
+        currencyUsed = 'EUR';
+        amountNumber = 5;
+    }
+    const paymentMethod = calculatePaymentMethods(currency, country_code, availableSofortCountries)
+    console.log(paymentMethod);
+    console.log(amountNumber);
+
     // Create a PaymentIntent with the order amount and currency
+    // Available payment methods: ['card', 'sofort', 'bancontact', 'eps', 'giropay', 'ideal', 'p24']
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: calculateOrderAmount(items),
-      currency: "usd"
+      amount: amountNumber,
+      currency: currencyUsed.toLowerCase(),
+      payment_method_types: paymentMethod,
+      payment_method_options: {
+        bancontact: {
+          preferred_language: 'nl',
+        },
+      },
     });
   
     res.send({
-      clientSecret: paymentIntent.client_secret
+      clientSecret: paymentIntent.client_secret,
+      paymentIntent: paymentIntent
     });
   });
 
@@ -65,14 +111,39 @@ app.post('/api/v1/contact', async (req, res) => {
     })
 })
 
+app.get('/success-page*', async (request, response) => {
+    const {pseudonym, e_mail, gender, age, age_category, ip_address, code, name, continent_code, languages, total_time_taken, number_of_correct_answers, time_for_each_item, study_level, study_area, language_code} =  request.query
+    try {
+            const total_time_takenINT = parseInt(total_time_taken)
+            const number_of_correct_answersINT = parseInt(number_of_correct_answers)
+            let string = time_for_each_item
+            string = string.slice(1, string.length-1)
+            let time_for_each_itemArr = string.split(', ')
+            time_for_each_itemArr = time_for_each_itemArr.map((i) => Number(i));
+            const date = new Date()
+            const insert_person = await db.query('WITH insert_person AS ( INSERT INTO person (pseudonym, e_mail, gender) VALUES ($1, $2, $3) RETURNING id AS personal_id), insert_age AS ( INSERT INTO age (personal_id, age, age_category) SELECT personal_id, $4, $5 FROM insert_person RETURNING personal_id), insert_country AS ( INSERT INTO country (personal_id, ip_address, code, "name", continent_code, languages) SELECT personal_id, $6,  $7, $8, $9, $10 FROM insert_age RETURNING personal_id), insert_iq_test AS ( INSERT INTO iq_test (personal_id, total_time_taken, number_of_correct_answers, time_for_each_item, "date") SELECT personal_id, $11, $12, $13, $14 FROM insert_country RETURNING personal_id) INSERT INTO education (personal_id, study_level, study_area) SELECT personal_id, $15, $16 FROM insert_iq_test RETURNING personal_id;',
+            [pseudonym, e_mail, gender, age, age_category, ip_address, code, name, continent_code, languages, total_time_takenINT, number_of_correct_answersINT, time_for_each_itemArr, date, study_level, study_area]);
+            let personal_id = await insert_person.rows[0]
+            response.redirect(`http://localhost:3000/${language_code}/results/${personal_id.personal_id.toString()}`) 
+    } catch (error) {
+        console.log(error)
+    }
+});
+
+/* app.get('/success-page*', function(request, response, next) {
+    response.send('hello world');
+  }); */
+
+
 // Create an IQ Test entry in the database
 app.post('/api/v1/iqtest', async (req, res) => {
     try {
-        const insert_person = await db.query('WITH insert_person AS ( INSERT INTO person (pseudonym, e_mail, gender) VALUES ($1, $2, $3) RETURNING id AS personal_id), insert_age AS ( INSERT INTO age (personal_id, age, age_category) SELECT personal_id, $4, $5 FROM insert_person RETURNING personal_id), insert_country AS ( INSERT INTO country (personal_id, ip_address, code, "name", continent_code, languages) SELECT personal_id, $6,  $7, $8, $9, $10 FROM insert_age RETURNING personal_id), insert_iq_test AS ( INSERT INTO iq_test (personal_id, total_time_taken, number_of_correct_answers, time_for_each_item, "date") SELECT personal_id, $11, $12, $13, $14 FROM insert_country RETURNING personal_id) INSERT INTO education (personal_id, study_level, study_area) SELECT personal_id, $15, $16 FROM insert_iq_test RETURNING personal_id;',
+            console.log('normal post: ' + typeof(req.body.time_for_each_item), req.body.time_for_each_item)
+            const insert_person = await db.query('WITH insert_person AS ( INSERT INTO person (pseudonym, e_mail, gender) VALUES ($1, $2, $3) RETURNING id AS personal_id), insert_age AS ( INSERT INTO age (personal_id, age, age_category) SELECT personal_id, $4, $5 FROM insert_person RETURNING personal_id), insert_country AS ( INSERT INTO country (personal_id, ip_address, code, "name", continent_code, languages) SELECT personal_id, $6,  $7, $8, $9, $10 FROM insert_age RETURNING personal_id), insert_iq_test AS ( INSERT INTO iq_test (personal_id, total_time_taken, number_of_correct_answers, time_for_each_item, "date") SELECT personal_id, $11, $12, $13, $14 FROM insert_country RETURNING personal_id) INSERT INTO education (personal_id, study_level, study_area) SELECT personal_id, $15, $16 FROM insert_iq_test RETURNING personal_id;',
             [req.body.pseudonym, req.body.e_mail, req.body.gender, req.body.age, req.body.age_category, req.body.ip_address, req.body.code, req.body.name, req.body.continent_code, req.body.languages, req.body.total_time_taken, req.body.number_of_correct_answers, req.body.time_for_each_item, req.body.date, req.body.study_level, req.body.study_area]);
-        res.status(201).json({
-            personal_id: insert_person.rows[0]
-        })
+            res.status(201).json({
+                personal_id: insert_person.rows[0]
+            })
     } catch (error) {
         console.log(error)
     }
@@ -219,7 +290,7 @@ app.get('/api/v1/continent_chart', async (req, res) => {
 // Get country rank and rows for each country
 app.get('/api/v1/country_chart', async (req, res) => {
     try {
-        const result = await db.query('WITH country AS (SELECT country.code, Percent_rank() OVER ( ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) FROM   iq_test INNER JOIN country ON country.personal_id = iq_test.personal_id) SELECT code, Count(code) AS number_of_tests_per_country, Avg(country.percent_rank) AS percentile, percent_rank() over ( ORDER BY Avg(country.percent_rank) asc ) FROM country GROUP  BY code;',
+        const result = await db.query('WITH country AS (SELECT country.code, Percent_rank() OVER ( ORDER BY iq_test.number_of_correct_answers ASC, iq_test.time_for_each_item DESC) FROM iq_test INNER JOIN country ON country.personal_id = iq_test.personal_id) SELECT code, Count(code) AS number_of_tests_per_country, Avg(country.percent_rank) AS percentile, percent_rank() over ( ORDER BY Avg(country.percent_rank) asc ) FROM country GROUP  BY code;',
             [])
         res.status(200).json({
             number_of_rows: result.rows.length,

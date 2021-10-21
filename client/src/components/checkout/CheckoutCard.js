@@ -1,28 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
     CardElement,
 } from "@stripe/react-stripe-js";
 
-function CheckoutCard(props) {
-
-    useEffect(() => {
-        // Create PaymentIntent as soon as the page loads
-        window
-            .fetch("http://localhost:3001/create-payment-intent", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ items: [{ id: "IQ-test" }] })
-            })
-            .then(res => {
-                return res.json();
-            })
-            .then(data => {
-                props.setClientSecret(data.clientSecret);
-            });
-            
-    }, []);
+function CheckoutCard({creditCardClicked, handleInputChange, handleChange, error, succeeded}) {
 
     const cardStyle = {
         style: {
@@ -44,7 +25,7 @@ function CheckoutCard(props) {
 
     return (
         <div className="cards">
-            <input className="checkoutInput" type="radio" id="cards" name="checkoutOption" value="cards" onChange={props.handleInputChange} />
+            <input className="checkoutInput" type="radio" id="cards" name="checkoutOption" value="cards" onChange={handleInputChange} />
             <label htmlFor="cards">
                 <strong>Credit Card</strong>
                 <img className="checkoutSVG" src="/checkout_pics/visa.svg" alt="visa" />
@@ -53,17 +34,17 @@ function CheckoutCard(props) {
                 <i id="andMore">and more...</i>
             </label>
             {
-                props.creditCardClicked &&
+                creditCardClicked &&
                 <div id="payment-form">
-                    <CardElement id="card-element" options={cardStyle} onChange={props.handleChange} />
+                    <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
                     {/* Show any error that happens when processing the payment */}
-                    {props.error && (
+                    {error && (
                         <div className="card-error" role="alert">
-                            {props.error}
+                            {error}
                         </div>
                     )}
                     {/* Show a success message upon completion */}
-                    <p className={props.succeeded ? "result-message" : "result-message hidden"}>
+                    <p className={succeeded ? "result-message" : "result-message hidden"}>
                         Payment succeeded, see the result in your
                         <a
                             href={`https://dashboard.stripe.com/test/payments`}
