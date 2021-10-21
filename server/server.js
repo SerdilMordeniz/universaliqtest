@@ -46,7 +46,6 @@ function round(value, decimals) {
     const { items, currency, country_code, convertedCurrencyAmount, availableSofortCountries } = req.body;
     const zerodecimalCurrencies = ['BIF', 'CLP', 'DJF', 'GNF', 'JPY', 'KMF', 'KRW', 'MGA', 'PYG', 'RWF', 'UGX', 'VND', 'VUV', 'XAF', 'XOF', 'XPF'];
     const twodecimalCurrencies = 'USDAEDAFNALLAMDANGAOAARSAUDAWGAZNBAMBBDBDTBGNBMDBNDBOBBRLBSDBWPBYNBZDCADCDFCHFCNYCOPCRCCVECZKDKKDOPDZDEGPETBEURFJDFKPGBPGELGIPGMDGTQGYDHKDHNLHRKHTGHUFIDRILSINRISKJMDKESKGSKHRKYDKZTLAKLBPLKRLRDLSLMADMDLMKDMMKMNTMOPMROMURMVRMWKMXNMYRMZNNADNGNNIONOKNPRNZDPABPENPGKPHPPKRPLNQARRONRSDRUBSARSBDSCRSEKSGDSHPSLLSOSSRDSTDSZLTHBTJSTOPTRYTTDTWDTZSUAHUYUUZSWSTXCDYERZARZMW'.split(/(.{3})/).filter(O=>O)
-    console.log(twodecimalCurrencies)
     let amountNumber = parseFloat(convertedCurrencyAmount)
     let currencyUsed = currency;
 
@@ -60,8 +59,6 @@ function round(value, decimals) {
         amountNumber = 5;
     }
     const paymentMethod = calculatePaymentMethods(currency, country_code, availableSofortCountries)
-    console.log(paymentMethod);
-    console.log(amountNumber);
 
     // Create a PaymentIntent with the order amount and currency
     // Available payment methods: ['card', 'sofort', 'bancontact', 'eps', 'giropay', 'ideal', 'p24']
